@@ -1,4 +1,3 @@
-// Call the dataTables jQuery plugin
 $(function () {
   // 搜索事件绑定
   $('#searchButton').on({
@@ -14,6 +13,7 @@ $(function () {
     }
   });
 });
+
 
 // 测试数据
 var testObjectDate = [

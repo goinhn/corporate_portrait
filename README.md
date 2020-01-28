@@ -1,5 +1,8 @@
 # 企业画像数据展示
 
+## Usage
+npm install
+
 ## Preview
 
 ### index.html
@@ -7,5 +10,3 @@
 
 ### display.html
 ![display](./img/display.png)
-
-## Usage
