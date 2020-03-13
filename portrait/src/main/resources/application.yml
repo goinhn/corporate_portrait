@@ -1,0 +1,53 @@
+server:
+  port: 8889
+  tomcat:
+    uri-encoding: utf-8
+  servlet:
+    context-path: /por
+
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 10MB
+  resources:
+    static-locations: classpath:/static/
+  mvc:
+    static-path-pattern: /static/**
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/portrait?serverTimezone=GMT%2B8&useUnicode=true&tinyInt1isBit=false&characterEncoding=UTF-8
+    username: root
+    password: fwz
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+  thymeleaf:
+    cache: false
+    check-template: true
+    check-template-location: true
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+
+mybatis:
+  mapper-locations: /mapper/*.xml
+  type-aliases-package: com.goinhn.portrait.model
+
+
+logging:
+  path: ./logs/
+  pattern:
+    console: '%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n'
+    file: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n'
+  level:
+    root: warn
+    com.goinhn.portrait: debug
