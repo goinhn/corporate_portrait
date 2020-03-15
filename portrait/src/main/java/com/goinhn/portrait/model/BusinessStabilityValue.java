@@ -5,10 +5,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
+ * 企业经营稳定心分析
+ *
  * @author goinhn
  */
 @Data
-public class BusinessStability implements Serializable {
+public class BusinessStabilityValue implements Serializable {
 
     /**
      * eid：序号

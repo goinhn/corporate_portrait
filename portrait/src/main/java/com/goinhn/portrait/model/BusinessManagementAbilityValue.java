@@ -5,10 +5,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
+ * 企业经营能力分析
+ *
  * @author goinhn
  */
 @Data
-public class BusinessManagementAbility implements Serializable {
+public class BusinessManagementAbilityValue implements Serializable {
 
     /**
      * eid：序号
@@ -21,12 +23,12 @@ public class BusinessManagementAbility implements Serializable {
     private String entName;
 
     /**
-     * evaluation: 实缴-认缴
+     * evaluation: 是否按时足额缴纳股本
      */
     private Double evaluation;
 
     /**
-     * investNum: 对外投资数
+     * investNum: 对外投资次数
      */
     private Double investNum;
 
@@ -36,28 +38,33 @@ public class BusinessManagementAbility implements Serializable {
     private Double bidNum;
 
     /**
-     * cbzt: 险种标志
+     * cbzt: 参保状态
      */
     private Double cbzt;
 
     /**
-     * iBrandNum: 知识产权申请
+     * iBrandNum: 商标数据
      */
     private Double iBrandNum;
 
     /**
-     * iCopyNum: 软著登记
+     * iCopyNum: 软著著作权
      */
     private Double iCopyNum;
 
     /**
-     * iPatNum: 专利申请
+     * iPatNum: 专利数据
      */
     private Double iPatNum;
 
     /**
-     * iDomNum: 域名的知识产权
+     * iDomNum: 域名数据
      */
     private Double iDomNum;
+
+    /**
+     * passPercent: 产品被抽查合格率
+     */
+    private Double passPercent;
 
 }

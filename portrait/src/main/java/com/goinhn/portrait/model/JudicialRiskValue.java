@@ -5,10 +5,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
+ * 企业司法风险分析
+ *
  * @author goinhn
  */
 @Data
-public class JudicialRisk implements Serializable {
+public class JudicialRiskValue implements Serializable {
 
     /**
      * eid：序号
@@ -36,7 +38,7 @@ public class JudicialRisk implements Serializable {
     private Double enforceAmount;
 
     /**
-     * isJusticeCredit: 失信黑名单
+     * isJusticeCredit: 是否列入失信黑名单
      */
     private Double isJusticeCredit;
 

@@ -38,9 +38,9 @@ spring:
     port: 6379
 
 
-mybatis:
-  mapper-locations: /mapper/*.xml
-  type-aliases-package: com.goinhn.portrait.model
+#mybatis:
+#  mapper-locations: /mapper/*.xml
+#  type-aliases-package: com.goinhn.portrait.model
 
 
 logging:

@@ -5,10 +5,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
+ * 企业经营风险分析
+ *
  * @author goinhn
  */
 @Data
-public class BusinessManagementRisk implements Serializable {
+public class BusinessManagementRiskValue implements Serializable {
 
     /**
      * eid：序号
@@ -36,27 +38,27 @@ public class BusinessManagementRisk implements Serializable {
     private Double encodeGatype;
 
     /**
-     * isRange: 保证范围
+     * isRange: 保证担保范围
      */
     private Double isRage;
 
     /**
-     * subPefperfromto: 履行债务时间
+     * subPefperfromto: 履行债务期间
      */
     private Double subPefperfromto;
 
     /**
-     * unpaidsocialines: 失业保险欠缴额
+     * unpaidsocialines: 单位参加的保险累计欠缴额
      */
     private Double unpaidsocialins;
 
     /**
-     * isBra: 经营异常
+     * isBra: 是否列入经营异常
      */
     private Double isBra;
 
     /**
-     * isBrap: 行政处罚记录
+     * isBrap: 企业行政处罚记录
      */
     private Double isBrap;
 
@@ -66,7 +68,7 @@ public class BusinessManagementRisk implements Serializable {
     private Double pledgeNum;
 
     /**
-     * taxunpaidNum: 累计欠税额
+     * taxunpaidNum: 企业累计欠税额
      */
     private Double taxunpaidNum;
 
