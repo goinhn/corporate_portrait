@@ -16,56 +16,56 @@ import org.springframework.stereotype.Service;
 public class AnalysisValueServiceImpl implements AnalysisService {
 
     @Autowired
-    private BusinessBackgroundValueMapper businessBackgroundValueMapper;
+    private BusinessBackgroundAnalysisMapper businessBackgroundAnalysisMapper;
 
     @Autowired
-    private BusinessManagementAbilityValueMapper businessManagementAbilityValueMapper;
+    private BusinessManagementAbilityAnalysisMapper businessManagementAbilityAnalysisMapper;
 
     @Autowired
-    private BusinessManagementRiskValueMapper businessManagementRiskValueMapper;
+    private BusinessManagementAnalysisValueMapper businessManagementAnalysisValueMapper;
 
     @Autowired
-    private BusinessStabilityValueMapper businessStabilityValueMapper;
+    private BusinessStabilityAnalysisMapper businessStabilityAnalysisMapper;
 
     @Autowired
-    private CreditRiskValueMapper creditRiskValueMapper;
+    private CreditRiskAnalysisMapper creditRiskAnalysisMapper;
 
     @Autowired
-    private JudicialRiskValueMapper judicialRiskValueMapper;
+    private JudicialRiskAnalysisMapper judicialRiskAnalysisMapper;
 
 
     @Override
     public Object riskValue(Classification classification, String entName) {
         switch (classification) {
             case BUSINESS_BACKGROUND:
-                BusinessBackgroundValue businessBackgroundValue = new BusinessBackgroundValue();
-                businessBackgroundValue.setEntName(entName);
-                return businessBackgroundValueMapper.selectAllByEntName(businessBackgroundValue);
+                BusinessBackgroundAnalysis businessBackgroundAnalysis = new BusinessBackgroundAnalysis();
+                businessBackgroundAnalysis.setEntName(entName);
+                return businessBackgroundAnalysisMapper.selectAllByEntName(businessBackgroundAnalysis);
 
             case BUSINESS_MANAGEMENT_ABILITY:
-                BusinessManagementAbilityValue businessManagementAbilityValue = new BusinessManagementAbilityValue();
-                businessManagementAbilityValue.setEntName(entName);
-                return businessManagementAbilityValueMapper.selectAllByEntName(businessManagementAbilityValue);
+                BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis = new BusinessManagementAbilityAnalysis();
+                businessManagementAbilityAnalysis.setEntName(entName);
+                return businessManagementAbilityAnalysisMapper.selectAllByEntName(businessManagementAbilityAnalysis);
 
             case BUSINESS_MANAGEMENT_RISK:
-                BusinessManagementRiskValue businessManagementRiskValue = new BusinessManagementRiskValue();
-                businessManagementRiskValue.setEntName(entName);
-                return businessManagementRiskValueMapper.selectAllByEntName(businessManagementRiskValue);
+                BusinessManagementRiskAnalysis businessManagementRiskAnalysis = new BusinessManagementRiskAnalysis();
+                businessManagementRiskAnalysis.setEntName(entName);
+                return businessManagementAnalysisValueMapper.selectAllByEntName(businessManagementRiskAnalysis);
 
             case BUSINESS_STABILITY:
-                BusinessStabilityValue businessStabilityValue = new BusinessStabilityValue();
-                businessStabilityValue.setEntName(entName);
-                return businessStabilityValueMapper.selectAllByEntName(businessStabilityValue);
+                BusinessStabilityAnalysis businessStabilityAnalysis = new BusinessStabilityAnalysis();
+                businessStabilityAnalysis.setEntName(entName);
+                return businessStabilityAnalysisMapper.selectAllByEntName(businessStabilityAnalysis);
 
             case CREDIT_RISK:
-                CreditRiskValue creditRiskValue = new CreditRiskValue();
-                creditRiskValue.setEntName(entName);
-                return creditRiskValueMapper.selectAllByEntName(creditRiskValue);
+                CreditRiskAnalysis creditRiskAnalysis = new CreditRiskAnalysis();
+                creditRiskAnalysis.setEntName(entName);
+                return creditRiskAnalysisMapper.selectAllByEntName(creditRiskAnalysis);
 
             case JUDICIAL_RISK:
-                JudicialRiskValue judicialRiskValue = new JudicialRiskValue();
-                judicialRiskValue.setEntName(entName);
-                return judicialRiskValueMapper.selectAllByEntName(judicialRiskValue);
+                JudicialRiskAnalysis judicialRiskAnalysis = new JudicialRiskAnalysis();
+                judicialRiskAnalysis.setEntName(entName);
+                return judicialRiskAnalysisMapper.selectAllByEntName(judicialRiskAnalysis);
 
             default:
                 return null;
