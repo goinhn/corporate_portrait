@@ -57,5 +57,4 @@ public class BusinessBackgroundAnalysis implements Serializable {
      * levelRank: 级别
      */
     private Double levelRank;
-
 }
