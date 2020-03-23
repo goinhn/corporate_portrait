@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author goinhn
  */
 @SpringBootApplication
-@MapperScan(basePackages = "com.goinhn.portrait.dao")
+@MapperScan(basePackages = "com.goinhn.portrait.mapper")
 @EnableTransactionManagement
 public class PortraitApplication {
 

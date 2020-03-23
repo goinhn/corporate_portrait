@@ -1,6 +1,6 @@
-package com.goinhn.portrait.dao;
+package com.goinhn.portrait.mapper;
 
-import com.goinhn.portrait.model.BusinessStabilityAnalysis;
+import com.goinhn.portrait.model.entity.BusinessStabilityAnalysis;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;

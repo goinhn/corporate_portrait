@@ -1,8 +1,8 @@
-package com.goinhn.portrait.dao;
+package com.goinhn.portrait.mapper;
 
 
 import com.goinhn.portrait.PortraitApplication;
-import com.goinhn.portrait.model.BusinessBackgroundAnalysis;
+import com.goinhn.portrait.model.entity.BusinessBackgroundAnalysis;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

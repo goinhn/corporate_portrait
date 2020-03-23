@@ -1,6 +1,6 @@
-package com.goinhn.portrait.service;
+package com.goinhn.portrait.service.intf;
 
-import com.goinhn.portrait.util.Classification;
+import com.goinhn.portrait.constant.enums.Classification;
 
 /**
  * @author goinhn

@@ -1,4 +1,4 @@
-package com.goinhn.portrait.model;
+package com.goinhn.portrait.model.entity;
 
 import lombok.Data;
 

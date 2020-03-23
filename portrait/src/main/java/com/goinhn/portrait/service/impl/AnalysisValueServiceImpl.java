@@ -1,9 +1,9 @@
 package com.goinhn.portrait.service.impl;
 
-import com.goinhn.portrait.dao.*;
-import com.goinhn.portrait.model.*;
-import com.goinhn.portrait.service.AnalysisService;
-import com.goinhn.portrait.util.Classification;
+import com.goinhn.portrait.mapper.*;
+import com.goinhn.portrait.model.entity.*;
+import com.goinhn.portrait.service.intf.AnalysisService;
+import com.goinhn.portrait.constant.enums.Classification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

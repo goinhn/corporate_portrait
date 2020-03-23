@@ -1,4 +1,4 @@
-package com.goinhn.portrait.util;
+package com.goinhn.portrait.constant.enums;
 
 
 /**

@@ -1,7 +1,7 @@
-package com.goinhn.portrait.dao;
+package com.goinhn.portrait.mapper;
 
 import com.goinhn.portrait.PortraitApplication;
-import com.goinhn.portrait.model.ShowInfo;
+import com.goinhn.portrait.model.vo.ShowInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

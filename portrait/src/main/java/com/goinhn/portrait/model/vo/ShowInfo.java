@@ -1,4 +1,4 @@
-package com.goinhn.portrait.model;
+package com.goinhn.portrait.model.vo;
 
 
 import lombok.Data;
