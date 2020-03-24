@@ -14,5 +14,5 @@ public interface AnalysisService {
      * @param entName        企业名称
      * @return
      */
-    Object riskValue(Classification classification, String entName);
+    Object getRiskValue(Classification classification, String entName);
 }

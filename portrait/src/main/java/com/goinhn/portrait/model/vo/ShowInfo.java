@@ -4,7 +4,7 @@ package com.goinhn.portrait.model.vo;
 import lombok.Data;
 
 /**
- * 展示数据
+ * 展示基本信息模型
  *
  * @author goinhn
  */

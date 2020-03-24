@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author goinhn
  */
 @Repository
-public interface BusinessManagementAnalysisValueMapper {
+public interface BusinessManagementRiskAnalysisMapper {
 
     /**
      * 根据公司名称返回分析数据
