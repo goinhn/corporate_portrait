@@ -697,10 +697,183 @@
 
             <div class="col-md-6 col-sm-6 fh5co-service to-animate">
                 <div id="newInfoBusinessManagementAbilityGallary" class="mfp-hide">
-                    <div id="newInfoBusinessManagementAbilityInput">
-                        <div class="row">
-                            <input type="text" value="公司名称">
-                        </div>
+                    <div id="newInfoBusinessManagementAbilityInput" class="col-md-10 col-md-offset-1"
+                         style="background-color: #fff">
+                        <form style="padding-top: 10px">
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="invTypeInput">投资人类型(股东类型)</label>
+                                <select id="invTypeInput" class="form-control">
+                                    <option value="法人股东">法人股东</option>
+                                    <option value="非农民自然人">非农民自然人</option>
+                                    <option value="个人独资企业">个人独资企业</option>
+                                    <option value="合伙企业">合伙企业</option>
+                                    <option value="华侨">华侨</option>
+                                    <option value="机关法人">机关法人</option>
+                                    <option value="农民自然人">农民自然人</option>
+                                    <option value="其他投资者">其他投资者</option>
+                                    <option value="企业法人">企业法人</option>
+                                    <option value="社团法人">社团法人</option>
+                                    <option value="事业法人">事业法人</option>
+                                    <option value="外国(地区)企业">外国(地区)企业</option>
+                                    <option value="外国(地区)投资者">外国(地区)投资者</option>
+                                    <option value="外籍自然人">外籍自然人</option>
+                                    <option value="自然人企业">自然人企业</option>
+                                    <option value="自然人股东">自然人股东</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="conFromInput">出资方式(认缴)</label>
+                                <select id="conFromInput" class="form-control">
+                                    <option value="高新技术成果">高新技术成果</option>
+                                    <option value="股权">股权</option>
+                                    <option value="货币">货币</option>
+                                    <option value="劳务">劳务</option>
+                                    <option value="实物">实物</option>
+                                    <option value="土地权">土地权</option>
+                                    <option value="债券">债券</option>
+                                    <option value="展示产权">知识产权</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="subconamInput">认缴出资额(认缴额万元)</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="subconamInput" placeholder="认缴出资额(认缴额万元)">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="conpropInput">持股比例</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="conpropInput" placeholder="持股比例">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="conDateInput">出资日期(认缴)</label>
+                                <input type="date" class="form-control" id="conDateInput">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="subconcurrencyInput">认缴币种</label>
+                                <select id="subconcurrencyInput" class="form-control">
+                                    <option value="德国马克">德国马克</option>
+                                    <option value="港元">港元</option>
+                                    <option value="美元">美元</option>
+                                    <option value="欧元">欧元</option>
+                                    <option value="人民币">人民币</option>
+                                    <option value="日元">日元</option>
+                                    <option value="英镑">英镑</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="acconDateInput">实缴出资时间</label>
+                                <input type="date" class="form-control" id="acconDateInput">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="subconformInput">认缴出资方式</label>
+                                <select id="subconformInput" class="form-control">
+                                    <option value="股权">股权</option>
+                                    <option value="货币">货币</option>
+                                    <option value="美元">美元</option>
+                                    <option value="日元">日元</option>
+                                    <option value="人民币">人民币</option>
+                                    <option value="实物">实物</option>
+                                    <option value="土地使用权">土地使用权</option>
+                                    <option value="债券">债券</option>
+                                    <option value="知识产权">知识产权</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="liacconamInput">累计实缴额</label>
+                                <input type="number" min="0" max="9999999999999" class="form-control" id="liacconamInput" placeholder="累计实缴额">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="lisubconamInput">累计认缴额</label>
+                                <input type="number" min="0" max="9999999999999" class="form-control" id="lisubconamInput" placeholder="累计认缴额">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="investNumInput">对外投资次数</label>
+                                <input type="number" min="0" max="9999999999999" class="form-control" id="investNumInput" placeholder="对外投资次数">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="bidNumInput">中标次数</label>
+                                <input type="number" min="0" max="9999999999999" class="form-control" id="bidNumInput" placeholder="中标次数">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="cbrqInput">参保日期</label>
+                                <input type="date" class="form-control" id="cbrqInput">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="xzbzInput">险种标志</label>
+                                <select id="xzbzInput" class="form-control">
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="G">G</option>
+                                    <option value="I">I</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="sbjgbhInput">社会保险经办机构</label>
+                                <select id="sbjgbhInput" class="form-control">
+                                    <option value="370100">370100</option>
+                                    <option value="370101">370101</option>
+                                    <option value="370126">370126</option>
+                                    <option value="370127">370127</option>
+                                    <option value="370128">370128</option>
+                                    <option value="370150">370150</option>
+                                    <option value="370151">370151</option>
+                                    <option value="370151">370157</option>
+                                    <option value="370161">370161</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="xzbzmcInput">险种标识名称</label>
+                                <select id="xzbzmcInput" class="form-control">
+                                    <option value="大额">大额</option>
+                                    <option value="工商">工商</option>
+                                    <option value="生育">生育</option>
+                                    <option value="养老">养老</option>
+                                    <option value="失业">失业</option>
+                                    <option value="医疗">医疗</option>
+                                    <option value="职业年金">职业年金</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="cbztmcInput">参保状态名称</label>
+                                <select id="cbztmcInput" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="cbztInput">参保状态</label>
+                                <select id="cbztInput" class="form-control">
+                                    <option value="参保缴费">参保缴费</option>
+                                    <option value="终止缴费">终止缴费</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="dwbhInput">单位编号</label>
+                                <input type="text" class="form-control" id="cbrqInput" placeholder="单位编号">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="parentInput">企业产品被抽查的合格率</label>
+                                <input type="number" min="0" max="1" class="form-control" id="cbrqInput" placeholder="企业产品被抽查的合格率">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="ibrandNumInput">商标数量</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="ibrandNumInput" placeholder="商标数量">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="icopyNumInput">企业软件著作权登记次数</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="icopyNumInput" placeholder="企业软件著作权登记次数">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="ipatNumInput">企业专利申请次数</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="ipatNumInput" placeholder="企业专利申请次数">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="idomNumInput">企业是拥有域名的知识产权数量</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="idomNumInput" placeholder="企业是否拥有域名的知识产权">
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <h3><a href="#newInfoBusinessManagementAbilityGallary"
@@ -708,10 +881,99 @@
             </div>
             <div class="col-md-6 col-sm-6 fh5co-service to-animate">
                 <div id="newInfoBusinessManagementRiskGallary" class="mfp-hide">
-                    <div id="newInfoBusinessManagemetRiskInput">
-                        <div class="row">
-                            <input type="text" value="公司名称">
-                        </div>
+                    <div id="newInfoBusinessManagementRiskInput" class="col-md-10 col-md-offset-1"
+                         style="background-color: #fff">
+                        <form style="padding-top: 10px">
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="priclaseckindInput">主债券种类</label>
+                                <select id="priclaseckindInput" class="form-control">
+                                    <option value="合同">合同</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="pefperfromInput">履行债务的期限自</label>
+                                <input type="date" class="form-control" id="pefperfromInput">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="iftopubInput">是否公示此担保信息</label>
+                                <select id="iftopubInput" class="form-control">
+                                    <option value="1">是</option>
+                                    <option value="2">否</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="priclasecamInput">主债权数额</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="priclasecamInput" placeholder="主债权数额">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="pefpertoInput">履行债务的期限至</label>
+                                <input type="date" class="form-control" id="pefpertoInput">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="guaranperiodInput">保证的期间</label>
+                                <select id="guaranperiodInput" class="form-control">
+                                    <option value="1">期限</option>
+                                    <option value="2">未约定</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="gatypeInput">保证的方式</label>
+                                <select id="gutypeInput" class="form-control">
+                                    <option value="1">一般保证</option>
+                                    <option value="2">连带保证</option>
+                                    <option value="3">未约定</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="rageInput">保证担保的范围</label>
+                                <input type="text" class="form-control" id="rageInput" placeholder="保证担保的范围">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="unpaidsocialinsso110Input">城镇职工养老保险累计欠缴金额 </label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso110Input" placeholder="单位参加城镇职工基本养老保险累计欠缴金额 ">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="unpaidsocialinsso210Input">失业保险累计欠缴金额</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso210Input" placeholder="单位参加失业保险累计欠缴金额">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="unpaidsocialinsso310Input">职工基本医疗保险累计欠缴金额</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso310Input" placeholder="单位参加职工基本医疗保险累计欠缴金额">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="unpaidsocialinsso410Input">工伤保险累计欠缴金额</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso410Input" placeholder="单位参加工伤保险累计欠缴金额">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="unpaidsocialinsso510Input">生育保险累计欠缴金额</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso510Input" placeholder="单位参加生育保险累计欠缴金额">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="isbraInput">是否列入经营异常</label>
+                                <select id="isbraInput" class="form-control">
+                                    <option value="1">是</option>
+                                    <option value="2">否</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="isbrapInput">企业行政处罚记录</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="isbrapInput" placeholder="企业行政处罚记录">
+                            </div>  
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="pledgeNumInput">出质股权次数</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="pledgeNumInput" placeholder="出质股权次数">
+                            </div>  
+                            
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="taxunpaidNumInput">企业累计欠税额</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="taxunpaidNumInput" placeholder="企业累计欠税额">
+                            </div>  
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="isexceptInput">是否列为异常</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="isexceptInput" placeholder="是否列为异常">
+                            </div>  
+                        </form>
                     </div>
                 </div>
                 <h3><a href="#newInfoBusinessManagementRiskGallary" id="newInfoBusinessManagementRisk">企业经营风险（点击）</a>
@@ -722,20 +984,138 @@
 
             <div class="col-md-6 col-sm-6 fh5co-service to-animate">
                 <div id="newInfoJudicialRiskGallary" class="mfp-hide">
-                    <div id="newInfoJudicialRiskInput">
-                        <div class="row">
-                            <input type="text" value="公司名称">
-                        </div>
+                    <div id="newInfoJudicialRiskInput" class="col-md-10 col-md-offset-1"
+                         style="background-color: #fff">
+                        <form style="padding-top: 10px">
+                            <label class="col-md-12 text-center">开庭公告数据</label>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="declareDateInput">公告时间</label>
+                                <input type="date" class="form-control" id="declareDateInput">
+                            </div>  
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="appellantInput">上诉方</label>
+                                <select id="appellantInput" class="form-control">
+                                    <option value="0">其他</option>
+                                    <option value="1">当前企业</option>
+                                </select>
+                            </div> 
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="defendantInput">被诉方</label>
+                                <select id="defendantInput" class="form-control">
+                                    <option value="0">其他</option>
+                                    <option value="1">当前企业</option>
+                                </select>
+                            </div> 
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="declarestyleInput">公告类型</label>
+                                <select id="declarestyleInput" class="form-control">
+                                    <option value="裁判文书">裁判文书</option>
+                                    <option value="更正">更正</option>
+                                    <option value="公式催告">公式催告</option>
+                                    <option value="开庭传告">开庭传告</option>
+                                    <option value="破产文书">破产文书</option>
+                                    <option value="起诉状、上诉状副本">起诉状、上诉状副本</option>
+                                    <option value="起诉状副本及开庭传票">起诉状副本及开庭传票</option>
+                                    <option value="执行文书">执行文书</option>
+                                </select>
+                            </div> 
+
+
+                            <label class="col-md-12 text-center">被执行人数据</label>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="recordDateInput">立案日期</label>
+                                <input type="date" class="form-control" id="recordDateInput">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="enforceamountInput">执行标的</label>
+                                <input type="number" min="0" max="9999999999" class="form-control" id="enforceamountInput">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="casenoInput">案号</label>
+                                <input type="text" class="form-control" id="casenoInput">
+                            </div>
+
+
+                            <label class="col-md-12 text-center">裁判文书数据</label>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="timeInput">时间</label>
+                                <input type="date" class="form-control" id="timeInput">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="titleInput">标题</label>
+                                <input type="date" class="form-control" id="titleInput">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="caseTypeInput">案件类型</label>
+                                <select id="caseTypeInput" class="form-control">
+                                    <option value="民事裁定书">民事裁定书</option>
+                                    <option value="民事判决书">民事判决书</option>
+                                    <option value="司法确认裁定书">司法确认裁定书</option>
+                                    <option value="执行裁定书">执行裁定书</option>
+                                    <option value="执行决定书">执行决定书</option>
+                                    <option value="刑事判决书">刑事判决书</option>
+                                    <option value="行政判决书">行政判决书</option>
+                                    <option value="行政裁定书">行政裁定书</option>
+                                    <option value="刑事附带民事判决书">刑事附带民事判决书</option>
+                                    <option value="刑事裁定书">刑事裁定书</option>
+                                    <option value="执行结案通知书">执行结案通知书</option>
+                                    <option value="驳回再审申请通知书">驳回再审申请通知书</option>
+                                    <option value="执行案件结案通知书">执行案件结案通知书</option>
+                                    <option value="刑事附带民事裁定书">刑事附带民事裁定书</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="judgeresultInput">判决结果</label>
+                                <input type="text" class="form-control" id="judgeresultInput" placeholder="判决结果">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="casecauseInput">案由</label>
+                                <input type="text" class="form-control" id="casecauseInput" placeholder="案由">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="evidenceInput">案由编码类型</label>
+                                <input type="text" class="form-control" id="evidenceInput" placeholder="案由编码类型">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="courtrantInput">依据</label>
+                                <input type="text" class="form-control" id="coutrantInput" placeholder="依据">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="dataTypeInput">法院等级</label>
+                                <input type="text" class="form-control" id="dataTypeInput" placeholder="法院等级">
+                            </div>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="laTypeInput">法院类型</label>
+                                <input type="text" class="form-control" id="laTypeTypeInput" placeholder="法院等级">
+                            </div>
+
+
+                            <label class="col-md-12 text-center">失信黑名单</label>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="isJusticeCreditInput">是否列入失信黑名单</label>
+                                <select id="isJusticeCreditInput" class="form-control">
+                                    <option value="1">是</option>
+                                    <option value="0">否</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <h3><a href="#newInfoJudicialRiskGallary" id="newInfoJudicialRisk">司法风险（点击）</a></h3>
             </div>
+
+
             <div class="col-md-6 col-sm-6 fh5co-service to-animate">
                 <div id="newInfoCreditRiskGallary" class="mfp-hide">
-                    <div id="newInfoCreditRiskInput">
-                        <div class="row">
-                            <input type="text" value="公司名称">
-                        </div>
+                    <div id="newInfoCreditRiskInput"class="col-md-10 col-md-offset-1"
+                         style="background-color: #fff">
+                        <form style="padding-top: 10px">
+                            <label class="col-md-12 text-center">行政处罚</label>
+                            <div class="form-group form-group-sm col-md-4">
+                                <label for="isPunishInput">公司是否有过行政处罚</label>
+                                <input type="number" min="0" max="999999999" class="form-control" id="isPunishInput">
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <h3><a href="#newInfoCreditRiskGallary" id="newInfoCreditRisk">信用风险（点击）</a></h3>

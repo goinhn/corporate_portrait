@@ -1,7 +1,7 @@
 package com.goinhn.portrait.service.impl;
 
-import com.goinhn.portrait.mapper.*;
-import com.goinhn.portrait.model.entity.*;
+import com.goinhn.portrait.mapper.analysis.*;
+import com.goinhn.portrait.model.entity.analysis.*;
 import com.goinhn.portrait.service.intf.AnalysisService;
 import com.goinhn.portrait.constant.enums.Classification;
 import org.springframework.beans.factory.annotation.Autowired;

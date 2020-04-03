@@ -1,7 +1,7 @@
 package com.goinhn.portrait.service.impl;
 
-import com.goinhn.portrait.mapper.*;
-import com.goinhn.portrait.model.entity.*;
+import com.goinhn.portrait.mapper.label.*;
+import com.goinhn.portrait.model.entity.label.*;
 import com.goinhn.portrait.model.vo.ShowLabel;
 import com.goinhn.portrait.service.intf.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,27 +36,27 @@ public class LabelServiceImpl implements LabelService {
     public ShowLabel getLabelValue(String entName) {
         BusinessBackgroundLabel businessBackgroundLabel = new BusinessBackgroundLabel();
         businessBackgroundLabel.setEntName(entName);
-        businessBackgroundLabel = businessBackgroundLabelMapper.selectByEntName(businessBackgroundLabel);
+        businessBackgroundLabel = businessBackgroundLabelMapper.selectAllByEntName(businessBackgroundLabel);
 
         BusinessManagementAbilityLabel businessManagementAbilityLabel = new BusinessManagementAbilityLabel();
         businessManagementAbilityLabel.setEntName(entName);
-        businessManagementAbilityLabel = businessManagementAbilityLabelMapper.selectByEntName(businessManagementAbilityLabel);
+        businessManagementAbilityLabel = businessManagementAbilityLabelMapper.selectAllByEntName(businessManagementAbilityLabel);
 
         BusinessManagementRiskLabel businessManagementRiskLabel = new BusinessManagementRiskLabel();
         businessManagementRiskLabel.setEntName(entName);
-        businessManagementRiskLabel = businessManagementRiskLabelMapper.selectByEntName(businessManagementRiskLabel);
+        businessManagementRiskLabel = businessManagementRiskLabelMapper.selectAllByEntName(businessManagementRiskLabel);
 
         BusinessStabilityLabel businessStabilityLabel = new BusinessStabilityLabel();
         businessStabilityLabel.setEntName(entName);
-        businessStabilityLabel = businessStabilityLabelMapper.selectByEntName(businessStabilityLabel);
+        businessStabilityLabel = businessStabilityLabelMapper.selectAllByEntName(businessStabilityLabel);
 
         CreditRiskLabel creditRiskLabel = new CreditRiskLabel();
         creditRiskLabel.setEntName(entName);
-        creditRiskLabel = creditRiskLabelMapper.selectByEntName(creditRiskLabel);
+        creditRiskLabel = creditRiskLabelMapper.selectAllByEntName(creditRiskLabel);
 
         JudicialRiskLabel judicialRiskLabel = new JudicialRiskLabel();
         judicialRiskLabel.setEntName(entName);
-        judicialRiskLabel = judicialRiskLabelMapper.selectByEntName(judicialRiskLabel);
+        judicialRiskLabel = judicialRiskLabelMapper.selectAllByEntName(judicialRiskLabel);
 
 
         ShowLabel showLabel = new ShowLabel();
