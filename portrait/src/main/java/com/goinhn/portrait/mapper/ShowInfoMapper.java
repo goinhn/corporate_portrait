@@ -5,6 +5,7 @@ import com.goinhn.portrait.model.entity.ShowInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public interface ShowInfoMapper {
                     @Result(column = "credit_grade", property = "creditGrade")
             }
     )
-    ShowInfo selectAllByEntName(ShowInfo showInfo);
+    ShowInfo selectAllByEntName(@NotNull ShowInfo showInfo);
 
 
     /**
@@ -50,7 +51,7 @@ public interface ShowInfoMapper {
 
     @Select("select * from tab_show_info where entname like concat('%', #{entName}, '%') limit #{pageIndex}, #{pageSize}")
     @ResultMap("showInfoMap")
-    List<ShowInfo> selectAllLikeEntName(Page page);
+    List<ShowInfo> selectAllLikeEntName(@NotNull Page page);
 
 
     /**
@@ -66,5 +67,5 @@ public interface ShowInfoMapper {
             "#{entStatus}, #{entType}, #{entCat}, #{indestryPhy}, #{creditGrade})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveShowInfo(ShowInfo showInfo);
+    int saveShowInfo(@NotNull ShowInfo showInfo);
 }

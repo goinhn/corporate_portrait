@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author goinhn
  */
@@ -28,7 +30,7 @@ public interface CreditRiskLabelMapper {
                     @Result(column = "label", property = "label")
             }
     )
-    CreditRiskLabel selectAllByEntName(CreditRiskLabel creditRiskLabel);
+    CreditRiskLabel selectAllByEntName(@NotNull CreditRiskLabel creditRiskLabel);
 
 
     /**
@@ -40,6 +42,6 @@ public interface CreditRiskLabelMapper {
     @Insert("insert into " +
             "tab_credit_risk_label(eid, entname, label) " +
             "values(#{eid}, #{entName}, #{label})")
-    int saveCreditRiskLabel(CreditRiskLabel creditRiskLabel);
+    int saveCreditRiskLabel(@NotNull CreditRiskLabel creditRiskLabel);
 
 }

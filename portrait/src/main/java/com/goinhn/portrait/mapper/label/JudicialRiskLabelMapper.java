@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author goinhn
  */
@@ -28,7 +30,7 @@ public interface JudicialRiskLabelMapper {
                     @Result(column = "label", property = "label")
             }
     )
-    JudicialRiskLabel selectAllByEntName(JudicialRiskLabel judicialRiskLabel);
+    JudicialRiskLabel selectAllByEntName(@NotNull JudicialRiskLabel judicialRiskLabel);
 
 
     /**
@@ -40,6 +42,6 @@ public interface JudicialRiskLabelMapper {
     @Insert("insert into " +
             "tab_judicial_risk_label(eid, entname, label) " +
             "values(#{eid}, #{entName}, #{label})")
-    int saveJudicialRiskLabel(JudicialRiskLabel judicialRiskLabel);
+    int saveJudicialRiskLabel(@NotNull JudicialRiskLabel judicialRiskLabel);
 
 }

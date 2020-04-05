@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.EntContributionNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public interface EntContributionNewInfoMapper {
                     @Result(column = "condate", property = "conDate")
             }
     )
-    List<EntContributionNewInfo> selectAllByEntName(EntContributionNewInfo entContributionNewInfo);
+    List<EntContributionNewInfo> selectAllByEntName(@NotNull EntContributionNewInfo entContributionNewInfo);
 
 
     /**
@@ -45,6 +46,6 @@ public interface EntContributionNewInfoMapper {
             "values(#{eid}, #{entName}, #{invType}, #{conForm}, #{subconam}, #{conProp}, #{conDate})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveEntContributionNewInfo(EntContributionNewInfo entContributionNewInfo);
+    int saveEntContributionNewInfo(@NotNull EntContributionNewInfo entContributionNewInfo);
 
 }

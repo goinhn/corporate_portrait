@@ -1,5 +1,6 @@
 package com.goinhn.portrait.model.entity.analysis;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @author goinhn
  */
 @Data
+@Builder
 public class JudicialRiskAnalysis implements Serializable {
 
     /**

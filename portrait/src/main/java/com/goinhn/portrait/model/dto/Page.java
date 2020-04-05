@@ -1,5 +1,6 @@
 package com.goinhn.portrait.model.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * @author goinhn
  */
 @Data
+@Builder
 public class Page<T> {
 
     private T entName;

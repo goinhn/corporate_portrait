@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.CompanyBaseinfoNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -39,7 +40,7 @@ public interface CompanyBaseinfoNewInfoMapper {
                     @Result(column = "opfrom", property = "opFrom")
             }
     )
-    List<CompanyBaseinfoNewInfo> selectAllByEntName(CompanyBaseinfoNewInfo companyBaseinfoNewInfo);
+    List<CompanyBaseinfoNewInfo> selectAllByEntName(@NotNull CompanyBaseinfoNewInfo companyBaseinfoNewInfo);
 
 
     /**
@@ -55,5 +56,5 @@ public interface CompanyBaseinfoNewInfoMapper {
             "#{opto}, #{entType}, #{entCat}, #{industryphy}, #{regcapcur}, #{industryco}, #{opFrom})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveCompanyBaseinfoNewInfo(CompanyBaseinfoNewInfo companyBaseinfoNewInfo);
+    int saveCompanyBaseinfoNewInfo(@NotNull CompanyBaseinfoNewInfo companyBaseinfoNewInfo);
 }

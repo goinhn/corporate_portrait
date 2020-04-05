@@ -1,10 +1,13 @@
 package com.goinhn.portrait.mapper.analysis;
 
 import com.goinhn.portrait.model.entity.analysis.BusinessManagementRiskAnalysis;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author goinhn
@@ -15,7 +18,7 @@ public interface BusinessManagementRiskAnalysisMapper {
     /**
      * 根据公司名称返回分析数据
      *
-     * @param businessManagementRiskAnalysis 企业经营风险
+     * @param businessManagementRiskAnalysis 企业经营风险分析
      * @return
      */
     @Select("select * from tab_business_management_risk_analysis where entname = #{entName}")
@@ -37,5 +40,20 @@ public interface BusinessManagementRiskAnalysisMapper {
                     @Result(column = "is_except", property = "isExcept")
             }
     )
-    BusinessManagementRiskAnalysis selectAllByEntName(BusinessManagementRiskAnalysis businessManagementRiskAnalysis);
+    BusinessManagementRiskAnalysis selectAllByEntName(@NotNull BusinessManagementRiskAnalysis businessManagementRiskAnalysis);
+
+
+    /**
+     * 保存企业经营风险分析数据
+     *
+     * @param businessManagementRiskAnalysis 企业经营风险分析
+     * @return
+     */
+    @Insert("insert into " +
+            "tab_business_management_risk_analysis(eid, entname, priclasecam, encode_guaranperiod, encode_gatype, " +
+            "is_rage, sub_pefperfromto, unpaidsocialins, is_bra, is_brap, pledgenum, taxunpaidnum, is_except) " +
+            "values(#{eid}, #{entName}, #{priclasecam}, #{encodeGuaranperiod}, #{encodeGatype}, #{isRage}, #{subPefperfromto}, " +
+            "#{unpaidsocialins}, #{isBra}, #{isBrap}, #{pledgeNum}, #{taxunpaidNum}, #{isExcept})")
+    int saveBusinessManagementRiskAnalysis(@NotNull BusinessManagementRiskAnalysis businessManagementRiskAnalysis);
+
 }

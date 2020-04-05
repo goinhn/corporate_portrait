@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author goinhn
  */
@@ -28,7 +30,7 @@ public interface BusinessManagementRiskLabelMapper {
                     @Result(column = "label", property = "label")
             }
     )
-    BusinessManagementRiskLabel selectAllByEntName(BusinessManagementRiskLabel businessManagementRiskLabel);
+    BusinessManagementRiskLabel selectAllByEntName(@NotNull BusinessManagementRiskLabel businessManagementRiskLabel);
 
 
     /**
@@ -40,6 +42,6 @@ public interface BusinessManagementRiskLabelMapper {
     @Insert("insert into " +
             "tab_business_management_risk_label(eid, entname, label) " +
             "vlaues(#{eid}, #{entName}, #{label})")
-    int saveBusinessManagementRiskLabel(BusinessManagementRiskLabel businessManagementRiskLabel);
+    int saveBusinessManagementRiskLabel(@NotNull BusinessManagementRiskLabel businessManagementRiskLabel);
 
 }

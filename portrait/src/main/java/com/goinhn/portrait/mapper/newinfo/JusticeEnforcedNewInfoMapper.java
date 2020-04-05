@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.JusticeEnforcedNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public interface JusticeEnforcedNewInfoMapper {
                     @Result(column = "enforce_amount", property = "enforceAmount"),
             }
     )
-    List<JusticeEnforcedNewInfo> selectAllByEntName(JusticeEnforcedNewInfo justiceEnforcedNewInfo);
+    List<JusticeEnforcedNewInfo> selectAllByEntName(@NotNull JusticeEnforcedNewInfo justiceEnforcedNewInfo);
 
 
     /**
@@ -42,6 +43,6 @@ public interface JusticeEnforcedNewInfoMapper {
             "values(#{eid}, #{entName}, #{recordDate}, #{enforceAmount})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveJusticeEnforcedNewInfo(JusticeEnforcedNewInfo justiceEnforcedNewInfo);
+    int saveJusticeEnforcedNewInfo(@NotNull JusticeEnforcedNewInfo justiceEnforcedNewInfo);
 
 }

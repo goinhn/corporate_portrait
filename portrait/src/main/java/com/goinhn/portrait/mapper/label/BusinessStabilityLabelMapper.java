@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author goinhn
  */
@@ -28,7 +30,7 @@ public interface BusinessStabilityLabelMapper {
                     @Result(column = "label", property = "label")
             }
     )
-    BusinessStabilityLabel selectAllByEntName(BusinessStabilityLabel businessStabilityLabel);
+    BusinessStabilityLabel selectAllByEntName(@NotNull BusinessStabilityLabel businessStabilityLabel);
 
 
     /**
@@ -40,6 +42,6 @@ public interface BusinessStabilityLabelMapper {
     @Insert("insert into " +
             "tab_business_stability_label(eid, entname, label) " +
             "values(#{eid}, #{entName}, #{label})")
-    int saveBusinessStabilityLabel(BusinessStabilityLabel businessStabilityLabel);
+    int saveBusinessStabilityLabel(@NotNull BusinessStabilityLabel businessStabilityLabel);
 
 }

@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.JusticeJudgeNewNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public interface JusticeJudgeNewNewInfoMapper {
                     @Result(column = "latypes", property = "laTypes")
             }
     )
-    List<JusticeJudgeNewNewInfo> selectAllByEntName(JusticeJudgeNewNewInfo justiceJudgeNewNewInfo);
+    List<JusticeJudgeNewNewInfo> selectAllByEntName(@NotNull JusticeJudgeNewNewInfo justiceJudgeNewNewInfo);
 
 
     /**
@@ -51,7 +52,7 @@ public interface JusticeJudgeNewNewInfoMapper {
             "#{courtRank}, #{dataType}, #{laTypes})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveJusticeJudgeNewNewInfo(JusticeJudgeNewNewInfo justiceJudgeNewNewInfo);
+    int saveJusticeJudgeNewNewInfo(@NotNull JusticeJudgeNewNewInfo justiceJudgeNewNewInfo);
 
 }
 

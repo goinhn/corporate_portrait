@@ -24,5 +24,5 @@ public enum Classification {
     CREDIT_RISK,
 
     //司法风险
-    JUDICIAL_RISK;
+    JUDICIAL_RISK
 }

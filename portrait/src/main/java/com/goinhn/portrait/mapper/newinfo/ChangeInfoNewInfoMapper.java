@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.ChangeInfoNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public interface ChangeInfoNewInfoMapper {
                     @Result(column = "openo", property = "openo")
             }
     )
-    List<ChangeInfoNewInfo> selectAllByEntName(ChangeInfoNewInfo changeInfoNewInfo);
+    List<ChangeInfoNewInfo> selectAllByEntName(@NotNull ChangeInfoNewInfo changeInfoNewInfo);
 
 
     /**
@@ -47,6 +48,6 @@ public interface ChangeInfoNewInfoMapper {
             "values(#{eid}, #{entName}, #{remark}, #{dataFlag}, #{altTime}, #{altItem}, #{cxStatus}, #{altDate}, #{openo})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveChangeInfoNewInfo(ChangeInfoNewInfo changeInfoNewInfo);
+    int saveChangeInfoNewInfo(@NotNull ChangeInfoNewInfo changeInfoNewInfo);
 
 }

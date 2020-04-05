@@ -1,5 +1,6 @@
 package com.goinhn.portrait.model.entity.newinfo;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
  * @author goinhn
  */
 @Data
+@Builder
 public class JusticeEnforcedNewInfo {
 
     /**

@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.JnCreditInfoNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public interface JnCreditInfoNewInfoMapper {
                     @Result(column = "credit_grade", property = "creditGrade")
             }
     )
-    List<JnCreditInfoNewInfo> selectAllByEntName(JnCreditInfoNewInfo jnCreditInfoNewInfo);
+    List<JnCreditInfoNewInfo> selectAllByEntName(@NotNull JnCreditInfoNewInfo jnCreditInfoNewInfo);
 
 
     /**
@@ -41,6 +42,6 @@ public interface JnCreditInfoNewInfoMapper {
             "values(#{eid}, #{entName}, #{creditGrade})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveJnCreditInfoNewInfo(JnCreditInfoNewInfo jnCreditInfoNewInfo);
+    int saveJnCreditInfoNewInfo(@NotNull JnCreditInfoNewInfo jnCreditInfoNewInfo);
 
 }

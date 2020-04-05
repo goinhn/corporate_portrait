@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.EnterpriseInsuranceNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public interface EnterpriseInsuranceNewInfoMapper {
                     @Result(column = "dwbh", property = "dwbh")
             }
     )
-    List<EnterpriseInsuranceNewInfo> selectAllByEntName(EnterpriseInsuranceNewInfo enterpriseInsuranceNewInfo);
+    List<EnterpriseInsuranceNewInfo> selectAllByEntName(@NotNull EnterpriseInsuranceNewInfo enterpriseInsuranceNewInfo);
 
 
     /**
@@ -47,5 +48,5 @@ public interface EnterpriseInsuranceNewInfoMapper {
             "values(#{eid}, #{entName}, #{cbrq}, #{xzbz}, #{sbjgbh}, #{xzbzmc}, #{cbzt}, #{cbztmc}, #{dwbh})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveEnterpriseInsuranceNewInfo(EnterpriseInsuranceNewInfo enterpriseInsuranceNewInfo);
+    int saveEnterpriseInsuranceNewInfo(@NotNull EnterpriseInsuranceNewInfo enterpriseInsuranceNewInfo);
 }

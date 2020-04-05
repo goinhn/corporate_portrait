@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.EntGuaranteeNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public interface EntGuaranteeNewInfoMapper {
                     @Result(column = "rage", property = "rage")
             }
     )
-    List<EntGuaranteeNewInfo> selectAllByEntName(EntGuaranteeNewInfo entGuaranteeNewInfo);
+    List<EntGuaranteeNewInfo> selectAllByEntName(@NotNull EntGuaranteeNewInfo entGuaranteeNewInfo);
 
 
     /**
@@ -50,6 +51,6 @@ public interface EntGuaranteeNewInfoMapper {
             "#{guaranperiod}, #{gaType}, #{rage})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveEntGuaranteeNewInfo(EntGuaranteeNewInfo entGuaranteeNewInfo);
+    int saveEntGuaranteeNewInfo(@NotNull EntGuaranteeNewInfo entGuaranteeNewInfo);
 
 }

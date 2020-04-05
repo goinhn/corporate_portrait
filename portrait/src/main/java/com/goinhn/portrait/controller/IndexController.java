@@ -1,9 +1,10 @@
 package com.goinhn.portrait.controller;
 
 import io.swagger.annotations.Api;
-import org.springframework.stereotype.Controller;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -11,17 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author goinhn
  */
-@Api("")
-@Controller
-@RequestMapping("/index")
-public class AnalysisValueController {
+@Api(tags = "首页返回接口")
+@RestController
+@RequestMapping(value = "/index")
+public class IndexController {
 
-    @GetMapping("/")
+    @ApiOperation(value = "返回首页")
+    @GetMapping(value = "/")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return modelAndView;
     }
-
 
 }

@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author goinhn
  */
@@ -16,7 +18,7 @@ public interface BusinessManagementAbilityAnalysisMapper {
     /**
      * 根据公司名称返回分析数据
      *
-     * @param businessManagementAbilityAnalysis 公司名称
+     * @param businessManagementAbilityAnalysis 公司经营能力分析
      * @return
      */
     @Select("select * from tab_business_management_ability_analysis where entname = #{entName}")
@@ -36,13 +38,20 @@ public interface BusinessManagementAbilityAnalysisMapper {
                     @Result(column = "passpercent", property = "passPercent")
             }
     )
-    BusinessManagementAbilityAnalysis selectAllByEntName(BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis);
+    BusinessManagementAbilityAnalysis selectAllByEntName(@NotNull BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis);
 
 
-//    @Insert("insert into " +
-//            "tab_business_management_ability_analysis(eid, entname, evaluation, investnum, bidnum, cbzt, ibrand_num, " +
-//            "icopy_num, ipat_num, idom_num, passpercent) " +
-//            "values(#{eid}, #{entName}, #{})")
-//    int saveBusinessManagementAbilityAnalysis(BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis);
+    /**
+     * 保存公司经营能力分析
+     *
+     * @param businessManagementAbilityAnalysis 公司经营能力分析
+     * @return
+     */
+    @Insert("insert into " +
+            "tab_business_management_ability_analysis(eid, entname, evaluation, investnum, bidnum, cbzt, ibrand_num, " +
+            "icopy_num, ipat_num, idom_num, passpercent) " +
+            "values(#{eid}, #{entName}, #{evaluation}， #{investNum}, #{bidNum}, #{cbzt}, #{iBrandNum}, #{iCopyNum}, " +
+            "#{iPatNum}, #{iDomNum}, #{passPercent})")
+    int saveBusinessManagementAbilityAnalysis(@NotNull BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis);
 
 }

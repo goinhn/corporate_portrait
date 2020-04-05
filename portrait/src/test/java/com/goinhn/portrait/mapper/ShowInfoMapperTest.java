@@ -32,18 +32,22 @@ public class ShowInfoMapperTest {
 
     @Test
     public void testSelectAllByEntName() {
-        ShowInfo showInfo = new ShowInfo();
-        showInfo.setEntName("d7a53be04656e8aca9751afa7c43e7cf");
+        ShowInfo showInfo = ShowInfo
+                .builder()
+                .entName("d7a53be04656e8aca9751afa7c43e7cf")
+                .build();
         showInfo = showInfoMapper.selectAllByEntName(showInfo);
         System.out.println(showInfo);
     }
 
     @Test
     public void testSelectAllLikeEntName() {
-        Page<String> page = new Page<>();
-        page.setEntName("a");
-        page.setPageIndex(0);
-        page.setPageSize(10);
+        Page<String> page = Page
+                .<String>builder()
+                .entName("a")
+                .pageIndex(10)
+                .pageSize(100)
+                .build();
         List<ShowInfo> showInfos = showInfoMapper.selectAllLikeEntName(page);
 
         for (ShowInfo showInfo : showInfos) {
@@ -57,6 +61,5 @@ public class ShowInfoMapperTest {
         int result = showInfoMapper.findAllCount();
         System.out.println(result);
     }
-
 
 }

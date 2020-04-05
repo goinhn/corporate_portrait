@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author goinhn
  */
@@ -28,7 +30,7 @@ public interface BusinessManagementAbilityLabelMapper {
                     @Result(column = "label", property = "label")
             }
     )
-    BusinessManagementAbilityLabel selectAllByEntName(BusinessManagementAbilityLabel businessManagementAbilityLabel);
+    BusinessManagementAbilityLabel selectAllByEntName(@NotNull BusinessManagementAbilityLabel businessManagementAbilityLabel);
 
 
     /**
@@ -40,6 +42,6 @@ public interface BusinessManagementAbilityLabelMapper {
     @Insert("insert into " +
             "tab_business_management_ability_label(eid, entname, label) " +
             "values(#{eid}, #{entName}, #{label})")
-    int saveBusinessManagementAbilityLabel(BusinessManagementAbilityLabel businessManagementAbilityLabel);
+    int saveBusinessManagementAbilityLabel(@NotNull BusinessManagementAbilityLabel businessManagementAbilityLabel);
 
 }

@@ -1,5 +1,6 @@
 package com.goinhn.portrait.model.entity.newinfo;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * @author goinhn
  */
 @Data
+@Builder
 public class JnCreditInfoNewInfo {
 
     /**

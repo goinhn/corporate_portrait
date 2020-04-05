@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author goinhn
  */
@@ -34,7 +36,7 @@ public interface BusinessBackgroundAnalysisMapper {
                     @Result(column = "level_rank", property = "levelRank")
             }
     )
-    BusinessBackgroundAnalysis selectAllByEntName(BusinessBackgroundAnalysis businessBackgroundAnalysis);
+    BusinessBackgroundAnalysis selectAllByEntName(@NotNull BusinessBackgroundAnalysis businessBackgroundAnalysis);
 
 
     /**
@@ -46,6 +48,6 @@ public interface BusinessBackgroundAnalysisMapper {
     @Insert("insert into " +
             "(eid, entname, empnum, encode_entstatus, shopnum, branchnum, is_infoa, is_infob, level_rank) " +
             "values(#{eid}, #{entName}, #{empNum}, #{encodeEntStatus}, #{shopNum}, #{branchNum}, #{isInfoA}, #{isInfoB}, #{levelRank})")
-    int saveBusinessBackgroundAnalysis(BusinessBackgroundAnalysis businessBackgroundAnalysis);
+    int saveBusinessBackgroundAnalysis(@NotNull BusinessBackgroundAnalysis businessBackgroundAnalysis);
 
 }

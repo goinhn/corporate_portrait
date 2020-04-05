@@ -14,47 +14,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>企业画像系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content=""/>
-    <meta name="keywords" content=""/>
-    <meta name="author" content=""/>
+    <meta name="author" content="goinhn"/>
 
-    <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content=""/>
-    <meta property="og:image" content=""/>
-    <meta property="og:url" content=""/>
-    <meta property="og:site_name" content=""/>
-    <meta property="og:description" content=""/>
-    <meta name="twitter:title" content=""/>
-    <meta name="twitter:image" content=""/>
-    <meta name="twitter:url" content=""/>
-    <meta name="twitter:card" content=""/>
-
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="shortcut icon" href="favicon.ico">
 
-
+    <!--  css  -->
     <!-- Animate.css -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="../static/css/library/animate.css">
     <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="../static/css/library/icomoon.css">
     <!-- Simple Line Icons -->
-    <link rel="stylesheet" href="css/simple-line-icons.css">
+    <link rel="stylesheet" href="../static/css/library/simple-line-icons.css">
     <!-- Magnific Popup -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="../static/css/library/magnific-popup.css">
     <!-- Bootstrap  -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-
-    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../static/css/library/bootstrap.css">
+    <!-- Bootstrap Table -->
+    <link rel="stylesheet" href="../static/css/library/bootstrap-table.min.css">
 
     <!-- main css style -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- End demo purposes only -->
+    <link rel="stylesheet" href="../static/css/style.css">
 
     <!-- Modernizr JS -->
-    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="../static/js/library/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
+
     <!--[if lt IE 9]>
-    <script src="js/respond.min.js"></script>
+    <script src="../static/js/library/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -76,16 +62,14 @@
                     <li><a href="#" data-nav-section="show"><span>信息展示</span></a></li>
                     <li><a href="#" data-nav-section="perfect"><span>完善信息</span></a></li>
                     <li><a href="#" data-nav-section="about"><span>信息统计</span></a></li>
-                    <!-- <li><a href="#" data-nav-section="contact"><span>Contact</span></a></li> -->
                 </ul>
             </div>
         </nav>
-        <!-- </div> -->
     </div>
 </header>
 
 <!-- home -->
-<section id="fh5co-home" data-section="home" style="background-image: url(images/full_image_2.jpg);"
+<section id="fh5co-home" data-section="home" style="background-image: url(../static/images/full_image_2.jpg);"
          data-stellar-background-ratio="0.5">
     <div class="gradient"></div>
     <div class="container">
@@ -93,9 +77,8 @@
             <div class="text-inner">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="to-animate">Do something you love.</h1>
-                        <h2 class="to-animate">Another free HTML5 bootstrap templatereleased underCreative
-                            Commons3.0</h2>
+                        <h1 class="to-animate">企业画像系统Online</h1>
+                        <h2 class="to-animate">金融科技服务平台企业数据的无监督分类系统</h2>
                     </div>
                 </div>
             </div>
@@ -152,25 +135,26 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-heading text-center">
-                <h2 class="to-animate">Search Company</h2>
-                <!-- <div class="row">
-                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts.</h3>
-                    </div>
-                </div> -->
+                <h2 class="to-animate">Search</h2>
             </div>
         </div>
-        <!-- self define -->
-        <div class="row" style="margin-bottom: 10em">
-            <div class="col-md-8 col-md-offset-2 to-animate">
-                <div class="form-group col-md-10">
-                    <label for="phone" class="sr-only">Phone</label>
-                    <input id="searchBlock" class="form-control" placeholder="公司名 / 公司序号" type="text">
+        <!--    Search Block    -->
+        <div class="row" style="margin-bottom: 3em">
+            <form id="searchBlock" class="col-md-8 col-md-offset-2">
+                <div class="col-md-12">
+                    <div class="form-group col-md-2">
+                        <div class="col-md-8 col-md-offset-2 btn btn-primary btn-lg" onclick="">-</div>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <input class="form-control" name="searchEntName" placeholder="公司名 / 公司序号" type="text">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="col-md-8 col-md-offset-2 btn btn-primary btn-lg" onclick="">+</div>
+                    </div>
                 </div>
-                <div class="form-group col-md-2">
-                    <input id="searchBlockButton" class="btn btn-primary btn-lg" value="搜索" type="submit">
-                </div>
+            </form>
+            <div class="col-md-4 col-md-offset-4">
+                <button id="searchButton" class="col-md-8 col-md-offset-2 btn btn-primary btn-lg">搜 索</button>
             </div>
         </div>
 
@@ -181,7 +165,6 @@
                     <tr>
                         <th>企业名称</th>
                         <th>企业类别</th>
-                        <th>成立时间</th>
                         <th>企业画像</th>
                     </tr>
                     </thead>
@@ -189,13 +172,11 @@
                     <tr>
                         <th>企业名称</th>
                         <th>企业类别</th>
-                        <th>成立时间</th>
                         <th>企业画像</th>
                     </tr>
                     </tfoot>
                     <tbody>
                     <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -737,11 +718,13 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="subconamInput">认缴出资额(认缴额万元)</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="subconamInput" placeholder="认缴出资额(认缴额万元)">
+                                <input type="number" min="0" max="999999999" class="form-control" id="subconamInput"
+                                       placeholder="认缴出资额(认缴额万元)">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="conpropInput">持股比例</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="conpropInput" placeholder="持股比例">
+                                <input type="number" min="0" max="999999999" class="form-control" id="conpropInput"
+                                       placeholder="持股比例">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="conDateInput">出资日期(认缴)</label>
@@ -779,19 +762,23 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="liacconamInput">累计实缴额</label>
-                                <input type="number" min="0" max="9999999999999" class="form-control" id="liacconamInput" placeholder="累计实缴额">
+                                <input type="number" min="0" max="9999999999999" class="form-control"
+                                       id="liacconamInput" placeholder="累计实缴额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="lisubconamInput">累计认缴额</label>
-                                <input type="number" min="0" max="9999999999999" class="form-control" id="lisubconamInput" placeholder="累计认缴额">
+                                <input type="number" min="0" max="9999999999999" class="form-control"
+                                       id="lisubconamInput" placeholder="累计认缴额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="investNumInput">对外投资次数</label>
-                                <input type="number" min="0" max="9999999999999" class="form-control" id="investNumInput" placeholder="对外投资次数">
+                                <input type="number" min="0" max="9999999999999" class="form-control"
+                                       id="investNumInput" placeholder="对外投资次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="bidNumInput">中标次数</label>
-                                <input type="number" min="0" max="9999999999999" class="form-control" id="bidNumInput" placeholder="中标次数">
+                                <input type="number" min="0" max="9999999999999" class="form-control" id="bidNumInput"
+                                       placeholder="中标次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="cbrqInput">参保日期</label>
@@ -855,23 +842,28 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="parentInput">企业产品被抽查的合格率</label>
-                                <input type="number" min="0" max="1" class="form-control" id="cbrqInput" placeholder="企业产品被抽查的合格率">
+                                <input type="number" min="0" max="1" class="form-control" id="cbrqInput"
+                                       placeholder="企业产品被抽查的合格率">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="ibrandNumInput">商标数量</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="ibrandNumInput" placeholder="商标数量">
+                                <input type="number" min="0" max="999999999" class="form-control" id="ibrandNumInput"
+                                       placeholder="商标数量">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="icopyNumInput">企业软件著作权登记次数</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="icopyNumInput" placeholder="企业软件著作权登记次数">
+                                <input type="number" min="0" max="999999999" class="form-control" id="icopyNumInput"
+                                       placeholder="企业软件著作权登记次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="ipatNumInput">企业专利申请次数</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="ipatNumInput" placeholder="企业专利申请次数">
+                                <input type="number" min="0" max="999999999" class="form-control" id="ipatNumInput"
+                                       placeholder="企业专利申请次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="idomNumInput">企业是拥有域名的知识产权数量</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="idomNumInput" placeholder="企业是否拥有域名的知识产权">
+                                <input type="number" min="0" max="999999999" class="form-control" id="idomNumInput"
+                                       placeholder="企业是否拥有域名的知识产权">
                             </div>
                         </form>
                     </div>
@@ -904,7 +896,8 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="priclasecamInput">主债权数额</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="priclasecamInput" placeholder="主债权数额">
+                                <input type="number" min="0" max="999999999" class="form-control" id="priclasecamInput"
+                                       placeholder="主债权数额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="pefpertoInput">履行债务的期限至</label>
@@ -931,23 +924,28 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="unpaidsocialinsso110Input">城镇职工养老保险累计欠缴金额 </label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso110Input" placeholder="单位参加城镇职工基本养老保险累计欠缴金额 ">
+                                <input type="number" min="0" max="999999999" class="form-control"
+                                       id="unpaidsocialinsso110Input" placeholder="单位参加城镇职工基本养老保险累计欠缴金额 ">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="unpaidsocialinsso210Input">失业保险累计欠缴金额</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso210Input" placeholder="单位参加失业保险累计欠缴金额">
+                                <input type="number" min="0" max="999999999" class="form-control"
+                                       id="unpaidsocialinsso210Input" placeholder="单位参加失业保险累计欠缴金额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="unpaidsocialinsso310Input">职工基本医疗保险累计欠缴金额</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso310Input" placeholder="单位参加职工基本医疗保险累计欠缴金额">
+                                <input type="number" min="0" max="999999999" class="form-control"
+                                       id="unpaidsocialinsso310Input" placeholder="单位参加职工基本医疗保险累计欠缴金额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="unpaidsocialinsso410Input">工伤保险累计欠缴金额</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso410Input" placeholder="单位参加工伤保险累计欠缴金额">
+                                <input type="number" min="0" max="999999999" class="form-control"
+                                       id="unpaidsocialinsso410Input" placeholder="单位参加工伤保险累计欠缴金额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="unpaidsocialinsso510Input">生育保险累计欠缴金额</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="unpaidsocialinsso510Input" placeholder="单位参加生育保险累计欠缴金额">
+                                <input type="number" min="0" max="999999999" class="form-control"
+                                       id="unpaidsocialinsso510Input" placeholder="单位参加生育保险累计欠缴金额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="isbraInput">是否列入经营异常</label>
@@ -958,21 +956,25 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="isbrapInput">企业行政处罚记录</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="isbrapInput" placeholder="企业行政处罚记录">
-                            </div>  
+                                <input type="number" min="0" max="999999999" class="form-control" id="isbrapInput"
+                                       placeholder="企业行政处罚记录">
+                            </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="pledgeNumInput">出质股权次数</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="pledgeNumInput" placeholder="出质股权次数">
-                            </div>  
-                            
+                                <input type="number" min="0" max="999999999" class="form-control" id="pledgeNumInput"
+                                       placeholder="出质股权次数">
+                            </div>
+
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="taxunpaidNumInput">企业累计欠税额</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="taxunpaidNumInput" placeholder="企业累计欠税额">
-                            </div>  
+                                <input type="number" min="0" max="999999999" class="form-control" id="taxunpaidNumInput"
+                                       placeholder="企业累计欠税额">
+                            </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="isexceptInput">是否列为异常</label>
-                                <input type="number" min="0" max="999999999" class="form-control" id="isexceptInput" placeholder="是否列为异常">
-                            </div>  
+                                <input type="number" min="0" max="999999999" class="form-control" id="isexceptInput"
+                                       placeholder="是否列为异常">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -991,21 +993,21 @@
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="declareDateInput">公告时间</label>
                                 <input type="date" class="form-control" id="declareDateInput">
-                            </div>  
+                            </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="appellantInput">上诉方</label>
                                 <select id="appellantInput" class="form-control">
                                     <option value="0">其他</option>
                                     <option value="1">当前企业</option>
                                 </select>
-                            </div> 
+                            </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="defendantInput">被诉方</label>
                                 <select id="defendantInput" class="form-control">
                                     <option value="0">其他</option>
                                     <option value="1">当前企业</option>
                                 </select>
-                            </div> 
+                            </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="declarestyleInput">公告类型</label>
                                 <select id="declarestyleInput" class="form-control">
@@ -1018,7 +1020,7 @@
                                     <option value="起诉状副本及开庭传票">起诉状副本及开庭传票</option>
                                     <option value="执行文书">执行文书</option>
                                 </select>
-                            </div> 
+                            </div>
 
 
                             <label class="col-md-12 text-center">被执行人数据</label>
@@ -1028,7 +1030,8 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="enforceamountInput">执行标的</label>
-                                <input type="number" min="0" max="9999999999" class="form-control" id="enforceamountInput">
+                                <input type="number" min="0" max="9999999999" class="form-control"
+                                       id="enforceamountInput">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="casenoInput">案号</label>
@@ -1107,7 +1110,7 @@
 
             <div class="col-md-6 col-sm-6 fh5co-service to-animate">
                 <div id="newInfoCreditRiskGallary" class="mfp-hide">
-                    <div id="newInfoCreditRiskInput"class="col-md-10 col-md-offset-1"
+                    <div id="newInfoCreditRiskInput" class="col-md-10 col-md-offset-1"
                          style="background-color: #fff">
                         <form style="padding-top: 10px">
                             <label class="col-md-12 text-center">行政处罚</label>
@@ -1191,7 +1194,7 @@
 </section> -->
 
 <!-- number -->
-<section id="fh5co-counters" style="background-image: url(images/full_image_1.jpg);"
+<section id="fh5co-counters" style="background-image: url(../static/images/full_image_1.jpg);"
          data-stellar-background-ratio="0.5" data-section="about">
     <div class="fh5co-overlay"></div>
     <div class="container">
@@ -1304,33 +1307,37 @@
 </footer>
 
 <!-- jQuery -->
-<script src="js/jquery.min.js"></script>
+<script src="../static/js/library/jquery.min.js"></script>
 <!-- jQuery Easing -->
-<script src="js/jquery.easing.1.3.js"></script>
+<script src="../static/js/library/jquery.easing.1.3.js"></script>
 <!-- Bootstrap -->
-<script src="js/bootstrap.min.js"></script>
+<script src="../static/js/library/bootstrap.min.js"></script>
 <!-- Waypoints -->
-<script src="js/jquery.waypoints.min.js"></script>
+<script src="../static/js/library/jquery.waypoints.min.js"></script>
 <!-- Stellar Parallax -->
-<script src="js/jquery.stellar.min.js"></script>
+<script src="../static/js/library/jquery.stellar.min.js"></script>
 <!-- Counter -->
-<script src="js/jquery.countTo.js"></script>
+<script src="../static/js/library/jquery.countTo.js"></script>
 <!-- Magnific Popup -->
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/magnific-popup-options.js"></script>
+<script src="../static/js/library/jquery.magnific-popup.min.js"></script>
+<script src="../static/js/library/magnific-popup-options.js"></script>
 <!-- For demo purposes only styleswitcher ( You may delete this anytime ) -->
-<script src="js/jquery.style.switcher.js"></script>
+<script src="../static/js/library/jquery.style.switcher.js"></script>
 <!-- End demo purposes only -->
 
-<script src="js/jquery.dataTables.min.js"></script>
+<!--<script src="../static/js/jquery.dataTables.min.js"></script>-->
 
-<script src="js/echarts.min.js"></script>
+<script src="../static/js/library/bootstrap-table.min.js"></script>
 
-<script src="js/main.js"></script>
+<script src="../static/js/library/bootstrap-table-zh-CN.min.js"></script>
 
-<script src="js/index.js"></script>
+<script src="../static/js/library/echarts.min.js"></script>
 
-<script src="js/gallary.js"></script>
+<script src="../static/js/main.js"></script>
+
+<script src="../static/js/index.js"></script>
+
+<script src="../static/js/gallary.js"></script>
 
 
 </body>

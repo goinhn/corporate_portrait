@@ -1,6 +1,9 @@
-package com.goinhn.portrait.model.vo;
+package com.goinhn.portrait.model.dto;
 
+import lombok.Builder;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 展示数据标签模型
@@ -8,7 +11,8 @@ import lombok.Data;
  * @author goinhn
  */
 @Data
-public class ShowLabel {
+@Builder
+public class ShowLabel implements Serializable {
 
     /**
      * 企业名称
@@ -18,30 +22,31 @@ public class ShowLabel {
     /**
      *企业背景标签
      */
-    private Integer businessBackgroundLabel;
+    private String businessBackgroundLabel;
 
     /**
      *企业经营能力标签
      */
-    private Integer businessManagementAbilityLabel;
+    private String businessManagementAbilityLabel;
 
     /**
      *企业经营风险标签
      */
-    private Integer businessManagementRiskLabel;
+    private String businessManagementRiskLabel;
 
     /**
      *企业稳定性标签
      */
-    private Integer businessStabilityLabel;
+    private String businessStabilityLabel;
 
     /**
      *信用风险标签
      */
-    private Integer creditRiskLabel;
+    private String creditRiskLabel;
 
     /**
      *司法风险标签
      */
-    private Integer judicialRiskLabel;
+    private String judicialRiskLabel;
+
 }

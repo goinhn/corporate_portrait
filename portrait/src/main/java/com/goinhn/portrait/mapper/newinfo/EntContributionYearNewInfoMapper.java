@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.EntContributionYearNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public interface EntContributionYearNewInfoMapper {
                     @Result(column = "liacconam", property = "lisubconam")
             }
     )
-    List<EntContributionYearNewInfo> selectAllByEntName(EntContributionYearNewInfo entContributionYearNewInfo);
+    List<EntContributionYearNewInfo> selectAllByEntName(@NotNull EntContributionYearNewInfo entContributionYearNewInfo);
 
 
     /**
@@ -50,5 +51,5 @@ public interface EntContributionYearNewInfoMapper {
             "#{acconcurrency}, #{acconForm}, #{lisubconam})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveEntContributionYearNewInfo(EntContributionYearNewInfo entContributionYearNewInfo);
+    int saveEntContributionYearNewInfo(@NotNull EntContributionYearNewInfo entContributionYearNewInfo);
 }

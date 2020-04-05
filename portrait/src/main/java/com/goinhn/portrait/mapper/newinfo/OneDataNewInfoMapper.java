@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.OneDataNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public interface OneDataNewInfoMapper {
                     @Result(column = "idom_num", property = "idomNum")
             }
     )
-    List<OneDataNewInfo> selectAllByEntName(OneDataNewInfo oneDataNewInfo);
+    List<OneDataNewInfo> selectAllByEntName(@NotNull OneDataNewInfo oneDataNewInfo);
 
     /**
      * 保存单条数据
@@ -70,6 +71,6 @@ public interface OneDataNewInfoMapper {
             "#{zhycNum}, #{zlzpNum}, #{isInfoa}, #{isInfob}, #{idomNum})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveOneDataNewInfo(OneDataNewInfo oneDataNewInfo);
+    int saveOneDataNewInfo(@NotNull OneDataNewInfo oneDataNewInfo);
 
 }

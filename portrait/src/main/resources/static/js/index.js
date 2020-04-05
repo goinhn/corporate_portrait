@@ -49,19 +49,41 @@ var testObjectDate = [
 
 
 var displayTable = function(info){
-    let table = $('#tableDisplay').DataTable({
-        data: info,
-        columns: [
-        { data: 'entname' },
-        { data: 'entcat' },
-        { data: 'esldate' },
-        {
-            data: 'entname',
-            render: function (data, type, row) {
-                return '<button name="' + data + '" class="btn btn-secondary btn-sm btn-icon-split"><span class="text">企业画像</span></button>';
-            }
-        }
-        ]
+    // $('#tableDisplay').DataTable({
+    //     data: info,
+    //     columns: [
+    //     { data: 'entname' },
+    //     { data: 'entcat' },
+    //     { data: 'esldate' },
+    //     {
+    //         data: 'entname',
+    //         render: function (data, type, row) {
+    //             return '<button name="' + data + '" class="btn btn-secondary btn-sm btn-icon-split"><span class="text">企业画像</span></button>';
+    //         }
+    //     }
+    //     ]
+    // });
+
+    let table = $('#tableDisplay').bootstrapTable({
+        columns: [{
+            field: 'entName',
+            title: 'entName'
+        }, {
+            field: 'entCat',
+            title: 'entCat'
+        }, {
+            field: 'analysis',
+            title: 'analysis'
+        }],
+        data: [{
+            entName: "8f0c15a6c0d2c09a157feef19ddb8783",
+            entCat: "有限责任公司(自然人投资或控股)",
+            analysis: '$1'
+        }, {
+            entName: "8f0c15a6c0d2c09a157feef19ddb8783",
+            entCat: "有限责任公司(自然人投资或控股)",
+            price: '$2'
+        }]
     });
 };
 

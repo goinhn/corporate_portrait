@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.EntSocialSecurityNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public interface EntSocialSecurityNewInfoMapper {
                     @Result(column = "updatetime", property = "updateTime")
             }
     )
-    List<EntSocialSecurityNewInfo> selectAllByEntName(EntSocialSecurityNewInfo entSocialSecurityNewInfo);
+    List<EntSocialSecurityNewInfo> selectAllByEntName(@NotNull EntSocialSecurityNewInfo entSocialSecurityNewInfo);
 
 
     /**
@@ -48,6 +49,6 @@ public interface EntSocialSecurityNewInfoMapper {
             "#{unpaidsocialinsSo410}, #{unpaidsocialinsSo510}, #{updateTime})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveEntSocialSecurityNewInfo(EntSocialSecurityNewInfo entSocialSecurityNewInfo);
+    int saveEntSocialSecurityNewInfo(@NotNull EntSocialSecurityNewInfo entSocialSecurityNewInfo);
 
 }

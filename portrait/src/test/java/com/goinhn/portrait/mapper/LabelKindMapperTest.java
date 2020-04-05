@@ -19,9 +19,11 @@ public class LabelKindMapperTest {
 
     @Test
     public void testSelectAllByKindAndNumber() {
-        LabelKind labelKind = new LabelKind();
-        labelKind.setKind("企业背景");
-        labelKind.setNumber(0);
+        LabelKind labelKind = LabelKind
+                .builder()
+                .kind("企业背景")
+                .number(0)
+                .build();
         labelKind = labelKindMapper.selectAllByKindAndNumber(labelKind);
         System.out.println(labelKind);
     }

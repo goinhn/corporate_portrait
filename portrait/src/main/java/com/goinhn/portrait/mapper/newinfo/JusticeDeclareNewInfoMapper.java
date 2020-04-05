@@ -4,6 +4,7 @@ import com.goinhn.portrait.model.entity.newinfo.JusticeDeclareNewInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public interface JusticeDeclareNewInfoMapper {
                     @Result(column = "declarestyle", property = "declareStyle")
             }
     )
-    List<JusticeDeclareNewInfo> selectAllByEntName(JusticeDeclareNewInfo justiceDeclareNewInfo);
+    List<JusticeDeclareNewInfo> selectAllByEntName(@NotNull JusticeDeclareNewInfo justiceDeclareNewInfo);
 
 
     /**
@@ -44,6 +45,6 @@ public interface JusticeDeclareNewInfoMapper {
             "values(#{eid}, #{entName}, #{declareDate}, #{appellant}, #{defendant}, #{declareStyle})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
-    int saveJusticeDeclareNewInfo(JusticeDeclareNewInfo justiceDeclareNewInfo);
+    int saveJusticeDeclareNewInfo(@NotNull JusticeDeclareNewInfo justiceDeclareNewInfo);
 
 }

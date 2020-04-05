@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author goinhn
  */
@@ -28,7 +30,7 @@ public interface BusinessBackgroundLabelMapper {
                     @Result(column = "label", property = "label")
             }
     )
-    BusinessBackgroundLabel selectAllByEntName(BusinessBackgroundLabel businessBackgroundLabel);
+    BusinessBackgroundLabel selectAllByEntName(@NotNull BusinessBackgroundLabel businessBackgroundLabel);
 
 
     /**
@@ -40,6 +42,6 @@ public interface BusinessBackgroundLabelMapper {
     @Insert("insert into " +
             "tab_business_background_label(eid, entname, label) " +
             "values(#{eid}, #{entName}, #{label})")
-    int saveBusinessBackgroundLabel(BusinessBackgroundLabel businessBackgroundLabel);
+    int saveBusinessBackgroundLabel(@NotNull BusinessBackgroundLabel businessBackgroundLabel);
 
 }
