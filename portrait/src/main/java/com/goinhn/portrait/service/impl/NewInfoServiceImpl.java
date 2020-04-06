@@ -21,40 +21,40 @@ import java.util.Optional;
 public class NewInfoServiceImpl implements NewInfoService {
 
     @Autowired
-    ChangeInfoNewInfoMapper changeInfoNewInfoMapper;
+    private ChangeInfoNewInfoMapper changeInfoNewInfoMapper;
 
     @Autowired
-    CompanyBaseinfoNewInfoMapper companyBaseinfoNewInfoMapper;
+    private CompanyBaseinfoNewInfoMapper companyBaseinfoNewInfoMapper;
 
     @Autowired
-    EntContributionNewInfoMapper entContributionNewInfoMapper;
+    private EntContributionNewInfoMapper entContributionNewInfoMapper;
 
     @Autowired
-    EntContributionYearNewInfoMapper entContributionYearNewInfoMapper;
+    private EntContributionYearNewInfoMapper entContributionYearNewInfoMapper;
 
     @Autowired
-    EnterpriseInsuranceNewInfoMapper enterpriseInsuranceNewInfoMapper;
+    private EnterpriseInsuranceNewInfoMapper enterpriseInsuranceNewInfoMapper;
 
     @Autowired
-    EntGuaranteeNewInfoMapper entGuaranteeNewInfoMapper;
+    private EntGuaranteeNewInfoMapper entGuaranteeNewInfoMapper;
 
     @Autowired
-    EntSocialSecurityNewInfoMapper entSocialSecurityNewInfoMapper;
+    private EntSocialSecurityNewInfoMapper entSocialSecurityNewInfoMapper;
 
     @Autowired
-    JnCreditInfoNewInfoMapper jnCreditInfoNewInfoMapper;
+    private JnCreditInfoNewInfoMapper jnCreditInfoNewInfoMapper;
 
     @Autowired
-    JusticeDeclareNewInfoMapper justiceDeclareNewInfoMapper;
+    private JusticeDeclareNewInfoMapper justiceDeclareNewInfoMapper;
 
     @Autowired
-    JusticeEnforcedNewInfoMapper justiceEnforcedNewInfoMapper;
+    private JusticeEnforcedNewInfoMapper justiceEnforcedNewInfoMapper;
 
     @Autowired
-    JusticeJudgeNewNewInfoMapper justiceJudgeNewNewInfoMapper;
+    private JusticeJudgeNewNewInfoMapper justiceJudgeNewNewInfoMapper;
 
     @Autowired
-    OneDataNewInfoMapper oneDataNewInfoMapper;
+    private OneDataNewInfoMapper oneDataNewInfoMapper;
 
     @Override
     public boolean saveNewInfoSignal(@NotNull NewInfoKind newInfoKind,

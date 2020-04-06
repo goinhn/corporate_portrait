@@ -30,7 +30,7 @@ public interface CreditRiskAnalysisMapper {
                     @Result(column = "is_punish", property = "isPunish"),
                     @Result(column = "is_kcont", property = "isKcont"),
                     @Result(column = "credit_grade", property = "creditGrade"),
-                    @Result(column = "is_justice_creditaic", property = "sJusticeCreditaic")
+                    @Result(column = "is_justice_creditaic", property = "isJusticeCreditaic")
             }
     )
     CreditRiskAnalysis selectAllByEntName(@NotNull CreditRiskAnalysis creditRiskAnalysis);
@@ -44,7 +44,7 @@ public interface CreditRiskAnalysisMapper {
      */
     @Insert("insert into " +
             "tab_credit_risk_analysis(eid, entname, is_punish, is_kcont, credit_grade, is_justice_creditaic) " +
-            "values(#{eid}, #{entName}, #{isPunish}, #{isKcont}, #{creditGrade}, #{sJusticeCreditaic})")
+            "values(#{eid}, #{entName}, #{isPunish}, #{isKcont}, #{creditGrade}, #{isJusticeCreditaic})")
     int saveCreditRiskAnalysis(@NotNull CreditRiskAnalysis creditRiskAnalysis);
 
 }

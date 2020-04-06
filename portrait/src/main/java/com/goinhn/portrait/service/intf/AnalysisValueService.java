@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * @author goinhn
  */
-public interface AnalysisService {
+public interface AnalysisValueService {
 
     /**
      * 返回对应字段的评估值

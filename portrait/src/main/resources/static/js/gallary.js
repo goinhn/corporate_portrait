@@ -1,6 +1,3 @@
-const localUrl = "localhost:8889";
-
-
 $(function () {
     NewInfoBusinessBackgroundGallary();
     getNewInfoBusinessStability();
@@ -118,21 +115,4 @@ var getNewInfoCreditRisk = function () {
     });
 };
 
-function ajaxTool(type, url, data, successFunc) {
-    $.ajax({
-        async: true,
-        type: type,
-        url: localUrl + url,
-        dataType: "json",
-        data: JSON.stringify(data),
-        timeout: 10000,
-        success: function (result) {
-            console.log("url:" + url + " -- " + "result:" + result);
-            successFunc(result);
-        },
-        error: function (e) {
-            console.log("errorStatus:" + e.status);
-            console.log("errorResponseText" + e.responseText);
-        }
-    });
-}
+

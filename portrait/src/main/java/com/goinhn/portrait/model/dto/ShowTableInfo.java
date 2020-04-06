@@ -15,11 +15,6 @@ import java.io.Serializable;
 public class ShowTableInfo implements Serializable {
 
     /**
-     * 序号
-     */
-    private Long eid;
-
-    /**
      * 企业名称
      */
     private String entName;

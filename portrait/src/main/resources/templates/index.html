@@ -140,19 +140,19 @@
         </div>
         <!--    Search Block    -->
         <div class="row" style="margin-bottom: 3em">
-            <form id="searchBlock" class="col-md-8 col-md-offset-2">
-                <div class="col-md-12">
+            <div id="searchBlock" class="col-md-8 col-md-offset-2">
+                <div name="block" class="col-md-12">
                     <div class="form-group col-md-2">
-                        <div class="col-md-8 col-md-offset-2 btn btn-primary btn-lg" onclick="">-</div>
+                        <div class="col-md-8 col-md-offset-2 btn btn-primary btn-lg" onclick="delInput(this)">-</div>
                     </div>
                     <div class="form-group col-md-8">
-                        <input class="form-control" name="searchEntName" placeholder="公司名 / 公司序号" type="text">
+                        <input class="form-control" placeholder="公司名 / 公司序号" type="text">
                     </div>
                     <div class="form-group col-md-2">
-                        <div class="col-md-8 col-md-offset-2 btn btn-primary btn-lg" onclick="">+</div>
+                        <div class="col-md-8 col-md-offset-2 btn btn-primary btn-lg" onclick="addInput(this)">+</div>
                     </div>
                 </div>
-            </form>
+            </div>
             <div class="col-md-4 col-md-offset-4">
                 <button id="searchButton" class="col-md-8 col-md-offset-2 btn btn-primary btn-lg">搜 索</button>
             </div>
@@ -160,70 +160,9 @@
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <table class="table" id="tableDisplay" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>企业名称</th>
-                        <th>企业类别</th>
-                        <th>企业画像</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>企业名称</th>
-                        <th>企业类别</th>
-                        <th>企业画像</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <table class="table" id="tableDisplay" width="100%" cellspacing="0"></table>
             </div>
         </div>
-
-        <!-- <div class="row">
-            <div class="col-md-4">
-                <div class="box-testimony">
-                    <blockquote class="to-animate-2">
-                        <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and
-                            Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at
-                            the coast of the Semantics, a large language ocean.&rdquo;</p>
-                    </blockquote>
-                    <div class="author to-animate">
-                        <figure><img src="images/person1.jpg" alt="Person"></figure>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="box-testimony">
-                    <blockquote class="to-animate-2">
-                        <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and
-                            Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at
-                            the coast of the Semantics, a large language ocean. Far far away, behind the word
-                            mountains, far from the countries Vokalia and Consonantia, there live the blind
-                            texts.&rdquo;</p>
-                    </blockquote>
-                    <div class="author to-animate">
-                        <figure><img src="images/person2.jpg" alt="Person"></figure>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="box-testimony">
-                    <blockquote class="to-animate-2">
-                        <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and
-                            Consonantia, there live the blind texts. &rdquo;</p>
-                    </blockquote>
-                    <div class="author to-animate">
-                        <figure><img src="images/person3.jpg" alt="Person"></figure>
-                    </div>
-                </div>
-            </div> -->
     </div>
 </section>
 
@@ -233,12 +172,48 @@
         <div class="row">
             <div class="col-md-12 section-heading text-center">
                 <h2 class="to-animate">企业信息</h2>
-                <!-- <div class="row">
-                    <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                        <h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts.</h3>
+                <div class="row">
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">企业名称</span>
+                        <span id="entNameInfo" class="col-md-9"></span>
                     </div>
-                </div> -->
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">企业类型</span>
+                        <span id="entTypeInfo" class="col-md-9"></span>
+                    </div>
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">企业类别</span>
+                        <span id="entCatInfo" class="col-md-9"></span>
+                    </div>
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">行业门类</span>
+                        <span id="industryphyInfo" class="col-md-9"></span>
+                    </div>
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">企业状态</span>
+                        <span id="entStatusInfo" class="col-md-9"></span>
+                    </div>
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">中标次数</span>
+                        <span id="bidNumInfo" class="col-md-9"></span>
+                    </div>
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">分支机构数</span>
+                        <span id="branchNumInfo" class="col-md-9"></span>
+                    </div>
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">对外投资数</span>
+                        <span id="investNumInfo" class="col-md-9"></span>
+                    </div>
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">网店个数</span>
+                        <span id="shopNumInfo" class="col-md-9"></span>
+                    </div>
+                    <div class="col-md-6 subtext to-animate">
+                        <span class="col-md-3">企业名称</span>
+                        <span id="creditGradeInfo" class="col-md-9"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -246,52 +221,25 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="fh5co-project-item to-animate">
                     <div style="margin-top: 20px">
-                        <div id="businessBackgroundChart" class="col-md-12" style="height:400px">
+                        <div id="businessBackgroundChartInfo" class="col-md-12" style="height:400px">
                         </div>
                     </div>
-                    <!-- <div class="fh5co-text">
-                        <h2>企业背景</h2>
-                        <span>begin</span>
-                    </div> -->
+                    <div class="fh5co-text">
+                        <span>标签</span>
+                        <h2 id="businessBackgroundLabelInfo"></h2>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="fh5co-project-item to-animate">
                     <div style="margin-top: 20px">
-                        <div id="businessStabilityChart" class="col-md-12" style="height:400px">
+                        <div id="businessStabilityChartInfo" class="col-md-12" style="height:400px">
                         </div>
                     </div>
-                    <!-- <div class="fh5co-text">
-                        <h2>企业稳定性</h2>
-                        <span>begin</span>
-                    </div> -->
-                </div>
-            </div>
-
-            <div class="clearfix visible-sm-block"></div>
-
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="fh5co-project-item to-animate">
-                    <div style="margin-top: 20px">
-                        <div id="businessManagementAbilityChart" class="col-md-12" style="height:400px">
-                        </div>
+                    <div class="fh5co-text">
+                        <span>标签</span>
+                        <h2 id="businessStabilityLabelInfo"></h2>
                     </div>
-                    <!-- <div class="fh5co-text">
-                        <h2>企业经营能力</h2>
-                        <span>begin</span>
-                    </div> -->
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="fh5co-project-item to-animate">
-                    <div style="margin-top: 20px">
-                        <div id="businessManagementRiskChart" class="col-md-12" style="height:400px">
-                        </div>
-                    </div>
-                    <!-- <div class="fh5co-text">
-                        <h2>企业经营风险</h2>
-                        <span>begin</span>
-                    </div> -->
                 </div>
             </div>
 
@@ -300,25 +248,52 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="fh5co-project-item to-animate">
                     <div style="margin-top: 20px">
-                        <div id="judicialRiskChart" class="col-md-12" style="height:400px">
+                        <div id="businessManagementAbilityChartInfo" class="col-md-12" style="height:400px">
                         </div>
                     </div>
-                    <!-- <div class="fh5co-text">
-                        <h2>司法风险</h2>
-                        <span>begin</span>
-                    </div> -->
+                    <div class="fh5co-text">
+                        <span>标签</span>
+                        <h2 id="businessManagementAbilityLabelInfo"></h2>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="fh5co-project-item to-animate">
                     <div style="margin-top: 20px">
-                        <div id="creditRiskChart" class="col-md-12" style="height:400px">
+                        <div id="businessManagementRiskChartInfo" class="col-md-12" style="height:400px">
                         </div>
                     </div>
-                    <!-- <div class="fh5co-text">
-                        <h2>信用风险</h2>
-                        <span>begin</span>
-                    </div> -->
+                    <div class="fh5co-text">
+                        <span>标签</span>
+                        <h2 id="businessManagementRiskLabelInfo"></h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="fh5co-project-item to-animate">
+                    <div style="margin-top: 20px">
+                        <div id="judicialRiskChartInfo" class="col-md-12" style="height:400px">
+                        </div>
+                    </div>
+                    <div class="fh5co-text">
+                        <span>标签</span>
+                        <h2 id="judicialRiskLabelInfo"></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="fh5co-project-item to-animate">
+                    <div style="margin-top: 20px">
+                        <div id="creditRiskChartInfo" class="col-md-12" style="height:400px">
+                        </div>
+                    </div>
+                    <div class="fh5co-text">
+                        <span>标签</span>
+                        <h2 id="creditRiskLabelInfo"></h2>
+                    </div>
                 </div>
             </div>
 
@@ -1335,7 +1310,9 @@
 
 <script src="../static/js/main.js"></script>
 
-<script src="../static/js/index.js"></script>
+<script src="../static/js/searchInfo.js"></script>
+
+<script src="../static/js/newInfo.js"></script>
 
 <script src="../static/js/gallary.js"></script>
 

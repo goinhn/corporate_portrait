@@ -2,7 +2,7 @@ package com.goinhn.portrait.service.impl;
 
 import com.goinhn.portrait.mapper.analysis.*;
 import com.goinhn.portrait.model.entity.analysis.*;
-import com.goinhn.portrait.service.intf.AnalysisService;
+import com.goinhn.portrait.service.intf.AnalysisValueService;
 import com.goinhn.portrait.constant.enums.Classification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.Optional;
  * @author goinhn
  */
 @Service
-public class AnalysisValueServiceImpl implements AnalysisService {
+public class AnalysisValueServiceImpl implements AnalysisValueService {
 
     @Autowired
     private BusinessBackgroundAnalysisMapper businessBackgroundAnalysisMapper;
