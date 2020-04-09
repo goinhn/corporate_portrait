@@ -32,10 +32,9 @@ public class ChangeInfoNewInfoMapperTest {
 
     @Test
     public void testSaveChangeInfoNewInfo() {
-        ChangeInfoNewInfo changeInfoNewInfo = ChangeInfoNewInfo
-                .builder()
-                .entName("begin")
-                .build();
+        ChangeInfoNewInfo changeInfoNewInfo = new ChangeInfoNewInfo();
+        changeInfoNewInfo.setEntName("begin");
+
         int result = changeInfoNewInfoMapper.saveChangeInfoNewInfo(changeInfoNewInfo);
         System.out.println(result);
         List<ChangeInfoNewInfo> changeInfoNewInfos = changeInfoNewInfoMapper.selectAllByEntName(changeInfoNewInfo);

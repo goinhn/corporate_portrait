@@ -1,6 +1,7 @@
 package com.goinhn.portrait.model.entity.newinfo;
 
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,7 +12,6 @@ import java.util.Date;
  * @author goinhn
  */
 @Data
-@Builder
 public class JusticeEnforcedNewInfo {
 
     /**
@@ -22,16 +22,20 @@ public class JusticeEnforcedNewInfo {
     /**
      * 企业名称
      */
+    @JsonProperty("entname")
     private String entName;
 
     /**
      * 立案日期
      */
+    @JsonProperty("record_date")
+    @JsonFormat
     private Date recordDate;
 
     /**
      * 执行标的
      */
+    @JsonProperty("enforce_amount")
     private Float enforceAmount;
 
 }

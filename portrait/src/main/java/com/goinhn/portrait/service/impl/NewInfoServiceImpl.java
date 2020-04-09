@@ -1,8 +1,12 @@
 package com.goinhn.portrait.service.impl;
 
+import com.goinhn.portrait.constant.enums.Classification;
 import com.goinhn.portrait.constant.enums.NewInfoKind;
+import com.goinhn.portrait.mapper.ShowInfoMapper;
 import com.goinhn.portrait.mapper.newinfo.*;
+import com.goinhn.portrait.model.entity.ShowInfo;
 import com.goinhn.portrait.model.entity.newinfo.*;
+import com.goinhn.portrait.model.vo.NewInfo;
 import com.goinhn.portrait.service.intf.NewInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.*;
 import java.util.Optional;
@@ -55,6 +60,9 @@ public class NewInfoServiceImpl implements NewInfoService {
 
     @Autowired
     private OneDataNewInfoMapper oneDataNewInfoMapper;
+
+    @Autowired
+    private ShowInfoMapper showInfoMapper;
 
     @Override
     public boolean saveNewInfoSignal(@NotNull NewInfoKind newInfoKind,
@@ -126,6 +134,97 @@ public class NewInfoServiceImpl implements NewInfoService {
         while (iterator.hasNext()) {
             Entry<NewInfoKind, Object> entry = iterator.next();
             if (!saveNewInfoSignal(entry.getKey(), Optional.ofNullable(entry.getValue()).get())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean isEntName(@NotNull String entName) {
+        ShowInfo showInfo = ShowInfo
+                .builder()
+                .entName(entName)
+                .build();
+
+        showInfo = showInfoMapper.selectAllByEntName(showInfo);
+
+        if (showInfo != null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean saveShowInfo(ShowInfo showInfo) {
+        int number = showInfoMapper.saveShowInfo(showInfo);
+        if (number == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean saveAllInfoSpecial(NewInfo newInfo) {
+        CompanyBaseinfoNewInfo companyBaseinfoNewInfo = newInfo.getCompanyBaseinfoNewInfo();
+        List<ChangeInfoNewInfo> changeInfoNewInfos = newInfo.getChangeInfoNewInfos();
+        List<EntContributionNewInfo> entContributionNewInfos = newInfo.getEntContributionNewInfos();
+        List<EntContributionYearNewInfo> entContributionYearNewInfos = newInfo.getEntContributionYearNewInfos();
+        List<EnterpriseInsuranceNewInfo> enterpriseInsuranceNewInfos = newInfo.getEnterpriseInsuranceNewInfos();
+        List<EntGuaranteeNewInfo> guaranteeNewInfos = newInfo.getEntGuaranteeNewInfos();
+        List<EntSocialSecurityNewInfo> entSocialSecurityNewInfos = newInfo.getEntSocialSecurityNewInfos();
+        JnCreditInfoNewInfo jnCreditInfoNewInfo = newInfo.getJnCreditInfoNewInfo();
+        List<JusticeDeclareNewInfo> justiceDeclareNewInfos = newInfo.getJusticeDeclareNewInfos();
+        List<JusticeEnforcedNewInfo> justiceEnforcedNewInfos = newInfo.getJusticeEnforcedNewInfos();
+        List<JusticeJudgeNewNewInfo> justiceJudgeNewNewInfos = newInfo.getJusticeJudgeNewNewInfos();
+        OneDataNewInfo oneDataNewInfo = newInfo.getOneDataNewInfo();
+
+        ShowInfo showInfo = ShowInfo
+                .builder()
+                .entName(companyBaseinfoNewInfo.getEntName())
+                .entCat(companyBaseinfoNewInfo.getEntCat())
+                .entStatus(companyBaseinfoNewInfo.getEntStatus())
+                .entType(companyBaseinfoNewInfo.getEntType())
+                .industryPhy(companyBaseinfoNewInfo.getIndustryphy())
+                .creditGrade(jnCreditInfoNewInfo.getCreditGrade())
+                .bidNum(oneDataNewInfo.getBidNum())
+                .branchNum(oneDataNewInfo.getBranchNum())
+                .investNum(oneDataNewInfo.getInvestNum())
+                .shopNum(oneDataNewInfo.getShopNum())
+                .build();
+
+        if (showInfo.getEntName() == null || "".equals(showInfo.getEntName())) {
+            return false;
+        }
+
+        if(!saveNewInfoSignal(NewInfoKind.COMPANY_BASE_INFO, companyBaseinfoNewInfo)){
+            return false;
+        }
+        if(!saveNewInfoSignal(NewInfoKind.JN_CREDIT_INFO, jnCreditInfoNewInfo)){
+            return false;
+        }
+        if(!saveNewInfoSignal(NewInfoKind.ONE_DATA, oneDataNewInfo)){
+            return false;
+        }
+
+        for (ChangeInfoNewInfo changeInfoNewInfo : changeInfoNewInfos) {
+            if(!saveNewInfoSignal(NewInfoKind.CHANGE_INFO, changeInfoNewInfo)){
+                return false;
+            }
+        }
+
+        for (EntContributionNewInfo entContributionNewInfo : entContributionNewInfos) {
+            if(!saveNewInfoSignal(NewInfoKind.ENT_CONTRIBUTION, entContributionNewInfo)){
+                return false;
+            }
+        }
+
+        for (EntContributionYearNewInfo entContributionYearNewInfo : entContributionYearNewInfos) {
+            if(!saveNewInfoSignal(NewInfoKind.ENT_CONTRIBUTION_YEAR, entContributionYearNewInfo)){
                 return false;
             }
         }

@@ -1,6 +1,6 @@
 package com.goinhn.portrait.model.entity.newinfo;
 
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
@@ -9,7 +9,6 @@ import lombok.Data;
  * @author goinhn
  */
 @Data
-@Builder
 public class JnCreditInfoNewInfo {
 
     /**
@@ -20,11 +19,13 @@ public class JnCreditInfoNewInfo {
     /**
      * 企业名称
      */
+    @JsonProperty("entname")
     private String entName;
 
     /**
      * 信用等级 N+、B-、A、C、N、A-
      */
+    @JsonProperty("credit_grade")
     private String creditGrade;
 
 }

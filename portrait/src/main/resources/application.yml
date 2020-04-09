@@ -36,6 +36,18 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+  jackson:
+    # 全局设置@JsonFormat的格式pattern
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 当地时区
+    locale: zh
+    # 设置全局时区
+    time-zone: GMT+8
+    deserialization:
+      # 常用,json中含pojo不存在属性时是否失败报错,默认true
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    parser:
+      ALLOW_SINGLE_QUOTES: true # 是否允许出现单引号,默认false
 
 
 #mybatis:
