@@ -32,7 +32,8 @@ public interface EntContributionYearNewInfoMapper {
                     @Result(column = "subcondate", property = "subconDate"),
                     @Result(column = "acconcurrency", property = "acconcurrency"),
                     @Result(column = "acconform", property = "acconForm"),
-                    @Result(column = "liacconam", property = "lisubconam")
+                    @Result(column = "liacconam", property = "liacconam"),
+                    @Result(column = "lisubconam", property = "lisubconam")
             }
     )
     List<EntContributionYearNewInfo> selectAllByEntName(@NotNull EntContributionYearNewInfo entContributionYearNewInfo);
@@ -46,9 +47,9 @@ public interface EntContributionYearNewInfoMapper {
      */
     @Insert("insert into " +
             "tab_ent_contribution_year_new_info(eid, entname, subconcurrency, accondate, subconform, anchetype, subcondate, " +
-            "acconcurrency, acconform, liacconam) " +
+            "acconcurrency, acconform, liacconam, lisubconam) " +
             "values(#{eid}, #{entName}, #{subconcurrency}, #{acconDate}, #{subconForm}, #{ancheType}, #{subconDate}, " +
-            "#{acconcurrency}, #{acconForm}, #{lisubconam})")
+            "#{acconcurrency}, #{acconForm}, #{liacconam}, #{lisubconam})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
     int saveEntContributionYearNewInfo(@NotNull EntContributionYearNewInfo entContributionYearNewInfo);

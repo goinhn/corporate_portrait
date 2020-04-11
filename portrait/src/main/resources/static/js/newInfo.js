@@ -1,19 +1,25 @@
-const remoteUrl = 'http://47.98.249.83:8000/predict';
+
 
 $(function () {
     lookAll();
 });
 
-console.log(localUrl);
-
 
 function submitNow() {
-    // let companyBaseinfoNewInfo = getModeOneInfo($('#companyBaseinfoNewInfoGallary'));
-    // let entName = companyBaseinfoNewInfo.entName;
-    // let url = localUrl + '/save/searchEntName/' + entName;
-    // ajaxTool("GET", url, judgeEntName);
+    let companyBaseinfoNewInfo = getBackOneInfo($('#companyBaseinfoNewInfoGallary'));
+    let entName = companyBaseinfoNewInfo.entname;
+    if (typeof (entName) == "undefined") {
+        alert("输入的企业名称不能为空！");
+        return;
+    } else {
+        if (entName.toString().trim().split(0, 255) == '') {
+            alert("输入的企业名称不能为空！");
+            return;
+        }
+    }
 
-    getBackFormInfo();
+    let url = localUrl + '/por/save/searchEntName/' + entName;
+    ajaxTool("GET", url, judgeEntName);
 }
 
 function judgeEntName(data) {
@@ -71,10 +77,17 @@ function getFormInfo() {
 }
 
 function getMode(data) {
-    console.log(data);
+    // console.log(data);
     if (data.flag == 0) {
-        console.log(data.data);
-
+        if (sendBackFormInfo()) {
+            if (sendBackAnalysisLabel(data.data)) {
+                alert("提交成功")
+            } else {
+                alert("提交失败");
+            }
+        } else {
+            alert("提交失败");
+        }
     } else if (data.flag == 1) {
         alert(data.errorMsg);
     } else {
@@ -82,7 +95,7 @@ function getMode(data) {
     }
 }
 
-function getBackFormInfo() {
+function sendBackFormInfo() {
     let companyBaseinfoNewInfo = getBackOneInfo($('#companyBaseinfoNewInfoGallary'));
     let entName = companyBaseinfoNewInfo.entname;
     let changeInfoNewInfo = getBackOneInfoArray($('#changeInfoNewInfoGallary'), entName);
@@ -97,35 +110,153 @@ function getBackFormInfo() {
     let justiceJudgeNewNewInfo = getBackOneInfoArray($('#justiceJudgeNewNewInfoGallary'), entName);
     let oneDataNewInfo = getBackOneInfo($('#oneDataNewInfoGallary'));
 
+    jnCreditInfoNewInfo.entname = entName;
+    oneDataNewInfo.entname = entName;
+
     let send = {
         "companyBaseinfoNewInfo": companyBaseinfoNewInfo,
-        "changeInfoNewInfo": changeInfoNewInfo,
-        "entContributionNewInfo": entContributionNewInfo,
-        "entContributionYearNewInfo": entContributionYearNewInfo,
+        "changeInfoNewInfos": changeInfoNewInfo,
+        "entContributionNewInfos": entContributionNewInfo,
+        "entContributionYearNewInfos": entContributionYearNewInfo,
         "enterpriseInsuranceNewInfos": enterpriseInsuranceNewInfo,
         "entGuaranteeNewInfos": entGuaranteeNewInfo,
         "entSocialSecurityNewInfos": entSocialSecurityNewInfo,
         "jnCreditInfoNewInfo": jnCreditInfoNewInfo,
-        "justiceDeclareNewInfo": justiceDeclareNewInfo,
-        "justiceEnforcedNewInfo": justiceEnforcedNewInfo,
+        "justiceDeclareNewInfos": justiceDeclareNewInfo,
+        "justiceEnforcedNewInfos": justiceEnforcedNewInfo,
         "justiceJudgeNewNewInfos": justiceJudgeNewNewInfo,
         "oneDataNewInfo": oneDataNewInfo
     };
 
-    console.log(JSON.stringify(send));
+    // console.log(JSON.stringify(send));
 
-    let url = localUrl + '/por/save/saveEntName';
+    let url = localUrl + '/por/save/saveNewInfo';
 
-    ajaxTool("POST", url, getBackInfoLook, JSON.stringify(send));
-
+    return ajaxTool("POST", url, getBackInfoLook, JSON.stringify(send));
 }
 
 function getBackInfoLook(data) {
-    if (data.flag == true) {
-        return true;
-    } else {
+    if (!data.flag) {
         alert(data.errorMsg);
-        return false;
+    }
+}
+
+
+function sendBackAnalysisLabel(data) {
+    let entName = data.entname;
+    let mms_data = data.mms_data;
+    let model_pred = data.model_pred;
+
+    let min = mms_data["bidnum"];
+    let max = mms_data["bidnum"];
+    for (let each in mms_data) {
+        if (min > mms_data[each]) {
+            min = mms_data[each];
+        }
+        if (max < mms_data[each]) {
+            max = mms_data[each];
+        }
+    }
+
+    let bei = max - min;
+
+    for (let each in mms_data) {
+        let abs = Math.abs(mms_data[each]);
+        let result = abs / bei;
+        mms_data[each] = result.toFixed(10);
+    }
+
+    let send = {
+        "businessBackgroundAnalysis": {
+            "entName": entName,
+            "empNum": mms_data.empnum,
+            "encodeEntStatus": mms_data.encode_entstatus,
+            "shopNum": mms_data.shopnum,
+            "branchNum": mms_data.branchnum,
+            "isInfoA": mms_data.is_infoa,
+            "isInfoB": mms_data.is_infob,
+            "levelRank": mms_data.level_rank
+        },
+        "businessManagementAbilityAnalysis": {
+            "entName": entName,
+            "evaluation": mms_data.evaluation,
+            "investNum": mms_data.investnum,
+            "bidNum": mms_data.bidnum,
+            "cbzt": mms_data.cbzt,
+            "ibrandNum": mms_data.ibrand_num,
+            "icopyNum": mms_data.icopy_num,
+            "ipatNum": mms_data.ipat_num,
+            "idomNum": mms_data.idom_num,
+            "passPercent": mms_data.passpercent
+        },
+        "businessManagementRiskAnalysis": {
+            "entName": entName,
+            "priclasecam": mms_data.priclasecam,
+            "encodeGuaranperiod": mms_data.encode_guaranperiod,
+            "encodeGatype": mms_data.encode_gatype,
+            "isRage": mms_data.is_rage,
+            "subPefperfromto": mms_data.sub_pefperfromto,
+            "unpaidsocialins": mms_data.unpaidsocialins,
+            "isBra": mms_data.is_bra,
+            "isBrap": mms_data.is_brap,
+            "pledgeNum": mms_data.pledgenum,
+            "taxunpaidNum": mms_data.taxunpaidnum,
+            "isExcept": mms_data.is_except
+        },
+        "businessStabilityAnalysis": {
+            "entName": entName,
+            "altTime": mms_data.alttime
+        },
+        "creditRiskAnalysis": {
+            "entName": entName,
+            "isPunish": mms_data.is_punish,
+            "isKcont": mms_data.is_kcont,
+            "creditGrade": mms_data.credit_grade,
+            "isJusticeCreditaic": mms_data.is_justice_creditaic
+        },
+        "judicialRiskAnalysis": {
+            "entName": entName,
+            "lawSum": mms_data.law_sum,
+            "defendant": mms_data.defendant,
+            "enforceAmount": mms_data.enforce_amount,
+            "isJusticeCredit": mms_data.is_justice_credit
+
+        },
+        "businessBackgroundLabel": {
+            "entName": entName,
+            "label": model_pred.df_bj
+        },
+        "businessManagementAbilityLabel": {
+            "entName": entName,
+            "label": model_pred.df_jn
+        },
+        "businessManagementRiskLabel": {
+            "entName": entName,
+            "label": model_pred.df_jf
+        },
+        "businessStabilityLabel": {
+            "entName": entName,
+            "label": model_pred.df_wd
+        },
+        "creditRiskLabel": {
+            "entName": entName,
+            "label": model_pred.df_xf
+        },
+        "judicialRiskLabel": {
+            "entName": entName,
+            "label": model_pred.df_sf
+        }
+    };
+    let url = localUrl + '/por/save/saveNewAnalysisLabel';
+
+    return ajaxTool("POST", url, getBackAnalysisLabelLook, JSON.stringify(send))
+
+}
+
+
+function getBackAnalysisLabelLook(data) {
+    if (!data.flag) {
+        alert(data.errorMsg);
     }
 }
 
@@ -234,10 +365,28 @@ function setNext(now) {
         let $newNode = $(now).parent().parent().find('form:last');
         let number = parseInt($newNode.find("div:first").html());
         let $newForm = $newNode.clone();
+        $newForm.find("input").each(function () {
+            $(this).val('');
+        });
+        $newForm.find("textarea").each(function () {
+            $(this).val('');
+        });
         $newForm.find("div:first").html(number + 1);
         $newNode.after($newForm);
     } else {
         alert("不能创建更多表单");
+    }
+}
+
+
+function setClear(now) {
+    let length = $(now).parent().parent().find('form').length;
+
+    if (length > 1) {
+        let $newNode = $(now).parent().parent().find('form:last');
+        $newNode.remove();
+    } else {
+        alert("不能撤销更多表单");
     }
 }
 

@@ -31,10 +31,10 @@ public interface BusinessManagementAbilityAnalysisMapper {
                     @Result(column = "investnum", property = "investNum"),
                     @Result(column = "bidnum", property = "bidNum"),
                     @Result(column = "cbzt", property = "cbzt"),
-                    @Result(column = "ibrand_num", property = "iBrandNum"),
-                    @Result(column = "icopy_num", property = "iCopyNum"),
-                    @Result(column = "ipat_num", property = "iPatNum"),
-                    @Result(column = "idom_num", property = "iDomNum"),
+                    @Result(column = "ibrand_num", property = "ibrandNum"),
+                    @Result(column = "icopy_num", property = "icopyNum"),
+                    @Result(column = "ipat_num", property = "ipatNum"),
+                    @Result(column = "idom_num", property = "idomNum"),
                     @Result(column = "passpercent", property = "passPercent")
             }
     )
@@ -50,8 +50,8 @@ public interface BusinessManagementAbilityAnalysisMapper {
     @Insert("insert into " +
             "tab_business_management_ability_analysis(eid, entname, evaluation, investnum, bidnum, cbzt, ibrand_num, " +
             "icopy_num, ipat_num, idom_num, passpercent) " +
-            "values(#{eid}, #{entName}, #{evaluation}， #{investNum}, #{bidNum}, #{cbzt}, #{iBrandNum}, #{iCopyNum}, " +
-            "#{iPatNum}, #{iDomNum}, #{passPercent})")
+            "values(#{eid}, #{entName}, #{evaluation}, #{investNum}, #{bidNum}, #{cbzt}, #{ibrandNum}, #{icopyNum}, " +
+            "#{ipatNum}, #{idomNum}, #{passPercent})")
     int saveBusinessManagementAbilityAnalysis(@NotNull BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis);
 
 }

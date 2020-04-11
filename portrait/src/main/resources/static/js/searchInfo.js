@@ -106,7 +106,6 @@ function searchSubmit() {
                 alert("输入值不能为空！");
             } else {
                 let url = localUrl + "/por/search/searchEntName/" + newEntNameStr;
-                console.log(url);
                 ajaxTool("GET", url, searchTable);
             }
         }
@@ -192,8 +191,7 @@ function getInfo(now) {
     console.log(entName);
     let url = localUrl + "/por/search/searchEntInfo/" + entName.toString();
     ajaxTool("GET", url, showInfo);
-    let location = $("#fh5co-work").offset().top;
-    $("html,body").animate({scrollTop: location}, 800);
+
 }
 
 
@@ -209,6 +207,8 @@ function showInfo(data) {
         lookJudicialRiskChart(data.data.chart.judicialRisk);
 
         lookLabel(data.data.label);
+        let location = $("#fh5co-work").offset().top;
+        $("html,body").animate({scrollTop: location}, 800);
     } else {
         alert(data.errorMsg);
     }
@@ -235,7 +235,6 @@ function lookEntInfo(data) {
 
 
 function lookBusinessBackgroundChart(data) {
-    console.log("businessBackgroundChart begin");
     let myChart = echarts.init(document.getElementById('businessBackgroundChartInfo'));
     let option = {
         title: {
@@ -327,7 +326,6 @@ function lookBusinessBackgroundChart(data) {
 }
 
 function lookBusinessStabilityChart(data) {
-    console.log("businessStabilityChart begin");
 
     let myChart = echarts.init(document.getElementById('businessStabilityChartInfo'));
     let option = {
@@ -415,7 +413,6 @@ function lookBusinessStabilityChart(data) {
 }
 
 function lookBusinessManagementAbilityChart(data) {
-    console.log("businessManagementAbilityChart begin");
 
     let myChart = echarts.init(document.getElementById('businessManagementAbilityChartInfo'));
     let option = {
@@ -510,7 +507,6 @@ function lookBusinessManagementAbilityChart(data) {
 }
 
 function lookBusinessManagementRiskChart(data) {
-    console.log("businessManagementRiskChart begin");
 
     let myChart = echarts.init(document.getElementById('businessManagementRiskChartInfo'));
     let option = {
@@ -607,7 +603,6 @@ function lookBusinessManagementRiskChart(data) {
 }
 
 function lookJudicialRiskChart(data) {
-    console.log("judicialRiskChart begin");
 
     let myChart = echarts.init(document.getElementById('judicialRiskChartInfo'));
     let option = {
@@ -697,7 +692,6 @@ function lookJudicialRiskChart(data) {
 }
 
 function lookCreditRiskChart(data) {
-    console.log("creditRiskChart begin");
 
     let myChart = echarts.init(document.getElementById('creditRiskChartInfo'));
     let option = {
@@ -819,8 +813,9 @@ function addInput(now) {
 
 //ajax封转函数
 function ajaxTool(type, url, successFunc, data) {
+    let pass = false;
     $.ajax({
-        async: true,
+        async: false,
         type: type,
         url: url,
         dataType: "json",
@@ -828,14 +823,20 @@ function ajaxTool(type, url, successFunc, data) {
         data: data,
         timeout: 10000,
         success: function (result) {
+            pass = result.flag;
             console.log("url:" + url + " -- " + "result:" + result);
             successFunc(result);
         },
         error: function (e) {
-            console.log(e);
             console.log("errorStatus:" + e.status);
             console.log("statusText:" + e.responseText);
-            // window.location.href = localUrl + "/por/error/404";
+            window.location.href = localUrl + "/por/error/404";
         }
     });
+
+    if (pass) {
+        return true;
+    } else {
+        return false;
+    }
 }

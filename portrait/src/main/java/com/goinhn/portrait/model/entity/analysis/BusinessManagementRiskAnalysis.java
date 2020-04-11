@@ -11,8 +11,7 @@ import java.io.Serializable;
  * @author goinhn
  */
 @Data
-@Builder
-public class BusinessManagementRiskAnalysis implements Serializable {
+public class BusinessManagementRiskAnalysis {
 
     /**
      * eid：序号

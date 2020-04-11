@@ -5,6 +5,7 @@ import com.goinhn.portrait.model.dto.Page;
 import com.goinhn.portrait.model.dto.ShowTableInfo;
 import com.goinhn.portrait.model.entity.ShowInfo;
 import com.goinhn.portrait.service.intf.ShowInfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 /**
  * @author goinhn
  */
+@Slf4j
 @Service
 public class ShowInfoServiceImpl implements ShowInfoService {
 
@@ -33,7 +35,11 @@ public class ShowInfoServiceImpl implements ShowInfoService {
                     .builder()
                     .entName(entName)
                     .build();
-            showInfo = showInfoMapper.selectAllByEntName(showInfo);
+            try {
+                showInfo = showInfoMapper.selectAllByEntName(showInfo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (showInfo != null) {
                 showTableInfos.add(ShowTableInfo
                         .builder()
@@ -49,7 +55,12 @@ public class ShowInfoServiceImpl implements ShowInfoService {
                 .pageIndex(0)
                 .pageSize(per)
                 .build();
-        List<ShowInfo> showInfos = showInfoMapper.selectAllLikeEntName(page);
+        List<ShowInfo> showInfos = new ArrayList<>();
+        try {
+            showInfos = showInfoMapper.selectAllLikeEntName(page);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         for (ShowInfo each : showInfos) {
             ShowTableInfo showTableInfo = ShowTableInfo
@@ -69,9 +80,36 @@ public class ShowInfoServiceImpl implements ShowInfoService {
                 .builder()
                 .entName(entName)
                 .build();
-        showInfo = showInfoMapper.selectAllByEntName(showInfo);
+        try {
+            showInfo = showInfoMapper.selectAllByEntName(showInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return showInfo;
+    }
+
+    @Override
+    public boolean deleteShowInfo(String entName) {
+        log.info("deleteShowInfo" + "----------" + entName + "\n");
+
+        int number = 0;
+        try {
+            ShowInfo showInfo = ShowInfo
+                    .builder()
+                    .entName(entName)
+                    .build();
+            number = showInfoMapper.deleteShowInfoByEntName(showInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        if (number == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

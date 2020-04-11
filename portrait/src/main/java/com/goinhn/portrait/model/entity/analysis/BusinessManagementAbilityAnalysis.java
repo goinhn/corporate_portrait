@@ -1,9 +1,9 @@
 package com.goinhn.portrait.model.entity.analysis;
 
-import lombok.Builder;
 import lombok.Data;
 
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
+
 
 /**
  * 企业经营能力分析
@@ -11,8 +11,7 @@ import java.io.Serializable;
  * @author goinhn
  */
 @Data
-@Builder
-public class BusinessManagementAbilityAnalysis implements Serializable {
+public class BusinessManagementAbilityAnalysis {
 
     /**
      * eid：序号
@@ -47,22 +46,26 @@ public class BusinessManagementAbilityAnalysis implements Serializable {
     /**
      * iBrandNum: 商标数据
      */
-    private Double iBrandNum;
+    @NotNull
+    private Double ibrandNum;
 
     /**
      * iCopyNum: 软著著作权
      */
-    private Double iCopyNum;
+    @NotNull
+    private Double icopyNum;
 
     /**
      * iPatNum: 专利数据
      */
-    private Double iPatNum;
+    @NotNull
+    private Double ipatNum;
 
     /**
      * iDomNum: 域名数据
      */
-    private Double iDomNum;
+    @NotNull
+    private Double idomNum;
 
     /**
      * passPercent: 产品被抽查合格率

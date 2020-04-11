@@ -18,7 +18,7 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/portrait?serverTimezone=GMT%2B8&useUnicode=true&tinyInt1isBit=false&characterEncoding=UTF-8
     username: root
-    password: fwz
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   devtools:
     restart:
@@ -62,4 +62,4 @@ logging:
     file: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n'
   level:
     root: warn
-    com.goinhn.portrait: debug
+    com.goinhn.portrait: info

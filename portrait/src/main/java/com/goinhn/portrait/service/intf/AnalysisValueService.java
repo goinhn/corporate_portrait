@@ -1,6 +1,7 @@
 package com.goinhn.portrait.service.intf;
 
 import com.goinhn.portrait.constant.enums.Classification;
+import com.goinhn.portrait.model.vo.NewAnalysisLabel;
 
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public interface AnalysisValueService {
      * @param analysis       不同种类的模型
      * @return
      */
-    boolean saveRiskValueSingle(Classification classification, Object analysis);
+    boolean saveRiskValueSingle(Classification classification, Object analysis) throws Exception;
 
     /**
      * 保存所有的分析值数据
@@ -33,6 +34,15 @@ public interface AnalysisValueService {
      * @param map 所有种类集合
      * @return
      */
-    boolean saveRiskValueAll(Map<Classification, Object> map);
+    boolean saveRiskValueAll(Map<Classification, Object> map) throws Exception;
+
+
+    /**
+     * 保存多个分析值数据
+     *
+     * @param newAnalysisLabel 分析数据集合
+     * @return
+     */
+    boolean saveRiskValueSpecial(NewAnalysisLabel newAnalysisLabel) throws Exception;
 
 }

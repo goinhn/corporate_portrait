@@ -46,7 +46,7 @@ public class SearchController {
     @GetMapping(value = "/searchEntName/{entName}")
     public ResultInfo searchEntName(@PathVariable("entName")
                                     @NotNull(message = "搜索的企业名称不为空") String entName) {
-        log.info("/por/search/searchEntName/" + entName);
+        log.info("/por/search/searchEntName/{entName}" + "----------" + entName + "\n");
 
         String[] entNames = entName.split(",");
         List<String> entNameList = new ArrayList<>();
@@ -98,7 +98,7 @@ public class SearchController {
     @GetMapping(value = "/searchEntInfo/{entName}")
     public ResultInfo searchEntInfo(@PathVariable("entName")
                                     @NotNull(message = "搜索的企业名称不为空") String entName) {
-        log.info("/por/searchEntInfo/" + entName);
+        log.info("/por/searchEntInfo/{entName)" + "----------" + entName + "\n");
         if ("".equals(entName) || entName == null) {
             return ResultInfo
                     .builder()
@@ -185,10 +185,10 @@ public class SearchController {
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getBidNum()).orElse(0.0));
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getCbzt()).orElse(0.0));
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getCbzt()).orElse(0.0));
-            list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getIBrandNum()).orElse(0.0));
-            list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getICopyNum()).orElse(0.0));
-            list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getIPatNum()).orElse(0.0));
-            list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getIDomNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getIbrandNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getIcopyNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getIpatNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getIdomNum()).orElse(0.0));
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getPassPercent()).orElse(0.0));
             map.put("value", list);
             List<Map<String, Object>> listKind = new ArrayList<>();
@@ -283,10 +283,5 @@ public class SearchController {
 
         return resultMap;
     }
-
-    //    @PostMapping(value = "/test", produces = "application/json")
-//    public ResultInfo test(@RequestBody Te te) {
-//
-//    }
 
 }

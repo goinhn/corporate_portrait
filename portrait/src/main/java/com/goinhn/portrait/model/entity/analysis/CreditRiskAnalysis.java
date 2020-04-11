@@ -11,8 +11,7 @@ import java.io.Serializable;
  * @author goinhn
  */
 @Data
-@Builder
-public class CreditRiskAnalysis implements Serializable {
+public class CreditRiskAnalysis {
 
     /**
      * eid：序号

@@ -15,17 +15,17 @@ public class BeginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        log.debug("preHandle method is now running!");
+//        log.debug("preHandle method is now running!");
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-        log.debug("postHandle method is now running!");
+//        log.debug("postHandle method is now running!");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        log.debug("afterCompletion method is now running!");
+//        log.debug("afterCompletion method is now running!");
     }
 }

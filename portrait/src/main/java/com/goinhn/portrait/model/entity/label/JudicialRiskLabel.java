@@ -9,7 +9,6 @@ import lombok.Data;
  * @author goinhn
  */
 @Data
-@Builder
 public class JudicialRiskLabel {
 
     /**

@@ -6,7 +6,9 @@ import com.goinhn.portrait.mapper.label.*;
 import com.goinhn.portrait.model.entity.LabelKind;
 import com.goinhn.portrait.model.entity.label.*;
 import com.goinhn.portrait.model.dto.ShowLabel;
+import com.goinhn.portrait.model.vo.NewAnalysisLabel;
 import com.goinhn.portrait.service.intf.LabelService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ import java.util.Optional;
  *
  * @author goinhn
  */
+@Slf4j
 @Service
 public class LabelServiceImpl implements LabelService {
 
@@ -65,7 +68,12 @@ public class LabelServiceImpl implements LabelService {
                     .kind(kind)
                     .number(mapNumber.get(enumKind))
                     .build();
-            labelKind = labelKindMapper.selectAllByKindAndNumber(labelKind);
+            try {
+                labelKind = labelKindMapper.selectAllByKindAndNumber(labelKind);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             return Optional.ofNullable(labelKind)
                     .map(i -> i.getLabel())
                     .orElse("");
@@ -75,41 +83,33 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public Map<Classification, Integer> getLabelNumber(@NotNull String entName) {
-        BusinessBackgroundLabel businessBackgroundLabel = BusinessBackgroundLabel
-                .builder()
-                .entName(entName)
-                .build();
-        businessBackgroundLabel = businessBackgroundLabelMapper.selectAllByEntName(businessBackgroundLabel);
+        BusinessBackgroundLabel businessBackgroundLabel = new BusinessBackgroundLabel();
+        businessBackgroundLabel.setEntName(entName);
+        BusinessManagementAbilityLabel businessManagementAbilityLabel = new BusinessManagementAbilityLabel();
+        businessManagementAbilityLabel.setEntName(entName);
+        BusinessManagementRiskLabel businessManagementRiskLabel = new BusinessManagementRiskLabel();
+        businessManagementRiskLabel.setEntName(entName);
+        BusinessStabilityLabel businessStabilityLabel = new BusinessStabilityLabel();
+        businessStabilityLabel.setEntName(entName);
+        CreditRiskLabel creditRiskLabel = new CreditRiskLabel();
+        creditRiskLabel.setEntName(entName);
+        JudicialRiskLabel judicialRiskLabel = new JudicialRiskLabel();
+        judicialRiskLabel.setEntName(entName);
+        try {
+            businessBackgroundLabel = businessBackgroundLabelMapper.selectAllByEntName(businessBackgroundLabel);
 
-        BusinessManagementAbilityLabel businessManagementAbilityLabel = BusinessManagementAbilityLabel
-                .builder()
-                .entName(entName)
-                .build();
-        businessManagementAbilityLabel = businessManagementAbilityLabelMapper.selectAllByEntName(businessManagementAbilityLabel);
+            businessManagementAbilityLabel = businessManagementAbilityLabelMapper.selectAllByEntName(businessManagementAbilityLabel);
 
-        BusinessManagementRiskLabel businessManagementRiskLabel = BusinessManagementRiskLabel
-                .builder()
-                .entName(entName)
-                .build();
-        businessManagementRiskLabel = businessManagementRiskLabelMapper.selectAllByEntName(businessManagementRiskLabel);
+            businessManagementRiskLabel = businessManagementRiskLabelMapper.selectAllByEntName(businessManagementRiskLabel);
 
-        BusinessStabilityLabel businessStabilityLabel = BusinessStabilityLabel
-                .builder()
-                .entName(entName)
-                .build();
-        businessStabilityLabel = businessStabilityLabelMapper.selectAllByEntName(businessStabilityLabel);
+            businessStabilityLabel = businessStabilityLabelMapper.selectAllByEntName(businessStabilityLabel);
 
-        CreditRiskLabel creditRiskLabel = CreditRiskLabel
-                .builder()
-                .entName(entName)
-                .build();
-        creditRiskLabel = creditRiskLabelMapper.selectAllByEntName(creditRiskLabel);
+            creditRiskLabel = creditRiskLabelMapper.selectAllByEntName(creditRiskLabel);
 
-        JudicialRiskLabel judicialRiskLabel = JudicialRiskLabel
-                .builder()
-                .entName(entName)
-                .build();
-        judicialRiskLabel = judicialRiskLabelMapper.selectAllByEntName(judicialRiskLabel);
+            judicialRiskLabel = judicialRiskLabelMapper.selectAllByEntName(judicialRiskLabel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //存储返回的6个标签数字
         Map<Classification, Integer> mapNumber = new HashMap<>(6);
@@ -172,8 +172,7 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean saveLabelValue(@NotNull String entName,
-                                  @NotNull Map<Classification, Object> map) {
+    public boolean saveLabelValue(@NotNull Map<Classification, Object> map) throws Exception {
         BusinessBackgroundLabel businessBackgroundLabel =
                 (BusinessBackgroundLabel) Optional.ofNullable(map.get(Classification.BUSINESS_BACKGROUND)).get();
         BusinessManagementAbilityLabel businessManagementAbilityLabel =
@@ -187,21 +186,61 @@ public class LabelServiceImpl implements LabelService {
         JudicialRiskLabel judicialRiskLabel =
                 (JudicialRiskLabel) Optional.ofNullable(map.get(Classification.JUDICIAL_RISK)).get();
 
-        if (businessBackgroundLabelMapper.saveBusinessBackgroundLabel(businessBackgroundLabel) == 1) {
-            if (businessManagementAbilityLabelMapper.saveBusinessManagementAbilityLabel(businessManagementAbilityLabel) == 1) {
-                if (businessManagementRiskLabelMapper.saveBusinessManagementRiskLabel(businessManagementRiskLabel) == 1) {
-                    if (businessStabilityLabelMapper.saveBusinessStabilityLabel(businessStabilityLabel) == 1) {
-                        if (creditRiskLabelMapper.saveCreditRiskLabel(creditRiskLabel) == 1) {
-                            if (judicialRiskLabelMapper.saveJudicialRiskLabel(judicialRiskLabel) == 1) {
-                                return true;
+        try {
+            if (businessBackgroundLabelMapper.saveBusinessBackgroundLabel(businessBackgroundLabel) == 1) {
+                if (businessManagementAbilityLabelMapper.saveBusinessManagementAbilityLabel(businessManagementAbilityLabel) == 1) {
+                    if (businessManagementRiskLabelMapper.saveBusinessManagementRiskLabel(businessManagementRiskLabel) == 1) {
+                        if (businessStabilityLabelMapper.saveBusinessStabilityLabel(businessStabilityLabel) == 1) {
+                            if (creditRiskLabelMapper.saveCreditRiskLabel(creditRiskLabel) == 1) {
+                                if (judicialRiskLabelMapper.saveJudicialRiskLabel(judicialRiskLabel) == 1) {
+                                    return true;
+                                }
                             }
                         }
                     }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
 
         return false;
+    }
+
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean saveLabelValueSpecial(NewAnalysisLabel newAnalysisLabel) throws Exception {
+        log.info("saveLabelValueSpecial" + "----------" + newAnalysisLabel.toString() + "\n");
+
+        BusinessBackgroundLabel businessBackgroundLabel = newAnalysisLabel.getBusinessBackgroundLabel();
+        BusinessManagementAbilityLabel businessManagementAbilityLabel = newAnalysisLabel.getBusinessManagementAbilityLabel();
+        BusinessManagementRiskLabel businessManagementRiskLabel = newAnalysisLabel.getBusinessManagementRiskLabel();
+        BusinessStabilityLabel businessStabilityLabel = newAnalysisLabel.getBusinessStabilityLabel();
+        CreditRiskLabel creditRiskLabel = newAnalysisLabel.getCreditRiskLabel();
+        JudicialRiskLabel judicialRiskLabel = newAnalysisLabel.getJudicialRiskLabel();
+
+        Map<Classification, Object> map = new HashMap<>(6);
+
+        try {
+            map.put(Classification.BUSINESS_BACKGROUND, businessBackgroundLabel);
+
+            map.put(Classification.BUSINESS_MANAGEMENT_ABILITY, businessManagementAbilityLabel);
+
+            map.put(Classification.BUSINESS_MANAGEMENT_RISK, businessManagementRiskLabel);
+
+            map.put(Classification.BUSINESS_STABILITY, businessStabilityLabel);
+
+            map.put(Classification.CREDIT_RISK, creditRiskLabel);
+
+            map.put(Classification.JUDICIAL_RISK, judicialRiskLabel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+
+        return saveLabelValue(map);
     }
 
 }

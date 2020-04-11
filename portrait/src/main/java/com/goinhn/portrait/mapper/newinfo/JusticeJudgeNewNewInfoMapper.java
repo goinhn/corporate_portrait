@@ -46,7 +46,7 @@ public interface JusticeJudgeNewNewInfoMapper {
      * @return
      */
     @Insert("insert into " +
-            "tab_justice_judge_new_new_info(eid, entname, time, title, casetype, judgeresult, casecause, ecidence, " +
+            "tab_justice_judge_new_new_info(eid, entname, time, title, casetype, judgeresult, casecause, evidence, " +
             "courtrank, datatype, latypes) " +
             "values(#{eid}, #{entName}, #{time}, #{title}, #{caseType}, #{judgeResult}, #{caseCause}, #{evidence}, " +
             "#{courtRank}, #{dataType}, #{laTypes})")

@@ -2,8 +2,10 @@ package com.goinhn.portrait.service.impl;
 
 import com.goinhn.portrait.mapper.analysis.*;
 import com.goinhn.portrait.model.entity.analysis.*;
+import com.goinhn.portrait.model.vo.NewAnalysisLabel;
 import com.goinhn.portrait.service.intf.AnalysisValueService;
 import com.goinhn.portrait.constant.enums.Classification;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import java.util.Optional;
  *
  * @author goinhn
  */
+@Slf4j
 @Service
 public class AnalysisValueServiceImpl implements AnalysisValueService {
 
@@ -48,45 +51,33 @@ public class AnalysisValueServiceImpl implements AnalysisValueService {
         try {
             switch (classification) {
                 case BUSINESS_BACKGROUND:
-                    BusinessBackgroundAnalysis businessBackgroundAnalysis = BusinessBackgroundAnalysis
-                            .builder()
-                            .entName(entName)
-                            .build();
+                    BusinessBackgroundAnalysis businessBackgroundAnalysis = new BusinessBackgroundAnalysis();
+                    businessBackgroundAnalysis.setEntName(entName);
                     return businessBackgroundAnalysisMapper.selectAllByEntName(businessBackgroundAnalysis);
 
                 case BUSINESS_MANAGEMENT_ABILITY:
-                    BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis = BusinessManagementAbilityAnalysis
-                            .builder()
-                            .entName(entName)
-                            .build();
+                    BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis = new BusinessManagementAbilityAnalysis();
+                    businessManagementAbilityAnalysis.setEntName(entName);
                     return businessManagementAbilityAnalysisMapper.selectAllByEntName(businessManagementAbilityAnalysis);
 
                 case BUSINESS_MANAGEMENT_RISK:
-                    BusinessManagementRiskAnalysis businessManagementRiskAnalysis = BusinessManagementRiskAnalysis
-                            .builder()
-                            .entName(entName)
-                            .build();
+                    BusinessManagementRiskAnalysis businessManagementRiskAnalysis = new BusinessManagementRiskAnalysis();
+                    businessManagementRiskAnalysis.setEntName(entName);
                     return businessManagementRiskAnalysisMapper.selectAllByEntName(businessManagementRiskAnalysis);
 
                 case BUSINESS_STABILITY:
-                    BusinessStabilityAnalysis businessStabilityAnalysis = BusinessStabilityAnalysis
-                            .builder()
-                            .entName(entName)
-                            .build();
+                    BusinessStabilityAnalysis businessStabilityAnalysis = new BusinessStabilityAnalysis();
+                    businessStabilityAnalysis.setEntName(entName);
                     return businessStabilityAnalysisMapper.selectAllByEntName(businessStabilityAnalysis);
 
                 case CREDIT_RISK:
-                    CreditRiskAnalysis creditRiskAnalysis = CreditRiskAnalysis
-                            .builder()
-                            .entName(entName)
-                            .build();
+                    CreditRiskAnalysis creditRiskAnalysis = new CreditRiskAnalysis();
+                    creditRiskAnalysis.setEntName(entName);
                     return creditRiskAnalysisMapper.selectAllByEntName(creditRiskAnalysis);
 
                 case JUDICIAL_RISK:
-                    JudicialRiskAnalysis judicialRiskAnalysis = JudicialRiskAnalysis
-                            .builder()
-                            .entName(entName)
-                            .build();
+                    JudicialRiskAnalysis judicialRiskAnalysis = new JudicialRiskAnalysis();
+                    judicialRiskAnalysis.setEntName(entName);
                     return judicialRiskAnalysisMapper.selectAllByEntName(judicialRiskAnalysis);
 
                 default:
@@ -101,8 +92,9 @@ public class AnalysisValueServiceImpl implements AnalysisValueService {
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean saveRiskValueSingle(@NotNull(message = "分类不能为空") Classification classification,
-                                       @NotNull(message = "分析类不能为空") Object analysis) {
+                                       @NotNull(message = "分析类不能为空") Object analysis) throws Exception {
         try {
             switch (classification) {
                 case BUSINESS_BACKGROUND:
@@ -135,20 +127,70 @@ public class AnalysisValueServiceImpl implements AnalysisValueService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            throw e;
         }
     }
 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean saveRiskValueAll(@NotNull(message = "映射分类不能为空") Map<Classification, Object> map) {
+    public boolean saveRiskValueAll(@NotNull(message = "映射分类不能为空") Map<Classification, Object> map) throws Exception {
         Iterator<Entry<Classification, Object>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Entry<Classification, Object> entry = iterator.next();
-            if (!saveRiskValueSingle(entry.getKey(), Optional.ofNullable(entry.getValue()).get())) {
+        try{
+            while (iterator.hasNext()) {
+                Entry<Classification, Object> entry = iterator.next();
+                if (!saveRiskValueSingle(entry.getKey(), Optional.ofNullable(entry.getValue()).get())) {
+                    return false;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+
+        return true;
+    }
+
+
+    @Override
+    @Transactional(rollbackFor = Error.class)
+    public boolean saveRiskValueSpecial(@NotNull NewAnalysisLabel newAnalysisLabel) throws Exception {
+        log.info("saveRiskValueSpecial" + "----------" + newAnalysisLabel.toString() + "\n");
+
+        BusinessBackgroundAnalysis businessBackgroundAnalysis = newAnalysisLabel.getBusinessBackgroundAnalysis();
+        BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis = newAnalysisLabel.getBusinessManagementAbilityAnalysis();
+        BusinessManagementRiskAnalysis businessManagementRiskAnalysis = newAnalysisLabel.getBusinessManagementRiskAnalysis();
+        BusinessStabilityAnalysis businessStabilityAnalysis = newAnalysisLabel.getBusinessStabilityAnalysis();
+        CreditRiskAnalysis creditRiskAnalysis = newAnalysisLabel.getCreditRiskAnalysis();
+        JudicialRiskAnalysis judicialRiskAnalysis = newAnalysisLabel.getJudicialRiskAnalysis();
+
+        try{
+            if(!saveRiskValueSingle(Classification.BUSINESS_BACKGROUND, businessBackgroundAnalysis)){
                 return false;
             }
+
+            if(!saveRiskValueSingle(Classification.BUSINESS_MANAGEMENT_ABILITY, businessManagementAbilityAnalysis)){
+                return false;
+            }
+
+            if(!saveRiskValueSingle(Classification.BUSINESS_MANAGEMENT_RISK, businessManagementRiskAnalysis)){
+                return false;
+            }
+
+            if(!saveRiskValueSingle(Classification.BUSINESS_STABILITY, businessStabilityAnalysis)){
+                return false;
+            }
+
+            if(!saveRiskValueSingle(Classification.CREDIT_RISK, creditRiskAnalysis)){
+                return false;
+            }
+
+            if(!saveRiskValueSingle(Classification.JUDICIAL_RISK, judicialRiskAnalysis)){
+                return false;
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+            throw e;
         }
 
         return true;

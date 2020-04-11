@@ -41,7 +41,7 @@ public interface BusinessManagementRiskLabelMapper {
      */
     @Insert("insert into " +
             "tab_business_management_risk_label(eid, entname, label) " +
-            "vlaues(#{eid}, #{entName}, #{label})")
+            "values(#{eid}, #{entName}, #{label})")
     int saveBusinessManagementRiskLabel(@NotNull BusinessManagementRiskLabel businessManagementRiskLabel);
 
 }

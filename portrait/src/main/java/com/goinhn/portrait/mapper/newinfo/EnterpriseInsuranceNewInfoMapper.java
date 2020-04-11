@@ -19,7 +19,7 @@ public interface EnterpriseInsuranceNewInfoMapper {
      * @param enterpriseInsuranceNewInfo 单位参保信息查询（养老单位参保信息）
      * @return
      */
-    @Select("select * from tab_ent_guarantee_new_info where entname = {entName}")
+    @Select("select * from tab_enterprise_insurance_new_info where entname = {entName}")
     @Results(
             id = "enterpriseInsuranceNewInfoMap",
             value = {
@@ -44,7 +44,7 @@ public interface EnterpriseInsuranceNewInfoMapper {
      * @return
      */
     @Insert("insert into " +
-            "tab_ent_guarantee_new_info(eid, entname, chrq, xzbz, sbjgbh, xzbzmc, cbzt, cbztmc, dwbh) " +
+            "tab_enterprise_insurance_new_info(eid, entname, cbrq, xzbz, sbjgbh, xzbzmc, cbzt, cbztmc, dwbh) " +
             "values(#{eid}, #{entName}, #{cbrq}, #{xzbz}, #{sbjgbh}, #{xzbzmc}, #{cbzt}, #{cbztmc}, #{dwbh})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})

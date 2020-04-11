@@ -29,7 +29,7 @@ public class ChangeInfoNewInfo {
      * 备注
      */
     @JsonProperty("remark")
-    private Integer remark;
+    private String remark;
 
     /**
      * 数据来源标志：1核准通过2删除或者驳回或者不予受理

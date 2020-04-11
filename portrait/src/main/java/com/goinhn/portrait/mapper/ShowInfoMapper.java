@@ -62,10 +62,20 @@ public interface ShowInfoMapper {
      */
     @Insert("insert into " +
             "tab_show_info(eid, entname, bidnum, branchnum, investnum, shopnum, entstatus, " +
-            "enttype, entcat, indestryphy, credit_grade) " +
+            "enttype, entcat, industryphy, credit_grade) " +
             "values(#{eid}, #{entName}, #{bidNum}, #{branchNum}, #{investNum}, #{shopNum}, " +
-            "#{entStatus}, #{entType}, #{entCat}, #{indestryPhy}, #{creditGrade})")
+            "#{entStatus}, #{entType}, #{entCat}, #{industryPhy}, #{creditGrade})")
     @SelectKey(keyColumn = "eid", keyProperty = "eid",
             resultType = Long.class, before = false, statement = {"select last_insert_id()"})
     int saveShowInfo(@NotNull ShowInfo showInfo);
+
+
+    /**
+     * 根据名字删除指定的展示信息
+     *
+     * @param showInfo 展示信息
+     * @return
+     */
+    @Delete("delete from tab_show_info where entName = #{entName}")
+    int deleteShowInfoByEntName(@NotNull ShowInfo showInfo);
 }

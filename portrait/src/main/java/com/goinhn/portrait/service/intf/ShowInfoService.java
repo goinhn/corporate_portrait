@@ -24,9 +24,19 @@ public interface ShowInfoService {
 
     /**
      * 获取所有展示的信息
+     *
      * @param entName 企业名称
      * @return
      */
     ShowInfo getShowInfo(String entName);
+
+
+    /**
+     * 删除存储的展示信息
+     *
+     * @param entName 企业名称
+     * @return
+     */
+    boolean deleteShowInfo(String entName);
 
 }

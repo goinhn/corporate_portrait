@@ -11,8 +11,7 @@ import java.io.Serializable;
  * @author goinhn
  */
 @Data
-@Builder
-public class BusinessStabilityAnalysis implements Serializable {
+public class BusinessStabilityAnalysis {
 
     /**
      * eid：序号

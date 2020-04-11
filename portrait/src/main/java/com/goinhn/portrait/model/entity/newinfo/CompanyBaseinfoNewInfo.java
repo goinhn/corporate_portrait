@@ -105,7 +105,7 @@ public class CompanyBaseinfoNewInfo {
     /**
      * 经营(驻在)期限自
      */
-    @JsonProperty("opFrom")
+    @JsonProperty("opfrom")
     @JsonFormat
     private Date opFrom;
 

@@ -8,6 +8,7 @@ import com.goinhn.portrait.model.entity.ShowInfo;
 import com.goinhn.portrait.model.entity.newinfo.*;
 import com.goinhn.portrait.model.vo.NewInfo;
 import com.goinhn.portrait.service.intf.NewInfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import java.util.Optional;
 /**
  * @author goinhn
  */
+@Slf4j
 @Service
 public class NewInfoServiceImpl implements NewInfoService {
 
@@ -65,8 +67,9 @@ public class NewInfoServiceImpl implements NewInfoService {
     private ShowInfoMapper showInfoMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean saveNewInfoSignal(@NotNull NewInfoKind newInfoKind,
-                                     @NotNull Object newInfo) {
+                                     @NotNull Object newInfo) throws Exception{
         try {
             switch (newInfoKind) {
                 case CHANGE_INFO:
@@ -123,18 +126,23 @@ public class NewInfoServiceImpl implements NewInfoService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            throw e;
         }
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean saveNewInfoAll(@NotNull Map<NewInfoKind, Object> map) {
+    public boolean saveNewInfoAll(@NotNull Map<NewInfoKind, Object> map) throws Exception {
         Iterator<Entry<NewInfoKind, Object>> iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
             Entry<NewInfoKind, Object> entry = iterator.next();
-            if (!saveNewInfoSignal(entry.getKey(), Optional.ofNullable(entry.getValue()).get())) {
-                return false;
+            try{
+                if (!saveNewInfoSignal(entry.getKey(), Optional.ofNullable(entry.getValue()).get())) {
+                    return false;
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+                throw e;
             }
         }
 
@@ -148,7 +156,11 @@ public class NewInfoServiceImpl implements NewInfoService {
                 .entName(entName)
                 .build();
 
-        showInfo = showInfoMapper.selectAllByEntName(showInfo);
+        try{
+            showInfo = showInfoMapper.selectAllByEntName(showInfo);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
 
         if (showInfo != null) {
             return false;
@@ -158,8 +170,15 @@ public class NewInfoServiceImpl implements NewInfoService {
     }
 
     @Override
-    public boolean saveShowInfo(ShowInfo showInfo) {
-        int number = showInfoMapper.saveShowInfo(showInfo);
+    @Transactional(rollbackFor = Exception.class)
+    public boolean saveShowInfo(ShowInfo showInfo) throws Exception{
+        int number = 0;
+        try{
+            number = showInfoMapper.saveShowInfo(showInfo);
+        } catch(Exception e){
+            e.printStackTrace();
+            throw e;
+        }
         if (number == 1) {
             return true;
         }
@@ -169,7 +188,9 @@ public class NewInfoServiceImpl implements NewInfoService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean saveAllInfoSpecial(NewInfo newInfo) {
+    public boolean saveAllInfoSpecial(@NotNull NewInfo newInfo) throws Exception {
+        log.info("saveAllInfoSpecial" + "----------" + newInfo.toString() + "\n");
+
         CompanyBaseinfoNewInfo companyBaseinfoNewInfo = newInfo.getCompanyBaseinfoNewInfo();
         List<ChangeInfoNewInfo> changeInfoNewInfos = newInfo.getChangeInfoNewInfos();
         List<EntContributionNewInfo> entContributionNewInfos = newInfo.getEntContributionNewInfos();
@@ -201,35 +222,80 @@ public class NewInfoServiceImpl implements NewInfoService {
             return false;
         }
 
-        if(!saveNewInfoSignal(NewInfoKind.COMPANY_BASE_INFO, companyBaseinfoNewInfo)){
-            return false;
-        }
-        if(!saveNewInfoSignal(NewInfoKind.JN_CREDIT_INFO, jnCreditInfoNewInfo)){
-            return false;
-        }
-        if(!saveNewInfoSignal(NewInfoKind.ONE_DATA, oneDataNewInfo)){
-            return false;
-        }
-
-        for (ChangeInfoNewInfo changeInfoNewInfo : changeInfoNewInfos) {
-            if(!saveNewInfoSignal(NewInfoKind.CHANGE_INFO, changeInfoNewInfo)){
+        try{
+            if (!saveNewInfoSignal(NewInfoKind.COMPANY_BASE_INFO, companyBaseinfoNewInfo)) {
                 return false;
             }
-        }
-
-        for (EntContributionNewInfo entContributionNewInfo : entContributionNewInfos) {
-            if(!saveNewInfoSignal(NewInfoKind.ENT_CONTRIBUTION, entContributionNewInfo)){
+            if (!saveNewInfoSignal(NewInfoKind.JN_CREDIT_INFO, jnCreditInfoNewInfo)) {
                 return false;
             }
-        }
-
-        for (EntContributionYearNewInfo entContributionYearNewInfo : entContributionYearNewInfos) {
-            if(!saveNewInfoSignal(NewInfoKind.ENT_CONTRIBUTION_YEAR, entContributionYearNewInfo)){
+            if (!saveNewInfoSignal(NewInfoKind.ONE_DATA, oneDataNewInfo)) {
                 return false;
             }
+
+            for (ChangeInfoNewInfo changeInfoNewInfo : changeInfoNewInfos) {
+                if (!saveNewInfoSignal(NewInfoKind.CHANGE_INFO, changeInfoNewInfo)) {
+                    return false;
+                }
+            }
+
+            for (EntContributionNewInfo entContributionNewInfo : entContributionNewInfos) {
+                if (!saveNewInfoSignal(NewInfoKind.ENT_CONTRIBUTION, entContributionNewInfo)) {
+                    return false;
+                }
+            }
+
+            for (EntContributionYearNewInfo entContributionYearNewInfo : entContributionYearNewInfos) {
+                if (!saveNewInfoSignal(NewInfoKind.ENT_CONTRIBUTION_YEAR, entContributionYearNewInfo)) {
+                    return false;
+                }
+            }
+
+            for (EnterpriseInsuranceNewInfo enterpriseInsuranceNewInfo : enterpriseInsuranceNewInfos) {
+                if (!saveNewInfoSignal(NewInfoKind.ENTERPRISE_INSURANCE, enterpriseInsuranceNewInfo)) {
+                    return false;
+                }
+            }
+
+            for (EntGuaranteeNewInfo guaranteeNewInfo : guaranteeNewInfos) {
+                if (!saveNewInfoSignal(NewInfoKind.ENT_GUARANTEE, guaranteeNewInfo)) {
+                    return false;
+                }
+            }
+
+            for (EntSocialSecurityNewInfo entSocialSecurityNewInfo : entSocialSecurityNewInfos) {
+                if (!saveNewInfoSignal(NewInfoKind.ENT_SOCIAL_SECURITY, entSocialSecurityNewInfo)) {
+                    return false;
+                }
+            }
+
+            for (JusticeDeclareNewInfo justiceDeclareNewInfo : justiceDeclareNewInfos) {
+                if (!saveNewInfoSignal(NewInfoKind.JUSTICE_DECLARE, justiceDeclareNewInfo)) {
+                    return false;
+                }
+            }
+
+            for (JusticeEnforcedNewInfo justiceEnforcedNewInfo : justiceEnforcedNewInfos) {
+                if (!saveNewInfoSignal(NewInfoKind.JUSTICE_ENFORCED, justiceEnforcedNewInfo)) {
+                    return false;
+                }
+            }
+
+            for (JusticeJudgeNewNewInfo justiceJudgeNewNewInfo : justiceJudgeNewNewInfos) {
+                if (!saveNewInfoSignal(NewInfoKind.JUSTICE_JUDGE, justiceJudgeNewNewInfo)) {
+                    return false;
+                }
+            }
+            if (!saveShowInfo(showInfo)) {
+                return false;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            throw e;
         }
 
         return true;
     }
+
 
 }

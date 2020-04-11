@@ -46,7 +46,7 @@ public interface BusinessBackgroundAnalysisMapper {
      * @return
      */
     @Insert("insert into " +
-            "(eid, entname, empnum, encode_entstatus, shopnum, branchnum, is_infoa, is_infob, level_rank) " +
+            "tab_business_background_analysis(eid, entname, empnum, encode_entstatus, shopnum, branchnum, is_infoa, is_infob, level_rank) " +
             "values(#{eid}, #{entName}, #{empNum}, #{encodeEntStatus}, #{shopNum}, #{branchNum}, #{isInfoA}, #{isInfoB}, #{levelRank})")
     int saveBusinessBackgroundAnalysis(@NotNull BusinessBackgroundAnalysis businessBackgroundAnalysis);
 
