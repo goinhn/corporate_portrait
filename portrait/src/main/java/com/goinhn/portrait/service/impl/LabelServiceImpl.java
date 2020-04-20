@@ -6,7 +6,7 @@ import com.goinhn.portrait.mapper.label.*;
 import com.goinhn.portrait.model.entity.LabelKind;
 import com.goinhn.portrait.model.entity.label.*;
 import com.goinhn.portrait.model.dto.ShowLabel;
-import com.goinhn.portrait.model.vo.NewAnalysisLabel;
+import com.goinhn.portrait.model.vo.NewOriginalAnalysisLabel;
 import com.goinhn.portrait.service.intf.LabelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,7 +157,7 @@ public class LabelServiceImpl implements LabelService {
             showLabel.setBusinessManagementRiskLabel(searchCorrect(Classification.BUSINESS_MANAGEMENT_RISK, "企业经营风险", mapNumber));
             showLabel.setBusinessStabilityLabel(searchCorrect(Classification.BUSINESS_STABILITY, "企业稳定性", mapNumber));
             showLabel.setCreditRiskLabel(searchCorrect(Classification.CREDIT_RISK, "企业信用风险", mapNumber));
-            showLabel.setJudicialRiskLabel(searchCorrect(Classification.CREDIT_RISK, "企业司法风险", mapNumber));
+            showLabel.setJudicialRiskLabel(searchCorrect(Classification.JUDICIAL_RISK, "企业司法风险", mapNumber));
         } else {
             showLabel.setBusinessBackgroundLabel("");
             showLabel.setBusinessManagementAbilityLabel("");
@@ -211,15 +211,15 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean saveLabelValueSpecial(NewAnalysisLabel newAnalysisLabel) throws Exception {
-        log.info("saveLabelValueSpecial" + "----------" + newAnalysisLabel.toString() + "\n");
+    public boolean saveLabelValueSpecial(NewOriginalAnalysisLabel newOriginalAnalysisLabel) throws Exception {
+        log.info("saveLabelValueSpecial" + "----------" + newOriginalAnalysisLabel.toString() + "\n");
 
-        BusinessBackgroundLabel businessBackgroundLabel = newAnalysisLabel.getBusinessBackgroundLabel();
-        BusinessManagementAbilityLabel businessManagementAbilityLabel = newAnalysisLabel.getBusinessManagementAbilityLabel();
-        BusinessManagementRiskLabel businessManagementRiskLabel = newAnalysisLabel.getBusinessManagementRiskLabel();
-        BusinessStabilityLabel businessStabilityLabel = newAnalysisLabel.getBusinessStabilityLabel();
-        CreditRiskLabel creditRiskLabel = newAnalysisLabel.getCreditRiskLabel();
-        JudicialRiskLabel judicialRiskLabel = newAnalysisLabel.getJudicialRiskLabel();
+        BusinessBackgroundLabel businessBackgroundLabel = newOriginalAnalysisLabel.getBusinessBackgroundLabel();
+        BusinessManagementAbilityLabel businessManagementAbilityLabel = newOriginalAnalysisLabel.getBusinessManagementAbilityLabel();
+        BusinessManagementRiskLabel businessManagementRiskLabel = newOriginalAnalysisLabel.getBusinessManagementRiskLabel();
+        BusinessStabilityLabel businessStabilityLabel = newOriginalAnalysisLabel.getBusinessStabilityLabel();
+        CreditRiskLabel creditRiskLabel = newOriginalAnalysisLabel.getCreditRiskLabel();
+        JudicialRiskLabel judicialRiskLabel = newOriginalAnalysisLabel.getJudicialRiskLabel();
 
         Map<Classification, Object> map = new HashMap<>(6);
 

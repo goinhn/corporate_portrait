@@ -2,6 +2,7 @@ package com.goinhn.portrait.model.vo;
 
 import com.goinhn.portrait.model.entity.analysis.*;
 import com.goinhn.portrait.model.entity.label.*;
+import com.goinhn.portrait.model.entity.original.*;
 import lombok.Data;
 
 /**
@@ -10,7 +11,38 @@ import lombok.Data;
  * @author goinhn
  */
 @Data
-public class NewAnalysisLabel {
+public class NewOriginalAnalysisLabel {
+
+    /**
+     * 企业背景分析
+     */
+    private BusinessBackgroundOriginal businessBackgroundOriginal;
+
+    /**
+     * 企业经营能力分析
+     */
+    private BusinessManagementAbilityOriginal businessManagementAbilityOriginal;
+
+    /**
+     * 企业经营风险分析
+     */
+    private BusinessManagementRiskOriginal businessManagementRiskOriginal;
+
+    /**
+     * 企业稳定性分析
+     */
+    private BusinessStabilityOriginal businessStabilityOriginal;
+
+    /**
+     * 信用风险分析
+     */
+    private CreditRiskOriginal creditRiskOriginal;
+
+    /**
+     * 司法风险分析
+     */
+    private JudicialRiskOriginal judicialRiskOriginal;
+
 
     /**
      * 企业背景分析

@@ -1,24 +1,18 @@
 package com.goinhn.portrait.utils;
 
-import com.goinhn.portrait.model.dto.Page;
 
-import java.util.Optional;
+import com.goinhn.portrait.model.vo.ResultInfo;
 
 public class Test {
     public static void main(String[] args) {
-        Page page = new Test().test();
-        System.out.println(page.getEntName());
+        String str = "nA";
 
-    }
-
-    public Page test() {
-        Page<String> page = Page
-                .<String>builder()
-                .entName("begin")
-                .pageIndex(10)
-                .pageSize(10)
+        ResultInfo resultInfo = ResultInfo
+                .builder()
+                .data(str.replaceFirst("(^)(?i)na($)", "未知"))
                 .build();
 
-        return Optional.ofNullable(page).get();
+
+        System.out.println(resultInfo);
     }
 }

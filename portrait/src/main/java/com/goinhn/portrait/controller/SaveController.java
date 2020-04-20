@@ -1,13 +1,10 @@
 package com.goinhn.portrait.controller;
 
 
-import com.goinhn.portrait.model.vo.NewAnalysisLabel;
+import com.goinhn.portrait.model.vo.NewOriginalAnalysisLabel;
 import com.goinhn.portrait.model.vo.NewInfo;
 import com.goinhn.portrait.model.vo.ResultInfo;
-import com.goinhn.portrait.service.intf.AnalysisValueService;
-import com.goinhn.portrait.service.intf.LabelService;
-import com.goinhn.portrait.service.intf.NewInfoService;
-import com.goinhn.portrait.service.intf.ShowInfoService;
+import com.goinhn.portrait.service.intf.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -28,16 +25,19 @@ import javax.validation.constraints.NotNull;
 public class SaveController {
 
     @Autowired
-    AnalysisValueService analysisValueService;
+    private OriginalValueService originalValueService;
 
     @Autowired
-    LabelService labelService;
+    private AnalysisValueService analysisValueService;
 
     @Autowired
-    NewInfoService newInfoService;
+    private LabelService labelService;
 
     @Autowired
-    ShowInfoService showInfoService;
+    private NewInfoService newInfoService;
+
+    @Autowired
+    private ShowInfoService showInfoService;
 
     /**
      * @param entName 企业名称
@@ -52,16 +52,21 @@ public class SaveController {
         boolean flag = newInfoService.isEntName(entName);
 
         if (flag) {
-            return ResultInfo
+            ResultInfo resultInfo = ResultInfo
                     .builder()
                     .flag(true)
                     .build();
+            log.info("/por/save/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
+            return resultInfo;
+
         } else {
-            return ResultInfo
+            ResultInfo resultInfo = ResultInfo
                     .builder()
                     .flag(false)
                     .errorMsg("该企业已经存在")
                     .build();
+            log.info("/por/save/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
+            return resultInfo;
         }
     }
 
@@ -75,60 +80,90 @@ public class SaveController {
             flag = newInfoService.saveAllInfoSpecial(newInfo);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        if (flag) {
-            return ResultInfo
-                    .builder()
-                    .flag(true)
-                    .build();
-        } else {
-            return ResultInfo
+            ResultInfo resultInfo = ResultInfo
                     .builder()
                     .flag(false)
                     .errorMsg("存储展示数据失败")
                     .build();
+            log.info("/por/save/saveNewInfo" + "++++++++++" + resultInfo.toString() + "\n");
+            return resultInfo;
+        }
+
+        if (flag) {
+            ResultInfo resultInfo = ResultInfo
+                    .builder()
+                    .flag(true)
+                    .build();
+            log.info("/por/save/saveNewInfo" + "++++++++++" + resultInfo.toString() + "\n");
+            return resultInfo;
+        } else {
+            ResultInfo resultInfo = ResultInfo
+                    .builder()
+                    .flag(false)
+                    .errorMsg("存储展示数据失败")
+                    .build();
+            log.info("/por/save/saveNewInfo" + "++++++++++" + resultInfo.toString() + "\n");
+            return resultInfo;
         }
     }
 
 
-    @ApiOperation(value = "保存新输入的企业分析数据和标签接口")
-    @PostMapping(value = "/saveNewAnalysisLabel")
-    public ResultInfo saveNewAnalysisLabel(@RequestBody @NotNull NewAnalysisLabel newAnalysisLabel) {
-        log.info("/por/save/saveNewAnalysisLabel" + "----------" + newAnalysisLabel.toString() + "\n");
+    @ApiOperation(value = "保存新输入的企业原始数据、分析数据和标签接口")
+    @PostMapping(value = "/saveNewOriginalAnalysisLabel")
+    public ResultInfo saveNewAnalysisLabel(@RequestBody @NotNull NewOriginalAnalysisLabel newOriginalAnalysisLabel) {
+        log.info("/por/save/saveNewAnalysisLabel" + "----------" + newOriginalAnalysisLabel.toString() + "\n");
 
-        String entName = newAnalysisLabel.getBusinessBackgroundAnalysis().getEntName();
+        String entName = newOriginalAnalysisLabel.getBusinessBackgroundAnalysis().getEntName();
         try {
-            if (!analysisValueService.saveRiskValueSpecial(newAnalysisLabel)) {
+            if (!analysisValueService.saveRiskValueSpecial(newOriginalAnalysisLabel)) {
                 showInfoService.deleteShowInfo(entName);
-                return ResultInfo
+                ResultInfo resultInfo = ResultInfo
                         .builder()
                         .flag(false)
                         .errorMsg("存储展示数据失败")
                         .build();
+                log.info("/por/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
+                return resultInfo;
             } else {
-                if (!labelService.saveLabelValueSpecial(newAnalysisLabel)) {
+                if (!labelService.saveLabelValueSpecial(newOriginalAnalysisLabel)) {
                     showInfoService.deleteShowInfo(entName);
-                    return ResultInfo
+                    ResultInfo resultInfo = ResultInfo
                             .builder()
                             .flag(false)
                             .errorMsg("存储展示数据失败")
                             .build();
+                    log.info("/por/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
+                    return resultInfo;
                 } else {
-                    return ResultInfo
-                            .builder()
-                            .flag(true)
-                            .build();
+                    if (!originalValueService.saveRiskValueSpecial(newOriginalAnalysisLabel)) {
+                        showInfoService.deleteShowInfo(entName);
+                        ResultInfo resultInfo = ResultInfo
+                                .builder()
+                                .flag(false)
+                                .errorMsg("存储展示数据失败")
+                                .build();
+                        log.info("/por/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
+                        return resultInfo;
+                    } else {
+                        ResultInfo resultInfo = ResultInfo
+                                .builder()
+                                .flag(true)
+                                .build();
+                        log.info("/por/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
+                        return resultInfo;
+                    }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
             showInfoService.deleteShowInfo(entName);
-            return ResultInfo
+            ResultInfo resultInfo = ResultInfo
                     .builder()
                     .flag(false)
                     .errorMsg("存储展示数据失败")
                     .build();
+            log.info("/por/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
+            return resultInfo;
         }
     }
 

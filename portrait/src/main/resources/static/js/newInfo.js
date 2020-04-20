@@ -80,8 +80,10 @@ function getMode(data) {
     // console.log(data);
     if (data.flag == 0) {
         if (sendBackFormInfo()) {
-            if (sendBackAnalysisLabel(data.data)) {
-                alert("提交成功")
+            if (sendBackOriginalAnalysisLabel(data.data)) {
+                let pcs_time = data.data.time_stat.pcs_time;
+                let prd_time = data.data.time_stat.prd_time;
+                alert("提交成功\n" + "数据预处理时间:" + pcs_time + "ms\n" + "模型预测时间:" + prd_time + "ms\n");
             } else {
                 alert("提交失败");
             }
@@ -142,31 +144,91 @@ function getBackInfoLook(data) {
 }
 
 
-function sendBackAnalysisLabel(data) {
+function sendBackOriginalAnalysisLabel(data) {
+    console.log("remote" + data);
+
     let entName = data.entname;
+    let fmt_data = data.fmt_data;
     let mms_data = data.mms_data;
     let model_pred = data.model_pred;
 
-    let min = mms_data["bidnum"];
-    let max = mms_data["bidnum"];
     for (let each in mms_data) {
-        if (min > mms_data[each]) {
-            min = mms_data[each];
+        if (mms_data[each] > 1) {
+            mms_data[each] = 1;
         }
-        if (max < mms_data[each]) {
-            max = mms_data[each];
+        if (mms_data[each] < 0) {
+            mms_data[each] = 0;
         }
+        mms_data[each] = mms_data[each].toFixed(10);
     }
 
-    let bei = max - min;
-
-    for (let each in mms_data) {
-        let abs = Math.abs(mms_data[each]);
-        let result = abs / bei;
-        mms_data[each] = result.toFixed(10);
+    for (let each in fmt_data) {
+        if (Math.abs(fmt_data[each]) > 9999999999.9999999999) {
+            if (fmt_data[each] < 0) {
+                fmt_data[each] = -999999999.9999999999;
+            } else {
+                fmt_data[each] = 9999999999.9999999999;
+            }
+        } else {
+            fmt_data[each] = fmt_data[each].toFixed(10);
+        }
     }
 
     let send = {
+        "businessBackgroundOriginal": {
+            "entName": entName,
+            "empNum": fmt_data.empnum,
+            "encodeEntStatus": fmt_data.encode_entstatus,
+            "shopNum": fmt_data.shopnum,
+            "branchNum": fmt_data.branchnum,
+            "isInfoA": fmt_data.is_infoa,
+            "isInfoB": fmt_data.is_infob,
+            "levelRank": fmt_data.level_rank
+        },
+        "businessManagementAbilityOriginal": {
+            "entName": entName,
+            "evaluation": fmt_data.evaluation,
+            "investNum": fmt_data.investnum,
+            "bidNum": fmt_data.bidnum,
+            "cbzt": fmt_data.cbzt,
+            "ibrandNum": fmt_data.ibrand_num,
+            "icopyNum": fmt_data.icopy_num,
+            "ipatNum": fmt_data.ipat_num,
+            "idomNum": fmt_data.idom_num,
+            "passPercent": fmt_data.passpercent
+        },
+        "businessManagementRiskOriginal": {
+            "entName": entName,
+            "priclasecam": fmt_data.priclasecam,
+            "encodeGuaranperiod": fmt_data.encode_guaranperiod,
+            "encodeGatype": fmt_data.encode_gatype,
+            "isRage": fmt_data.is_rage,
+            "subPefperfromto": fmt_data.sub_pefperfromto,
+            "unpaidsocialins": fmt_data.unpaidsocialins,
+            "isBra": fmt_data.is_bra,
+            "isBrap": fmt_data.is_brap,
+            "pledgeNum": fmt_data.pledgenum,
+            "taxunpaidNum": fmt_data.taxunpaidnum,
+            "isExcept": fmt_data.is_except
+        },
+        "businessStabilityOriginal": {
+            "entName": entName,
+            "altTime": fmt_data.alttime
+        },
+        "creditRiskOriginal": {
+            "entName": entName,
+            "isPunish": fmt_data.is_punish,
+            "isKcont": fmt_data.is_kcont,
+            "creditGrade": fmt_data.credit_grade,
+            "isJusticeCreditaic": fmt_data.is_justice_creditaic
+        },
+        "judicialRiskOriginal": {
+            "entName": entName,
+            "lawSum": fmt_data.law_sum,
+            "defendant": fmt_data.defendant,
+            "enforceAmount": fmt_data.enforce_amount,
+            "isJusticeCredit": fmt_data.is_justice_credit
+        },
         "businessBackgroundAnalysis": {
             "entName": entName,
             "empNum": mms_data.empnum,
@@ -247,10 +309,9 @@ function sendBackAnalysisLabel(data) {
             "label": model_pred.df_sf
         }
     };
-    let url = localUrl + '/por/save/saveNewAnalysisLabel';
+    let url = localUrl + '/por/save/saveNewOriginalAnalysisLabel';
 
     return ajaxTool("POST", url, getBackAnalysisLabelLook, JSON.stringify(send))
-
 }
 
 
@@ -363,7 +424,7 @@ function setNext(now) {
 
     if (length < 10) {
         let $newNode = $(now).parent().parent().find('form:last');
-        let number = parseInt($newNode.find("div:first").html());
+        let number = parseInt($newNode.find("div:first").html().substring(1, 2));
         let $newForm = $newNode.clone();
         $newForm.find("input").each(function () {
             $(this).val('');
@@ -371,7 +432,8 @@ function setNext(now) {
         $newForm.find("textarea").each(function () {
             $(this).val('');
         });
-        $newForm.find("div:first").html(number + 1);
+        number += 1;
+        $newForm.find("div:first").html('【' + number + '】');
         $newNode.after($newForm);
     } else {
         alert("不能创建更多表单");

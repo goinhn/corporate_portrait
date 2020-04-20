@@ -5,9 +5,11 @@ import com.goinhn.portrait.model.dto.ShowLabel;
 import com.goinhn.portrait.model.dto.ShowTableInfo;
 import com.goinhn.portrait.model.entity.ShowInfo;
 import com.goinhn.portrait.model.entity.analysis.*;
+import com.goinhn.portrait.model.entity.original.*;
 import com.goinhn.portrait.model.vo.ResultInfo;
 import com.goinhn.portrait.service.intf.AnalysisValueService;
 import com.goinhn.portrait.service.intf.LabelService;
+import com.goinhn.portrait.service.intf.OriginalValueService;
 import com.goinhn.portrait.service.intf.ShowInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +29,9 @@ import java.util.*;
 @CrossOrigin
 @Slf4j
 public class SearchController {
+
+    @Autowired
+    private OriginalValueService originalValueService;
 
     @Autowired
     private AnalysisValueService analysisValueService;
@@ -58,11 +63,13 @@ public class SearchController {
         }
 
         if (entNameList.size() == 0) {
-            return ResultInfo
+            ResultInfo resultInfo = ResultInfo
                     .builder()
                     .flag(false)
                     .errorMsg("查询的字段有误")
                     .build();
+            log.info("/por/search/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
+            return resultInfo;
         }
 
         List<ShowTableInfo> showTableInfos = new ArrayList<>();
@@ -75,18 +82,22 @@ public class SearchController {
         }
 
         if (showTableInfos.size() == 0) {
-            return ResultInfo
+            ResultInfo resultInfo = ResultInfo
                     .builder()
                     .flag(false)
                     .errorMsg("不存在该公司")
                     .build();
+            log.info("/por/search/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
+            return resultInfo;
         }
 
-        return ResultInfo
+        ResultInfo resultInfo = ResultInfo
                 .builder()
                 .flag(true)
                 .data(showTableInfos)
                 .build();
+//        log.info("/por/search/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
+        return resultInfo;
     }
 
 
@@ -100,24 +111,29 @@ public class SearchController {
                                     @NotNull(message = "搜索的企业名称不为空") String entName) {
         log.info("/por/searchEntInfo/{entName)" + "----------" + entName + "\n");
         if ("".equals(entName) || entName == null) {
-            return ResultInfo
+            ResultInfo resultInfo = ResultInfo
                     .builder()
                     .flag(false)
                     .errorMsg("查询发生错误！")
                     .build();
+            log.info("/por/searchEntInfo/{entName)" + "++++++++++" + resultInfo.toString() + "\n");
+            return resultInfo;
         }
 
         Map<String, Object> resultMap = new HashMap<>(3);
 
-        resultMap = delInfo(resultMap, entName);
-        resultMap = delChart(resultMap, entName);
-        resultMap = delLabel(resultMap, entName);
+        resultMap = dealInfo(resultMap, entName);
+        resultMap = dealOriginal(resultMap, entName);
+        resultMap = dealAnalysis(resultMap, entName);
+        resultMap = dealLabel(resultMap, entName);
 
-        return ResultInfo
+        ResultInfo resultInfo = ResultInfo
                 .builder()
                 .flag(true)
                 .data(resultMap)
                 .build();
+        log.info("/por/searchEntInfo/{entName)" + "++++++++++" + resultInfo.toString() + "\n");
+        return resultInfo;
     }
 
     /**
@@ -127,7 +143,7 @@ public class SearchController {
      * @param entName   企业名称
      * @return
      */
-    private Map<String, Object> delInfo(Map<String, Object> resultMap, String entName) {
+    private Map<String, Object> dealInfo(Map<String, Object> resultMap, String entName) {
         ShowInfo showInfo = showInfoService.getShowInfo(entName);
         resultMap.put("info", showInfo);
 
@@ -141,7 +157,7 @@ public class SearchController {
      * @param entName   企业名称
      * @return
      */
-    private Map<String, Object> delChart(Map<String, Object> resultMap, String entName) {
+    private Map<String, Object> dealAnalysis(Map<String, Object> resultMap, String entName) {
         Map<String, List<Map<String, Object>>> chartMap = new HashMap<>(6);
 
         BusinessBackgroundAnalysis businessBackgroundAnalysis =
@@ -183,7 +199,6 @@ public class SearchController {
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getEvaluation()).orElse(0.0));
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getInvestNum()).orElse(0.0));
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getBidNum()).orElse(0.0));
-            list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getCbzt()).orElse(0.0));
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getCbzt()).orElse(0.0));
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getIbrandNum()).orElse(0.0));
             list.add(Optional.ofNullable(businessManagementAbilityAnalysis.getIcopyNum()).orElse(0.0));
@@ -266,9 +281,146 @@ public class SearchController {
             chartMap.put("judicialRisk", null);
         }
 
-        resultMap.put("chart", chartMap);
+        resultMap.put("analysis", chartMap);
         return resultMap;
     }
+
+
+    /**
+     * 处理雷达图原始数值部分
+     *
+     * @param resultMap 返回的集合
+     * @param entName   企业名称
+     * @return
+     */
+    private Map<String, Object> dealOriginal(Map<String, Object> resultMap, String entName) {
+        Map<String, List<Map<String, Object>>> chartMap = new HashMap<>(6);
+
+        BusinessBackgroundOriginal businessBackgroundOriginal =
+                (BusinessBackgroundOriginal) originalValueService.getRiskValue(Classification.BUSINESS_BACKGROUND, entName);
+        BusinessManagementAbilityOriginal businessManagementAbilityOriginal =
+                (BusinessManagementAbilityOriginal) originalValueService.getRiskValue(Classification.BUSINESS_MANAGEMENT_ABILITY, entName);
+        BusinessManagementRiskOriginal businessManagementRiskOriginal =
+                (BusinessManagementRiskOriginal) originalValueService.getRiskValue(Classification.BUSINESS_MANAGEMENT_RISK, entName);
+        BusinessStabilityOriginal businessStabilityOriginal =
+                (BusinessStabilityOriginal) originalValueService.getRiskValue(Classification.BUSINESS_STABILITY, entName);
+        CreditRiskOriginal creditRiskOriginal =
+                (CreditRiskOriginal) originalValueService.getRiskValue(Classification.CREDIT_RISK, entName);
+        JudicialRiskOriginal judicialRiskOriginal =
+                (JudicialRiskOriginal) originalValueService.getRiskValue(Classification.JUDICIAL_RISK, entName);
+
+        if (businessBackgroundOriginal != null) {
+            Map<String, Object> map = new HashMap<>(2);
+            map.put("name", "企业背景分析");
+            List<Double> list = new ArrayList<>();
+            list.add(Optional.ofNullable(businessBackgroundOriginal.getEmpNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessBackgroundOriginal.getEncodeEntStatus()).orElse(0.0));
+            list.add(Optional.ofNullable(businessBackgroundOriginal.getShopNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessBackgroundOriginal.getBranchNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessBackgroundOriginal.getIsInfoA()).orElse(0.0));
+            list.add(Optional.ofNullable(businessBackgroundOriginal.getIsInfoB()).orElse(0.0));
+            list.add(Optional.ofNullable(businessBackgroundOriginal.getLevelRank()).orElse(0.0));
+            map.put("value", list);
+            List<Map<String, Object>> listKind = new ArrayList<>();
+            listKind.add(map);
+            chartMap.put("businessBackground", listKind);
+        } else {
+            chartMap.put("businessBackground", null);
+        }
+
+        if (businessManagementAbilityOriginal != null) {
+            Map<String, Object> map = new HashMap<>(2);
+            map.put("name", "企业经营能力分析");
+            List<Double> list = new ArrayList<>();
+            list.add(Optional.ofNullable(businessManagementAbilityOriginal.getEvaluation()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityOriginal.getInvestNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityOriginal.getBidNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityOriginal.getCbzt()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityOriginal.getIbrandNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityOriginal.getIcopyNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityOriginal.getIpatNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityOriginal.getIdomNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementAbilityOriginal.getPassPercent()).orElse(0.0));
+            map.put("value", list);
+            List<Map<String, Object>> listKind = new ArrayList<>();
+            listKind.add(map);
+            chartMap.put("businessManagementAbility", listKind);
+        } else {
+            chartMap.put("businessManagementAbility", null);
+        }
+
+        if (businessManagementRiskOriginal != null) {
+            Map<String, Object> map = new HashMap<>(2);
+            map.put("name", "企业经营风险分析");
+            List<Double> list = new ArrayList<>();
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getPriclasecam()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getEncodeGuaranperiod()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getEncodeGatype()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getIsRage()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getSubPefperfromto()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getUnpaidsocialins()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getIsBra()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getIsBrap()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getPledgeNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getTaxunpaidNum()).orElse(0.0));
+            list.add(Optional.ofNullable(businessManagementRiskOriginal.getIsExcept()).orElse(0.0));
+            map.put("value", list);
+            List<Map<String, Object>> listKind = new ArrayList<>();
+            listKind.add(map);
+            chartMap.put("businessManagementRisk", listKind);
+        } else {
+            chartMap.put("businessManagementRisk", null);
+        }
+
+        if (businessStabilityOriginal != null) {
+            Map<String, Object> map = new HashMap<>(2);
+            map.put("name", "企业稳定性分析");
+            List<Double> list = new ArrayList<>();
+            list.add(Optional.ofNullable(businessStabilityOriginal.getAltTime()).orElse(0.0));
+            map.put("value", list);
+            List<Map<String, Object>> listKind = new ArrayList<>();
+            listKind.add(map);
+            chartMap.put("businessStability", listKind);
+        } else {
+            chartMap.put("businessStability", null);
+        }
+
+        if (creditRiskOriginal != null) {
+            Map<String, Object> map = new HashMap<>(2);
+            map.put("name", "信用风险分析");
+            List<Double> list = new ArrayList<>();
+            list.add(Optional.ofNullable(creditRiskOriginal.getIsPunish()).orElse(0.0));
+            list.add(Optional.ofNullable(creditRiskOriginal.getIsKcont()).orElse(0.0));
+            list.add(Optional.ofNullable(creditRiskOriginal.getCreditGrade()).orElse(0.0));
+            list.add(Optional.ofNullable(creditRiskOriginal.getIsJusticeCreditaic()).orElse(0.0));
+            map.put("value", list);
+            List<Map<String, Object>> listKind = new ArrayList<>();
+            listKind.add(map);
+            chartMap.put("creditRisk", listKind);
+        } else {
+            chartMap.put("creditRisk", null);
+        }
+
+        if (judicialRiskOriginal != null) {
+            Map<String, Object> map = new HashMap<>(2);
+            map.put("name", "司法风险分析");
+            List<Double> list = new ArrayList<>();
+            list.add(Optional.ofNullable(judicialRiskOriginal.getLawSum()).orElse(0.0));
+            list.add(Optional.ofNullable(judicialRiskOriginal.getDefendant()).orElse(0.0));
+            list.add(Optional.ofNullable(judicialRiskOriginal.getEnforceAmount()).orElse(0.0));
+            list.add(Optional.ofNullable(judicialRiskOriginal.getIsJusticeCredit()).orElse(0.0));
+            map.put("value", list);
+            List<Map<String, Object>> listKind = new ArrayList<>();
+            listKind.add(map);
+            chartMap.put("judicialRisk", listKind);
+        } else {
+            chartMap.put("judicialRisk", null);
+        }
+
+        resultMap.put("original", chartMap);
+        return resultMap;
+    }
+
 
     /**
      * 标签信息处理
@@ -277,9 +429,13 @@ public class SearchController {
      * @param entName   企业名称
      * @return
      */
-    private Map<String, Object> delLabel(Map<String, Object> resultMap, String entName) {
+    private Map<String, Object> dealLabel(Map<String, Object> resultMap, String entName) {
+        long before = System.currentTimeMillis();
         ShowLabel showLabel = labelService.getLabelValue(entName);
+        long end = System.currentTimeMillis();
+        long label_time = end - before;
         resultMap.put("label", showLabel);
+        resultMap.put("label_time", label_time);
 
         return resultMap;
     }

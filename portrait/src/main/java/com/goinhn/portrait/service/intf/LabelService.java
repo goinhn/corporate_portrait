@@ -2,7 +2,7 @@ package com.goinhn.portrait.service.intf;
 
 import com.goinhn.portrait.constant.enums.Classification;
 import com.goinhn.portrait.model.dto.ShowLabel;
-import com.goinhn.portrait.model.vo.NewAnalysisLabel;
+import com.goinhn.portrait.model.vo.NewOriginalAnalysisLabel;
 
 import java.util.Map;
 
@@ -38,9 +38,9 @@ public interface LabelService {
     /**
      * 保存多个标签值
      *
-     * @param newAnalysisLabel 分析值和标签集合
+     * @param newOriginalAnalysisLabel 分析值和标签集合
      * @return
      */
-    boolean saveLabelValueSpecial(NewAnalysisLabel newAnalysisLabel) throws Exception;
+    boolean saveLabelValueSpecial(NewOriginalAnalysisLabel newOriginalAnalysisLabel) throws Exception;
 
 }

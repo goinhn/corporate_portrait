@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.goinhn</groupId>
     <artifactId>portrait</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
     <name>portrait</name>
     <description>corporate portrait</description>
 

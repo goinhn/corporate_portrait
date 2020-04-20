@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * @author goinhn
  */
-public interface AnalysisValueService {
+public interface OriginalValueService {
 
     /**
      * 返回对应字段的评估值

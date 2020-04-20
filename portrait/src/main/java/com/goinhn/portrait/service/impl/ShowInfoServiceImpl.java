@@ -44,7 +44,7 @@ public class ShowInfoServiceImpl implements ShowInfoService {
                 showTableInfos.add(ShowTableInfo
                         .builder()
                         .entName(showInfo.getEntName())
-                        .entCat(Optional.ofNullable(showInfo.getEntCat()).orElse("未知"))
+                        .entCat(Optional.ofNullable(showInfo.getEntCat()).orElse("未知").replaceFirst("(^)(?i)na($)", "未知"))
                         .build());
             }
         }

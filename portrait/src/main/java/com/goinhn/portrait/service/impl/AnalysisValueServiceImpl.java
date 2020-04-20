@@ -2,7 +2,7 @@ package com.goinhn.portrait.service.impl;
 
 import com.goinhn.portrait.mapper.analysis.*;
 import com.goinhn.portrait.model.entity.analysis.*;
-import com.goinhn.portrait.model.vo.NewAnalysisLabel;
+import com.goinhn.portrait.model.vo.NewOriginalAnalysisLabel;
 import com.goinhn.portrait.service.intf.AnalysisValueService;
 import com.goinhn.portrait.constant.enums.Classification;
 import lombok.extern.slf4j.Slf4j;
@@ -154,15 +154,15 @@ public class AnalysisValueServiceImpl implements AnalysisValueService {
 
     @Override
     @Transactional(rollbackFor = Error.class)
-    public boolean saveRiskValueSpecial(@NotNull NewAnalysisLabel newAnalysisLabel) throws Exception {
-        log.info("saveRiskValueSpecial" + "----------" + newAnalysisLabel.toString() + "\n");
+    public boolean saveRiskValueSpecial(@NotNull NewOriginalAnalysisLabel newOriginalAnalysisLabel) throws Exception {
+        log.info("saveRiskValueSpecial" + "----------" + newOriginalAnalysisLabel.toString() + "\n");
 
-        BusinessBackgroundAnalysis businessBackgroundAnalysis = newAnalysisLabel.getBusinessBackgroundAnalysis();
-        BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis = newAnalysisLabel.getBusinessManagementAbilityAnalysis();
-        BusinessManagementRiskAnalysis businessManagementRiskAnalysis = newAnalysisLabel.getBusinessManagementRiskAnalysis();
-        BusinessStabilityAnalysis businessStabilityAnalysis = newAnalysisLabel.getBusinessStabilityAnalysis();
-        CreditRiskAnalysis creditRiskAnalysis = newAnalysisLabel.getCreditRiskAnalysis();
-        JudicialRiskAnalysis judicialRiskAnalysis = newAnalysisLabel.getJudicialRiskAnalysis();
+        BusinessBackgroundAnalysis businessBackgroundAnalysis = newOriginalAnalysisLabel.getBusinessBackgroundAnalysis();
+        BusinessManagementAbilityAnalysis businessManagementAbilityAnalysis = newOriginalAnalysisLabel.getBusinessManagementAbilityAnalysis();
+        BusinessManagementRiskAnalysis businessManagementRiskAnalysis = newOriginalAnalysisLabel.getBusinessManagementRiskAnalysis();
+        BusinessStabilityAnalysis businessStabilityAnalysis = newOriginalAnalysisLabel.getBusinessStabilityAnalysis();
+        CreditRiskAnalysis creditRiskAnalysis = newOriginalAnalysisLabel.getCreditRiskAnalysis();
+        JudicialRiskAnalysis judicialRiskAnalysis = newOriginalAnalysisLabel.getJudicialRiskAnalysis();
 
         try{
             if(!saveRiskValueSingle(Classification.BUSINESS_BACKGROUND, businessBackgroundAnalysis)){
