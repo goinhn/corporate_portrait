@@ -1,5 +1,5 @@
 
-// const localUrl = "http://127.0.0.1:8889";
+const localUrl = "http://127.0.0.1:8889";
 const searchHtml = "<div name=\"block\" class=\"col-md-12\">\n" +
     "                    <div class=\"form-group col-md-2\">\n" +
     "                        <div class=\"col-md-8 col-md-offset-2 btn btn-primary btn-lg\" onclick=\"delInput(this)\">-</div>\n" +
@@ -196,12 +196,12 @@ function getInfo(now) {
 
 function showInfo(data) {
     if (data.flag) {
-        clearNone('#businessBackgroundChartInfo', '#businessBackgroundTable');
-        clearNone('#businessManagementAbilityChartInfo', '#businessManagementAbilityTable');
-        clearNone('#businessManagementRiskChartInfo', '#businessManagementRiskTable');
-        clearNone('#businessStabilityChartInfo', '#businessStabilityTable');
-        clearNone('#creditRiskChartInfo', '#creditRiskTable');
-        clearNone('#judicialRiskChartInfo', '#judicialRiskTable');
+        clearNone('#businessBackgroundChartInfo', '#businessBackgroundTable', '#businessBackgroundTableButton');
+        clearNone('#businessManagementAbilityChartInfo', '#businessManagementAbilityTable', '#businessManagementAbilityTableButton');
+        clearNone('#businessManagementRiskChartInfo', '#businessManagementRiskTable', '#businessManagementRiskTableButton');
+        clearNone('#businessStabilityChartInfo', '#businessStabilityTable', '#businessStabilityTableButton');
+        clearNone('#creditRiskChartInfo', '#creditRiskTable', '#creditRiskTableButton');
+        clearNone('#judicialRiskChartInfo', '#judicialRiskTable', '#judicialRiskTableButton');
 
         lookChartTable(lookBusinessBackgroundChangeToTable(data.data.original.businessBackground, data.data.info.entStatus), '#businessBackgroundTableDisplay');
         lookChartTable(lookBusinessManagementAbilityChangeToTable(data.data.original.businessManagementAbility), '#businessManagementAbilityTableDisplay');
@@ -263,6 +263,16 @@ function lookBusinessBackgroundChangeToTable(data, entStatus) {
     for (let i = 0; i < data.value.length; i++) {
         data.value[i] = Math.abs(parseFloat(data.value[i]));
     }
+    switch (data.value[6]) {
+        case(1):
+            data.value[6] = "市级";
+            break;
+        case(2):
+            data.value[6] = "省级";
+            break;
+        default:
+            data.value[6] = "未知";
+    }
     let result = [
         {
             "analysis": "从业人数",
@@ -281,11 +291,11 @@ function lookBusinessBackgroundChangeToTable(data, entStatus) {
             "value": data.value[3]
         },
         {
-            "analysis": "是否列入驰名商标",
+            "analysis": "列入驰名商标次数",
             "value": data.value[4]
         },
         {
-            "analysis": "是否列入著名商标",
+            "analysis": "列入著名商标次数",
             "value": data.value[5]
         },
         {
@@ -305,7 +315,7 @@ function lookBusinessManagementAbilityChangeToTable(data) {
     }
     let result = [
         {
-            "analysis": "是否按时足额缴纳股本",
+            "analysis": "按时足额缴纳股本次数",
             "value": data.value[0]
         },
         {
@@ -377,7 +387,7 @@ function lookBusinessManagementRiskChangeToTable(data) {
             "value": data.value[5]
         },
         {
-            "analysis": "是否列入经营异常",
+            "analysis": "列入经营异常次数",
             "value": data.value[6]
         },
         {
@@ -393,7 +403,7 @@ function lookBusinessManagementRiskChangeToTable(data) {
             "value": data.value[9]
         },
         {
-            "analysis": "是否被列为异常",
+            "analysis": "被列为异常次数",
             "value": data.value[10]
         }
     ];
@@ -425,36 +435,36 @@ function lookCreditRiskChangeToTable(data) {
     }
     switch (parseInt(data.value[2])) {
         case 1:
-            data.value[2] = "N+";
+            data.value[2] = "C";
             break;
         case 2:
-            data.value[2] = "N";
+            data.value[2] = "B-";
             break;
         case 3:
-            data.value[2] = "A";
+            data.value[2] = "B";
             break;
         case 4:
             data.value[2] = "A-";
             break;
         case 5:
-            data.value[2] = "B";
+            data.value[2] = "A";
             break;
         case 6:
-            data.value[2] = "B-";
+            data.value[2] = "N";
             break;
         case 7:
-            data.value[2] = "C";
+            data.value[2] = "N+";
             break;
         default:
             data.value[2] = "未知";
     }
     let result = [
         {
-            "analysis": "公司是否有过行政处罚",
+            "analysis": "公司行政处罚次数",
             "value": data.value[0]
         },
         {
-            "analysis": "是否列为守合同重信用企业",
+            "analysis": "列为守合同重信用企业次数",
             "value": data.value[1]
         },
         {
@@ -462,7 +472,7 @@ function lookCreditRiskChangeToTable(data) {
             "value": data.value[2]
         },
         {
-            "analysis": "是否列入失信企业（工商部）",
+            "analysis": "列入失信企业（工商部）次数",
             "value": data.value[3]
         }
     ];
@@ -490,7 +500,7 @@ function lookJudicialRiskChangeToTable(data) {
             "value": data.value[2]
         },
         {
-            "analysis": "是否列入失信黑名单",
+            "analysis": "列入失信黑名单次数",
             "value": data.value[3]
         }
     ];
@@ -558,8 +568,8 @@ function lookBusinessBackgroundChart(dataNow) {
                 {name: '企业状态', max: 1},
                 {name: '网店个数', max: 1},
                 {name: '分支机构数', max: 1},
-                {name: '是否列入驰名商标', max: 1},
-                {name: '是否列入著名商标', max: 1},
+                {name: '列入驰名商标次数', max: 1},
+                {name: '列入著名商标次数', max: 1},
                 {name: '级别', max: 1}
             ],
             name: {
@@ -737,7 +747,7 @@ function lookBusinessManagementAbilityChart(dataNow) {
             center: ['50%', '50%'],
             radius: '120',
             indicator: [
-                {name: '是否按时足额缴纳股本', max: 1},
+                {name: '按时足额缴纳股本次数', max: 1},
                 {name: '对外投资次数', max: 1},
                 {name: '中标次数', max: 1},
                 {name: '参保状态', max: 1},
@@ -838,11 +848,11 @@ function lookBusinessManagementRiskChart(dataNow) {
                 {name: '保证担保的范围', max: 1},
                 {name: '履行债务间隔', max: 1},
                 {name: '单位参加的保险累计欠缴额标', max: 1},
-                {name: '是否列入经营异常', max: 1},
+                {name: '列入经营异常次数', max: 1},
                 {name: '企业行政处罚记录', max: 1},
                 {name: '出质股权次数', max: 1},
                 {name: '企业累计欠税额', max: 1},
-                {name: '是否被列为异常', max: 1},
+                {name: '被列为异常次数', max: 1},
             ],
             name: {
                 formatter: '【{value}】',
@@ -932,7 +942,7 @@ function lookJudicialRiskChart(dataNow) {
                 {name: '司法次数', max: 1},
                 {name: '被诉方', max: 1},
                 {name: '执行标的', max: 1},
-                {name: '是否列入\n失信黑名单', max: 1}
+                {name: '列入失信\n黑名单次数', max: 1}
             ],
             name: {
                 formatter: '【{value}】',
@@ -1019,10 +1029,10 @@ function lookCreditRiskChart(dataNow) {
             center: ['50%', '50%'],
             radius: '120',
             indicator: [
-                {name: '公司是否有过行政处罚', max: 1},
-                {name: '是否列为守合\n同重信用企业', max: 1},
+                {name: '公司行政处罚次数', max: 1},
+                {name: '列为守合同重\n信用企业次数', max: 1},
                 {name: '信用等级从高到低： N+、N、A、A-、B-、C', max: 1},
-                {name: '是否列入失信\n企业(工商部)', max: 1}
+                {name: '列入失信企业\n(工商部)次数', max: 1}
             ],
             name: {
                 formatter: '【{value}】',
@@ -1211,18 +1221,21 @@ function changeTableAndChart(now, chart, table) {
             if ($(table).css("display") == "none") {
                 $(table).css("display", "block");
                 $(chart).css("display", "none");
+                $(now).html("雷达视图");
             } else {
                 $(table).css("display", "none");
                 $(chart).css("display", "block");
+                $(now).html("数据视图");
             }
         }
     });
 }
 
 
-function clearNone(chart, table) {
+function clearNone(chart, table, now) {
     $(table).css("display", "none");
     $(chart).css("display", "block");
+    $(now).html("数据视图");
 }
 
 //删除输入函数

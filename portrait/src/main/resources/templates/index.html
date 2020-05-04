@@ -62,7 +62,7 @@
                     <li class="active"><a href="#" data-nav-section="home"><span>系统首页</span></a></li>
                     <li><a href="#" data-nav-section="search"><span>企业搜索</span></a></li>
                     <li><a href="#" data-nav-section="show"><span>信息展示</span></a></li>
-                    <li><a href="#" data-nav-section="perfect"><span>完善信息</span></a></li>
+                    <li><a href="#" data-nav-section="perfect"><span>新企业分类</span></a></li>
                     <!--                    <li><a href="#" data-nav-section="about"><span>信息统计</span></a></li>-->
                 </ul>
             </div>
@@ -192,7 +192,7 @@
                         <h2 id="businessBackgroundLabelInfo"></h2>
                     </div>
                     <div class="col-md-3 text-center">
-                        <button id="businessBackgroundTableButton" class="btn btn-primary btn-sm">切换视图</button>
+                        <button id="businessBackgroundTableButton" class="btn btn-primary btn-sm">数据视图</button>
                     </div>
                 </div>
             </div>
@@ -210,7 +210,7 @@
                         <h2 id="businessStabilityLabelInfo"></h2>
                     </div>
                     <div class="col-md-3 text-center">
-                        <button id="businessStabilityTableButton" class="btn btn-primary btn-sm">切换视图</button>
+                        <button id="businessStabilityTableButton" class="btn btn-primary btn-sm">数据视图</button>
                     </div>
                 </div>
             </div>
@@ -233,7 +233,7 @@
                         <h2 id="businessManagementAbilityLabelInfo"></h2>
                     </div>
                     <div class="col-md-3 text-center">
-                        <button id="businessManagementAbilityTableButton" class="btn btn-primary btn-sm">切换视图</button>
+                        <button id="businessManagementAbilityTableButton" class="btn btn-primary btn-sm">数据视图</button>
                     </div>
                 </div>
             </div>
@@ -251,7 +251,7 @@
                         <h2 id="businessManagementRiskLabelInfo"></h2>
                     </div>
                     <div class="col-md-3 text-center">
-                        <button id="businessManagementRiskTableButton" class="btn btn-primary btn-sm">切换视图</button>
+                        <button id="businessManagementRiskTableButton" class="btn btn-primary btn-sm">数据视图</button>
                     </div>
                 </div>
             </div>
@@ -272,7 +272,7 @@
                         <h2 id="judicialRiskLabelInfo"></h2>
                     </div>
                     <div class="col-md-3 text-center">
-                        <button id="judicialRiskTableButton" class="btn btn-primary btn-sm">切换视图</button>
+                        <button id="judicialRiskTableButton" class="btn btn-primary btn-sm">数据视图</button>
                     </div>
                 </div>
             </div>
@@ -290,7 +290,7 @@
                         <h2 id="creditRiskLabelInfo"></h2>
                     </div>
                     <div class="col-md-3 text-center">
-                        <button id="creditRiskTableButton" class="btn btn-primary btn-sm">切换视图</button>
+                        <button id="creditRiskTableButton" class="btn btn-primary btn-sm">数据视图</button>
                     </div>
                 </div>
             </div>
@@ -305,7 +305,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-heading text-left">
-                <h2 class=" left-border to-animate">完善信息</h2>
+                <h2 class=" left-border to-animate">新企业分类</h2>
                 <!-- <div class="row">
                     <div class="col-md-8 subtext to-animate">
                         <h3>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
@@ -327,13 +327,19 @@
                                        placeholder="企业名称">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="regcapInput">注册资本</label>
-                                <input type="number" min="0" max="999999999999999" class="form-control" name="regcap"
+                                <label for="regcapInput">注册资本(单位：万元)</label>
+                                <input type="text" money="money"
+                                       class="form-control"
+                                       name="regcap"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        placeholder="注册资本">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="empNumInput">从业人数</label>
-                                <input type="number" min="0" max="999999999999999" class="form-control" name="empnum"
+                                <input type="text" integer="integer"
+                                       class="form-control" name="empnum"
+                                       Oninput="isInteger(this);"
                                        placeholder="从业人数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
@@ -509,8 +515,10 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="altTimeInput">变更次数</label>
-                                <input type="number" min="0" max="999999999" class="form-control"
-                                       name="alttime" placeholder="变更次数">
+                                <input type="text" integer="integer" class="form-control"
+                                       name="alttime"
+                                       Oninput="isInteger(this);"
+                                       placeholder="变更次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="altItemInput">变更事项</label>
@@ -594,13 +602,19 @@
                                 </select>
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="subconamInput">认缴出资额(认缴额万元)</label>
-                                <input type="number" min="0" max="999999999999999" class="form-control" name="subconam"
+                                <label for="subconamInput">认缴出资额(单位：万元)</label>
+                                <input type="text" money="money" class="form-control"
+                                       name="subconam"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        placeholder="认缴出资额(认缴额万元)">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="conpropInput">持股比例</label>
-                                <input type="number" min="0" max="100" step="0.1" class="form-control" name="conprop"
+                                <label for="conpropInput">持股比例(单位%)</label>
+                                <input type="text" class="form-control" stock="stock"
+                                       Oninput="isStock(this);"
+                                       onblur="isClear(this);"
+                                       name="conprop"
                                        placeholder="持股比例">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
@@ -698,13 +712,17 @@
                                 </select>
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="liacconamInput">累计实缴额</label>
-                                <input type="number" min="0" max="9999999999999999" class="form-control"
+                                <label for="liacconamInput">累计实缴额(单位：万元)</label>
+                                <input type="text" money="money" class="form-control"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        name="liacconam" placeholder="累计实缴额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="lisubconamInput">累计认缴额</label>
-                                <input type="number" min="0" max="9999999999999999" class="form-control"
+                                <label for="lisubconamInput">累计认缴额(单位：万元)</label>
+                                <input type="text" money="money" class="form-control"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        name="lisubconam" placeholder="累计认缴额">
                             </div>
                         </form>
@@ -745,7 +763,9 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="sbjgbhInput">社会保险经办机构</label>
-                                <input type="text" class="form-control" name="sbjgbh">
+                                <input type="text" class="form-control"
+                                       name="sbjgbh"
+                                       placeholder="社会保险经办机构">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="xzbzmcInput">险种标识名称</label>
@@ -800,6 +820,7 @@
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="priclaseckindInput">主债券种类</label>
                                 <select name="priclaseckind" class="form-control">
+                                    <option value=""></option>
                                     <option value="1">合同</option>
                                     <option value="2">其他</option>
                                 </select>
@@ -809,16 +830,18 @@
                                 <input type="date" class="form-control" name="pefperfrom">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="iftopubInput">是否公示此担保信息</label>
-                                <select name="iftopub" class="form-control">
-                                    <option value="1">是</option>
-                                    <option value="2">否</option>
-                                </select>
+                                <label for="iftopubInput">公示此担保信息次数</label>
+                                <input type="text" integer="integer" class="form-control"
+                                       name="iftopub"
+                                       Oninput="isInteger(this);"
+                                       placeholder="公示此担保信息次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="priclasecamInput">主债权数额</label>
-                                <input type="number" min="0" max="999999999999999" class="form-control"
+                                <label for="priclasecamInput">主债权数额(单位：万元)</label>
+                                <input type="text" money="money" class="form-control"
                                        name="priclasecam"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        placeholder="主债权数额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
@@ -873,33 +896,43 @@
                         <form style="padding-top: 10px">
                             <div class="col-md-12 text-center" style="color:#000000; margin-top:10px">【1】</div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="unpaidsocialinsso110Input">城镇职工养老保险累计欠缴金额 </label>
-                                <input type="number" min="0" max="999999999999999" class="form-control"
+                                <label for="unpaidsocialinsso110Input">城镇职工养老保险累计欠缴金额(单位：万元) </label>
+                                <input type="text" money="money" class="form-control"
                                        name="unpaidsocialins_so110"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        placeholder="单位参加城镇职工基本养老保险累计欠缴金额 ">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="unpaidsocialinsso210Input">失业保险累计欠缴金额</label>
-                                <input type="number" min="0" max="999999999999999" class="form-control"
+                                <label for="unpaidsocialinsso210Input">失业保险累计欠缴金额(单位：万元)</label>
+                                <input type="text" money="money" class="form-control"
                                        name="unpaidsocialins_so210"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        placeholder="单位参加失业保险累计欠缴金额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="unpaidsocialinsso310Input">职工基本医疗保险累计欠缴金额</label>
-                                <input type="number" min="0" max="999999999999999" class="form-control"
+                                <label for="unpaidsocialinsso310Input">职工基本医疗保险累计欠缴金额(单位：万元)</label>
+                                <input type="text" money="money" class="form-control"
                                        name="unpaidsocialins_so310"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        placeholder="单位参加职工基本医疗保险累计欠缴金额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="unpaidsocialinsso410Input">工伤保险累计欠缴金额</label>
-                                <input type="number" min="0" max="999999999999999" class="form-control"
+                                <label for="unpaidsocialinsso410Input">工伤保险累计欠缴金额(单位：万元)</label>
+                                <input type="text" money="money" class="form-control"
                                        name="unpaidsocialins_so410"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        placeholder="单位参加工伤保险累计欠缴金额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="unpaidsocialinsso510Input">生育保险累计欠缴金额</label>
-                                <input type="number" min="0" max="999999999999999" class="form-control"
+                                <label for="unpaidsocialinsso510Input">生育保险累计欠缴金额(单位：万元)</label>
+                                <input type="text" money="money" class="form-control"
                                        name="unpaidsocialins_so510"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        placeholder="单位参加生育保险累计欠缴金额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
@@ -1006,9 +1039,12 @@
                                 <input type="date" class="form-control" name="record_date">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="enforceAmountInput">执行标的</label>
-                                <input type="number" min="0" max="999999999999999" name="enforce_amount"
-                                       class="form-control">
+                                <label for="enforceAmountInput">执行标的(单位：万元)</label>
+                                <input type="text" money="money" name="enforce_amount"
+                                       class="form-control"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
+                                       placeholder="执行标的">
                             </div>
                         </form>
                         <div class="row"></div>
@@ -1035,11 +1071,13 @@
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="titleInput">标题</label>
-                                <input type="text" class="form-control" name="title">
+                                <input type="text" class="form-control" name="title"
+                                       placeholder="标题">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="caseTypeInput">案件类型</label>
                                 <select name="casetype" class="form-control">
+                                    <option value=""></option>
                                     <option value="民事裁定书">民事裁定书</option>
                                     <option value="民事判决书">民事判决书</option>
                                     <option value="司法确认裁定书">司法确认裁定书</option>
@@ -1105,148 +1143,185 @@
                          style="border-radius: 25px; background-color: #fff">
                         <form style="padding-top: 10px">
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isPunishInput">公司是否有过行政处罚</label>
-                                <input type="number" min="0" max="999999999" class="form-control" name="is_punish"
-                                >
+                                <label for="isPunishInput">公司行政处罚次数</label>
+                                <input type="text" integer="integer"
+                                       class="form-control"
+                                       Oninput="isInteger(this);"
+                                       name="is_punish"
+                                       placeholder="公司行政处罚次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isBraInput">是否列入经营异常</label>
-                                <select name="is_bra" class="form-control">
-                                    <option value="1">是</option>
-                                    <option value="2">否</option>
-                                </select>
+                                <label for="isBraInput">列入经营异常的次数</label>
+                                <input type="text" integer="integer" class="form-control"
+                                       Oninput="isInteger(this);"
+                                       name="is_bra"
+                                       placeholder="列入经营异常的次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isBrapInput">企业行政处罚记录</label>
-                                <input type="number" min="0" max="999999999" class="form-control" name="is_brap"
+                                <label for="isBrapInput">企业行政处罚次数</label>
+                                <input type="text" integer="integer" class="form-control"
+                                       name="is_brap"
+                                       Oninput="isInteger(this);"
                                        placeholder="企业行政处罚记录">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="pledgeNumInput">出质股权次数</label>
-                                <input type="number" min="0" max="999999999" class="form-control" name="pledgenum"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="pledgenum"
+                                       Oninput="isInteger(this);"
                                        placeholder="出质股权次数">
                             </div>
 
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="taxunpaidNumInput">企业累计欠税额</label>
-                                <input type="number" min="0" max="999999999" class="form-control" name="taxunpaidnum"
+                                <label for="taxunpaidNumInput">企业累计欠税额(单位：万元)</label>
+                                <input type="text" money="money" class="form-control"
+                                       name="taxunpaidnum"
+                                       Oninput="isMoney(this);"
+                                       onblur="isClear(this);"
                                        placeholder="企业累计欠税额">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="bidNumInput">中标次数</label>
-                                <input type="number" min="0" max="9999999999999" class="form-control" name="bidnum"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="bidnum"
+                                       Oninput="isInteger(this);"
                                        placeholder="中标次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="branchNumInput">分支机构个数</label>
-                                <input type="number" min="0" max="99999999999" class="form-control" name="branchnum"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="branchnum"
+                                       Oninput="isInteger(this);"
                                        placeholder="分支机构个数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="investNumInput">对外投资次数</label>
-                                <input type="number" min="0" max="9999999999999" class="form-control" name="investnum"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="investnum"
+                                       Oninput="isInteger(this);"
                                        placeholder="对外投资次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="shopNumInput">网店个数</label>
-                                <input type="number" min="0" max="99999999999" class="form-control" name="shopnum"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="shopnum"
+                                       Oninput="isInteger(this);"
                                        placeholder="网店个数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isKcontInput">是否列为守合同重信用企业</label>
-                                <select name="is_kcont" class="form-control">
-                                    <option value="1">是</option>
-                                    <option value="2">否</option>
-                                </select>
+                                <label for="isKcontInput">列为守合同重信用企业次数</label>
+                                <input type="text" integer="integer"
+                                       class="form-control"
+                                       Oninput="isInteger(this);"
+                                       name="is_kcont"
+                                       placeholder="列为守合同重信用企业次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isExceptInput">是否列为异常</label>
-                                <input type="number" min="0" max="999999999" class="form-control" name="is_except"
-                                       placeholder="是否列为异常">
+                                <label for="isExceptInput">列为异常的次数</label>
+                                <input type="text" integer="integer" class="form-control"
+                                       name="is_except"
+                                       Oninput="isInteger(this);"
+                                       placeholder="列为异常的次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="ibrandNumInput">商标数量</label>
-                                <input type="number" min="0" max="999999999" class="form-control" name="ibrand_num"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="ibrand_num"
+                                       Oninput="isInteger(this);"
                                        placeholder="商标数量">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="icopyNumInput">企业软件著作权登记次数</label>
-                                <input type="number" min="0" max="999999999" class="form-control" name="icopy_num"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="icopy_num"
+                                       Oninput="isInteger(this);"
                                        placeholder="企业软件著作权登记次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="ipatNumInput">企业专利申请次数</label>
-                                <input type="number" min="0" max="999999999" class="form-control" name="ipat_num"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="ipat_num"
+                                       Oninput="isInteger(this);"
                                        placeholder="企业专利申请次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isJnsnInput">是否是济南市专精特新中小企业</label>
-                                <select name="is_jnsn" class="form-control">
-                                    <option value="1">是</option>
-                                    <option value="0">否</option>
-                                </select>
+                                <label for="isJnsnInput">列为济南市专精特新中小企业次数</label>
+                                <input type="text" integer="integer" class="form-control"
+                                       name="is_jnsn"
+                                       Oninput="isInteger(this);"
+                                       placeholder="列为济南市专精特新中小企业次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="levelRankInput">级别</label>
                                 <select name="level_rank" class="form-control">
-                                    <option value="2">省级</option>
-                                    <option value="1">市级</option>
                                     <option value="0">无</option>
+                                    <option value="1">市级</option>
+                                    <option value="2">省级</option>
                                 </select>
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isJusticeCreditInput">是否列入失信黑名单</label>
-                                <select name="is_justice_credit" class="form-control">
-                                    <option value="1">是</option>
-                                    <option value="0">否</option>
-                                </select>
+                                <label for="isJusticeCreditInput">列入失信黑名单次数</label>
+                                <input type="text" integer="integer" class="form-control"
+                                       name="is_justice_credit"
+                                       Oninput="isInteger(this);"
+                                       placeholder="列入失信黑名单次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isJusticeCreditaicInput">是否为工商部失信企业</label>
-                                <select name="is_justice_creditaic" class="form-control">
-                                    <option value="1">是</option>
-                                    <option value="0">否</option>
-                                </select>
+                                <label for="isJusticeCreditaicInput">列为工商部失信企业次数</label>
+                                <input type="text" integer="integer" class="form-control"
+                                       name="is_justice_creditaic"
+                                       Oninput="isInteger(this);"
+                                       placeholder="列为工商部失信企业次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="passpercentInput">企业产品被抽查的合格率</label>
-                                <input type="number" min="0" max="1" class="form-control" name="passpercent"
+                                <input type="text" min="0" max="1" rate="rate" class="form-control"
+                                       name="passpercent"
+                                       Oninput="isRate(this);"
+                                       onblur="isClear(this);"
                                        placeholder="企业产品被抽查的合格率">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="qcwyNumInput">前程无忧招聘记录条数</label>
-                                <input type="number" min="0" max="99999999" class="form-control" name="qcwynum"
-
+                                <input type="text" integer="integer" class="form-control"
+                                       name="qcwynum"
+                                       Oninput="isInteger(this);"
                                        placeholder="前程无忧招聘记录条数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="zhycNumInput">中华英才网招聘记录条数</label>
-                                <input type="number" min="0" max="99999999" class="form-control" name="zhycnum"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="zhycnum"
+                                       Oninput="isInteger(this);"
                                        placeholder="中华英才网招聘记录条数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="zlzpNumInput">智联招聘招聘记录条数</label>
-                                <input type="number" min="0" max="99999999" class="form-control" name="zlzpnum"
+                                <input type="text" integer="integer" class="form-control"
+                                       name="zlzpnum"
+                                       Oninput="isInteger(this);"
                                        placeholder="智联招聘招聘记录条数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isInfoAInput">是否列为驰名商标</label>
-                                <select name="is_infoa" class="form-control">
-                                    <option value="1">是</option>
-                                    <option value="0">否</option>
-                                </select>
+                                <label for="isInfoAInput">列为驰名商标次数</label>
+                                <input type="text" integer="integer" class="form-control"
+                                       name="is_infoa"
+                                       Oninput="isInteger(this);"
+                                       placeholder="列为驰名商标次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
-                                <label for="isInfoBInput">是否列为著名商标</label>
-                                <select name="is_infob" class="form-control">
-                                    <option value="1">是</option>
-                                    <option value="0">否</option>
-                                </select>
+                                <label for="isInfoBInput">列为著名商标次数</label>
+                                <input type="text" integer="integer" class="form-control"
+                                       name="is_infob"
+                                       Oninput="isInteger(this);"
+                                       placeholder="列为著名商标次数">
                             </div>
                             <div class="form-group form-group-sm col-md-4">
                                 <label for="idomNumInput">企业是拥有域名的知识产权数量</label>
-                                <input type="number" min="0" max="999999999" class="form-control" name="idom_num"
-                                       placeholder="企业是否拥有域名的知识产权">
+                                <input type="text" integer="integer" class="form-control"
+                                       name="idom_num"
+                                       Oninput="isInteger(this);"
+                                       placeholder="企业拥有域名的知识产权数量">
                             </div>
                         </form>
                     </div>

@@ -12,7 +12,8 @@ function submitNow() {
         alert("输入的企业名称不能为空！");
         return;
     } else {
-        if (entName.toString().trim().split(0, 255) == '') {
+        let value = entName.toString().trim().split(0, 255);
+        if (typeof value == 'undefined' || value == null || value == '') {
             alert("输入的企业名称不能为空！");
             return;
         }
@@ -73,6 +74,7 @@ function getFormInfo() {
     $.extend(coptra, oneDataNewInfo);
 
     let send = JSON.stringify({"coptra": coptra});
+    console.log(send);
     ajaxTool("POST", remoteUrl, getMode, send);
 }
 
@@ -328,7 +330,7 @@ function getModeOneInfo(formOut) {
     let one = formOut.find('form').serializeArray();
     for (let key in one) {
         let value = one[key]['value'].toString().trim().slice(0, 255);
-        if (value == '') {
+        if (typeof value == 'undefined' || value == null || value == '') {
             resultJson[one[key]['name']] = 0;
         } else {
             let reg = /^[0-9]*$/;
@@ -365,7 +367,7 @@ function getModeOneInfoArray(formOut) {
         let one = $(this).serializeArray();
         for (let key in one) {
             let value = one[key]['value'].toString().trim().slice(0, 255);
-            if (value == '') {
+            if (typeof value == 'undefined' || value == null || value == '') {
                 resultJson[one[key]['name']].push(0);
             } else {
                 let reg = /^[0-9]*$/;
@@ -488,4 +490,81 @@ function hiddenLookAll(location, input) {
     });
 }
 
+function isMoney(now) {
+    let value = now.value;
+    let regx = /^\d{1,15}(\.\d*)?$/g;
 
+    let number = value.search(regx);
+    if (number == -1 && parseFloat(value) < 999999999999999) {
+        value = "";
+    }
+
+    if (parseFloat(value) > 999999999999999) {
+        value = 999999999999999;
+    }
+
+    let location = value.toString().indexOf('.');
+    if (value.length - location + 1 > 6 && location != -1) {
+        value = value.substring(0, location) + value.substring(location, location + 6);
+    }
+    now.value = value;
+}
+
+
+function isInteger(now) {
+    let value = now.value;
+    let regx = /^(0|[1-9][0-9]*)$/g;
+
+    let number = value.search(regx);
+    if (number == -1) {
+        value = "";
+    }
+
+    if (value.length > 12) {
+        value = value.slice(0, 12);
+    }
+    now.value = value;
+}
+
+function isRate(now) {
+    let value = now.value;
+    let regx = /^0(\.\d*)?$/g;
+
+    let number = value.search(regx);
+    if (number == -1) {
+        value = "";
+    }
+
+    if (value.length > 8) {
+        value = value.slice(0, 8);
+    }
+    now.value = value;
+}
+
+function isStock(now) {
+    let value = now.value;
+    let regx = /^\d{1,2}(\.\d*)?$/g;
+
+    let number = value.search(regx);
+    if (number == -1 && parseFloat(value) < 100) {
+        value = "";
+    }
+
+    if (parseFloat(value) > 100) {
+        value = 100;
+    }
+
+    let location = value.toString().indexOf('.');
+    if (value.length - location + 1 > 6 && location != -1) {
+        value = value.substring(0, location) + value.substring(location, location + 6);
+    }
+    now.value = value;
+}
+
+function isClear(now) {
+    let value = now.value;
+    if (value.toString().indexOf('.') == value.length - 1) {
+        value = value.substring(0, value.length - 1);
+    }
+    now.value = value;
+}
