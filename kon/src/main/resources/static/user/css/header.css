@@ -1,0 +1,219 @@
+.wp {
+    width: 1200px;
+    max-width: 94%;
+    margin: 0 auto;
+    text-algin: center;
+}
+
+#hd {
+    height: 68px;
+    background: #0571FF;
+    position: relative;
+    z-index: 11;
+}
+
+.hd-logo {
+    height: 100%;
+    line-height: 68px;
+    margin-left: 40px;
+}
+
+.hd-logo .hd-logo-title {
+    font-size: 22px;
+    color: #fff;
+}
+
+.hd-nav {
+    margin-left: 9.3%;
+}
+
+.hd-nav ul li {
+    float: left;
+    margin: 0 20px;
+}
+
+.hd-nav ul li h3 a {
+    display: block;
+    line-height: 68px;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.hd-nav ul li h3 a::after {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.hd-nav ul li.on h3 a::after {
+    background: #00FF66;
+    -webkit-transition: 0.4s ease;
+    -ms-transition: 0.4s ease;
+    transition: 0.4s ease;
+}
+
+@media screen and (min-width: 1366px) {
+    .hd-nav ul li h3 a:hover::after {
+        background: #00FF66;
+        -webkit-transition: 0.4s ease;
+        -ms-transition: 0.4s ease;
+        transition: 0.4s ease;
+    }
+}
+
+.hd-nav ul li .subnav {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    text-align: center;
+    display: none;
+}
+
+.hd-nav ul li .sub-inner {
+    width: 1000px;
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.hd-nav ul li .sub-inner a {
+    float: left;
+    line-height: 24px;
+    display: inline-block;
+    margin: 5px 40px;
+}
+
+.hd-bar h3 {
+    float: left;
+    font-size: 14px;
+    line-height: 20px;
+    border-right: 1px solid #fff;
+    margin: 24px 0 0 0;
+    padding-right: 49px;
+    color: #fff;
+}
+
+.hd-bar .hd-user {
+    padding: 19px 40px 0;
+    height: 68px;
+    position: relative;
+}
+
+.hd-bar .hd-user .photo {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.hd-bar .hd-user .photo img {
+    width: 100%;
+    height: 100%;
+}
+
+.hd-bar .hd-user .dropdown {
+    position: absolute;
+    width: 100%;
+    right: 0;
+    top: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0 10px;
+    display: none;
+}
+
+.hd-bar .hd-user .dropdown ul li a {
+    display: block;
+    line-height: 48px;
+    color: rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.hd-bar .hd-user .dropdown ul li a:hover {
+    color: #fff;
+    transition: 0.4s ease;
+}
+
+.hd-bar .hd-user .dropdown .signout {
+    display: block;
+    line-height: 38px;
+    color: #fff;
+}
+
+#banner {
+    height: 500px;
+    width: 100%;
+}
+
+#banner .wp {
+    height: 100%;
+    position: relative;
+}
+
+#banner .text {
+    float: left;
+    width: 40%;
+    color: #fff;
+    margin-left: 10%;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#banner .text h2 {
+    font-size: 36px;
+    line-height: 50px;
+}
+
+#banner .text p {
+    font-size: 16px;
+    line-height: 32px;
+    margin-top: 23px;
+}
+
+#banner .text a {
+    display: block;
+    vertical-align: top;
+    margin-top: 46px;
+    width: 201px;
+    line-height: 34px;
+    background: #00FF00;
+    border-radius: 4px;
+    text-align: center;
+}
+
+#banner .img {
+    float: right;
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+#banner .img img {
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#banner .swiper-pagination-bullet {
+    width: 18px;
+    height: 18px;
+    background: url('../images/hexagon.png');
+    background-size: 100% 100%;
+}

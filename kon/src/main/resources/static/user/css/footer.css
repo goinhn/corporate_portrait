@@ -1,0 +1,85 @@
+/*******************************************
+      		 -****页脚样式****-
+********************************************/
+
+#ft {
+    background: #222C3A;
+}
+
+#ft .ft-infos {
+    padding: 32px 0;
+    text-align: center;
+}
+
+#ft .ft-infos .hot-line {
+    color: #fff;
+    line-height: 30px;
+}
+
+#ft .ft-infos .hot-line h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#ft .ft-infos .hot-line h4 img {
+    vertical-align: top;
+    margin: 0 10px 0 0;
+}
+
+#ft .ft-infos .hot-line h3 {
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+#ft .ft-infos dl {
+    display: inline;
+}
+
+#ft .ft-infos dl dt {
+    font-size: 16px;
+    line-height: 22px;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+#ft .ft-infos dl dd {
+    font-size: 12px;
+    line-height: 28px;
+    color: #ccc;
+}
+
+#ft .ft-infos dl dd a {
+    color: #ccc;
+}
+
+#ft .ft-infos dl dd a:hover {
+    color: #fff;
+}
+
+#ft .ft-infos .erweima li {
+    float: left;
+    margin-left: 46px;
+    text-align: center;
+}
+
+#ft .ft-infos .erweima li img {
+}
+
+#ft .ft-infos .erweima li p {
+    line-height: 24px;
+    color: #fff;
+    margin-top: 14px;
+    font-size: 13px;
+}
+
+#ft .copyright {
+    border-top: 1px solid rgba(216, 216, 216, 0.1);
+    padding: 10px 20px;
+}
+
+#ft .copyright p {
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #888;
+}

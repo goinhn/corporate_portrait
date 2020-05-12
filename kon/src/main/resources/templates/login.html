@@ -1,36 +1,116 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>txt</title>
 
-    <link rel="stylesheet" type="text/css" href="../static/css/lib/vector.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <script type="text/javascript" src="../static/js/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="../static/js/lib/vector.js"></script>
+    <title>登录/企业画像系统</title>
+
+    <link href="/kon/static/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="/kon/static/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="/kon/static/public/public.js"></script>
 
 </head>
-<body>
 
-<div id="container">
-    <div id="output">
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <!-- 主要部分内容 -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <img class="col-lg-6 d-none d-lg-block" src="/kon/static/user/images/verification.jpg"
+                             alt="verification">
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-1">登录企业画像系统</h1>
+                                </div>
+                                <div class="text-center">
+                                    <span id="loginChoice" style="color:#1169EE" class="h6">用户登录</span>
+                                </div>
+                                <form class="user">
+                                    <div class="form-group">
+                                        <input class="form-control form-control-user"
+                                               id="username"
+                                               aria-describedby="emailHelp"
+                                               placeholder="用户名/邮箱">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password"
+                                               class="form-control form-control-user"
+                                               id="password"
+                                               placeholder="密码">
+                                    </div>
+                                    <!--                                    <div class="form-group">-->
+                                    <!--                                        <div class="custom-control custom-checkbox small">-->
+                                    <!--                                            <input type="checkbox" class="custom-control-input" id="loginCheck">-->
+                                    <!--                                            <label class="custom-control-label" for="loginCheck">记住我</label>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+
+
+                                </form>
+                                <button id="login" class="btn btn-primary btn-user btn-block">
+                                    登录
+                                </button>
+
+                                <hr>
+
+                                <div class="col-md-12">
+                                    <button id="user" class="m-auto col-md-6 btn btn-facebook btn-user btn-block">
+                                        我是用户
+                                    </button>
+                                    <button id="admin" class="m-auto col-md-6 btn btn-google btn-user btn-block">
+                                        我是管理员
+                                    </button>
+                                </div>
+
+                                <hr>
+
+                                <div class="text-center">
+                                    <a id="forget" class="small" href="/kon/verification/forgot-password.html">重置密码?</a>
+                                </div>
+                                <div class="text-center">
+                                    <a id="newAccount" class="small" href="/kon/verification/register.html">创建新的账户!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
 </div>
 
-<script type="text/javascript">
-    $(function () {
-        Victor("container", "output");   //登录背景函数
-        $("#entry_name").focus();
-        $(document).keydown(function (event) {
-            if (event.keyCode == 13) {
-                $("#entry_btn").click();
-            }
-        });
-    });
-</script>
-<div style="text-align:center;">
-</div>
+<!-- Bootstrap core JavaScript-->
+<script src="/kon/static/admin/vendor/jquery/jquery.min.js"></script>
+
+<script src="/kon/static/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/kon/static/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/kon/static/admin/js/sb-admin-2.min.js"></script>
+
+<script src="/kon/static/user/js/jQuery.md5.js"></script>
+
+<script src="/kon/static/user/js/login.js"></script>
+
 </body>
+
 </html>

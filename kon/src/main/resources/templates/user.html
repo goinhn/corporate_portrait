@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>首页/企业画像系统</title>
+    <link rel="stylesheet" type="text/css" href="/kon/static/user/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="/kon/static/user/css/swiper.css"/>
+    <link rel="stylesheet" type="text/css" href="/kon/static/user/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="/kon/static/user/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/kon/static/user/css/header.css"/>
+
+    <script src="/kon/static/user/static/js/library/jquery.min.js"></script>
+
+    <script src="/kon/static/public/public.js"></script>
+
+</head>
+<body>
+<div th:include="header :: header"></div>
+
+<div id="main">
+    <div class="index-sec2">
+        <div class="title">
+            <h3><span>平台优势</span></h3>
+        </div>
+        <div class="wp">
+            <ul class="clearfix">
+                <li>
+                    <span><img src="/kon/static/user/images/advantage8.png"></span>
+                    <h4>千万级并发</h4>
+                    <p>支持千万级设备并发，确保数据安全可靠</p>
+                </li>
+                <li>
+                    <span><img src="/kon/static/user/images/advantage5.png"></span>
+                    <h4>毫秒级响应</h4>
+                    <p>毫秒级的响应速度，确保工作协同效率</p>
+                </li>
+                <li>
+                    <span><img src="/kon/static/user/images/advantage1.png"></span>
+                    <h4>高精确度聚类</h4>
+                    <p>高达98.2%的聚类精确度，聚焦量级改进</p>
+                </li>
+                <li>
+                    <span><img src="/kon/static/user/images/advantage4.png"></span>
+                    <h4>全周期产品管理</h4>
+                    <p>前期营销触达，中期风险识别，后期预警评分</p>
+                </li>
+                <li>
+                    <span><img src="/kon/static/user/images/advantage2.png"></span>
+                    <h4>24小时管控</h4>
+                    <p>24小时管控服务，确保实时更新数据</p>
+                </li>
+                <li>
+                    <span><img src="/kon/static/user/images/advantage6.png"></span>
+                    <h4>节约成本</h4>
+                    <p>租用式服务，零平台建设成本，超低使用费率</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="index-sec3">
+        <div class="title white">
+            <h3><span>行业使用</span></h3>
+        </div>
+        <div class="wp">
+            <div class="item-swiper">
+                <div id="mySwiper1" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="#" class="item-box">
+                                <div class="img">
+                                    <span><img src="/kon/static/user/images/use1.jpg"></span>
+                                </div>
+                                <div class="text">
+                                    <h4>以商业银行为代表的智慧金融场景</h4>
+                                    <p>放款实力强、潜力大、存在识客难、获客难的痛点</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" class="item-box">
+                                <div class="img">
+                                    <span><img src="/kon/static/user/images/use2.jpg"></span>
+                                </div>
+                                <div class="text">
+                                    <h4>强贷款需求的中小微企业</h4>
+                                    <p>资金实力弱、融资渠道，审查不通畅而造成的借贷难、借贷慢的中小微企业</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="footer :: footer"></div>
+
+
+<script type="text/javascript" src="/kon/static/user/js/swiper.js"></script>
+<script type="text/javascript" src="/kon/static/user/js/common.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var mySwiper1 = new Swiper('#mySwiper1', {
+            autoplay: false,
+            slidesPerView: 2,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    });
+</script>
+</body>
+
+
+</html>

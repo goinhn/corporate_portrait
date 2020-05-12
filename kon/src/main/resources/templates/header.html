@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="header">
+    <!--头部 Start!-->
+    <div id="hd" class="clearfix">
+        <div href="index.html" class="hd-logo fl">
+            <span class="hd-logo-title">企业画像系统</span>
+        </div>
+        <div class="hd-nav fl">
+            <ul class="clearfix">
+                <li>
+                    <h3><a href="/kon/user/user.html">首页</a></h3>
+                </li>
+                <li>
+                    <h3><a href="/kon/user/search.html">企业搜索</a></h3>
+                </li>
+                <li>
+                    <h3><a href="/kon/user/new-class.html">新企业分类</a></h3>
+                </li>
+            </ul>
+        </div>
+
+        <div class="hd-bar fr clearfix">
+            <h3 id="titlename"></h3>
+            <div class="hd-user fl">
+                <a href="#" class="photo">
+                    <img src="/kon/static/user/images/photo.png">
+                </a>
+                <div class="dropdown">
+                    <a style="text-align: center" id="exit" class="signout">退出</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--头部 End!-->
+
+    <!--banner Start!-->
+    <div id="banner" class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background: #0066FF">
+                <div class="wp clearfix">
+                    <div class="text">
+                        <h2 style="color: #fff">企业画像系统</h2>
+                        <p>金融科技服务平台企业数据的无监督分类系统</p>
+                    </div>
+                    <div class="img">
+                        <img src="/kon/static/user/images/banner-img.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" style="background: #0066FF">
+                <div class="wp clearfix">
+                    <div class="text">
+                        <h2 style="color: #fff">企业画像系统</h2>
+                        <p>金融科技服务平台企业数据的无监督分类系统</p>
+                    </div>
+                    <div class="img">
+                        <img src="/kon/static/user/images/banner-img.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" style="background: #0066FF">
+                <div class="wp clearfix">
+                    <div class="text">
+                        <h2 style="color: #fff">企业画像系统</h2>
+                        <p>金融科技服务平台企业数据的无监督分类系统</p>
+                    </div>
+                    <div class="img">
+                        <img src="/kon/static/user/images/banner-img.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="banner-pagination swiper-pagination"></div>
+    </div>
+    <!--banner End!-->
+
+    <script type="text/javascript">
+        $(function () {
+            var banner = new Swiper('#banner', {
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.banner-pagination',
+                    clickable: true,
+                },
+            });
+
+            let username = localStorage.getItem("username");
+            let token = localStorage.getItem("token");
+            let a = document.getElementsByTagName('a');
+            for (let i = 0; i < a.length; i++) {
+                a[i].href = a[i].href + "?token=" + token;
+            }
+
+            $('#titlename').html(username);
+
+            $('#exit').on({
+                click: function () {
+                    localStorage.clear();
+                    $.ajax({
+                        type: 'GET',
+                        contentType: "application/json;charset=utf-8",
+                        url: localUrl + '/kon/verify/userloginout',
+                        beforeSend: function (request) {
+                            request.setRequestHeader("Authorization", token);
+                        },
+                        success: function (result) {
+                            window.location.href = localUrl + '/kon/verification/login.html';
+                        },
+                        error: function (e) {
+                            console.log("errorStatus:" + e.status);
+                            console.log("statusText:" + e.responseText);
+                            window.location.href = localUrl + "/kon/error/500.html";
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</div>
+
+</body>
+
+</html>
+
+
+
