@@ -1,11 +1,11 @@
 package com.goinhn.kon.controller;
 
 
-
 import com.goinhn.kon.model.vo.NewInfo;
 import com.goinhn.kon.model.vo.NewOriginalAnalysisLabel;
 import com.goinhn.kon.model.vo.ResultInfo;
 import com.goinhn.kon.service.intf.*;
+import com.goinhn.kon.utils.ResultInfoUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -48,68 +48,59 @@ public class SaveController {
     @GetMapping(value = "/searchEntName/{entName}")
     public ResultInfo searchEntName(@PathVariable("entName")
                                     @NotNull(message = "搜索的企业名称不为空") String entName) {
-        log.info("/kon/save/searchEntName/{entName}" + "----------" + entName + "\n");
+        log.info("/kon/save/searchEntName/{entName}----------{}\n", entName);
 
         boolean flag = newInfoService.isEntName(entName);
 
         if (flag) {
-            ResultInfo resultInfo = ResultInfo
-                    .builder()
-                    .status(200)
-                    .flag(true)
-                    .build();
-            log.info("/kon/save/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
-            return resultInfo;
-
+            return ResultInfoUtil.createResultInfo(
+                    true,
+                    200,
+                    "",
+                    "",
+                    "/kon/save/searchEntName/{entName}");
         } else {
-            ResultInfo resultInfo = ResultInfo
-                    .builder()
-                    .status(200)
-                    .flag(false)
-                    .errorMsg("该企业已经存在")
-                    .build();
-            log.info("/kon/save/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
-            return resultInfo;
+            return ResultInfoUtil.createResultInfo(
+                    false,
+                    200,
+                    "",
+                    "该企业已经存在",
+                    "/kon/save/searchEntName/{entName}");
         }
     }
 
     @ApiOperation(value = "保存新输入的企业信息接口")
     @PostMapping(value = "/saveNewInfo")
     public ResultInfo saveNewInfo(@RequestBody @NotNull NewInfo newInfo) {
-        log.info("/kon/save/saveNewInfo" + "----------" + newInfo.toString() + "\n");
+        log.info("/kon/save/saveNewInfo----------{}\n", newInfo.toString());
 
         boolean flag = false;
         try {
             flag = newInfoService.saveAllInfoSpecial(newInfo);
         } catch (Exception e) {
             e.printStackTrace();
-            ResultInfo resultInfo = ResultInfo
-                    .builder()
-                    .status(200)
-                    .flag(false)
-                    .errorMsg("存储展示数据失败")
-                    .build();
-            log.info("/kon/save/saveNewInfo" + "++++++++++" + resultInfo.toString() + "\n");
-            return resultInfo;
+            return ResultInfoUtil.createResultInfo(
+                    false,
+                    200,
+                    "",
+                    "存储展示数据失败",
+                    "/kon/save/saveNewInfo");
         }
 
         if (flag) {
-            ResultInfo resultInfo = ResultInfo
-                    .builder()
-                    .status(200)
-                    .flag(true)
-                    .build();
-            log.info("/kon/save/saveNewInfo" + "++++++++++" + resultInfo.toString() + "\n");
-            return resultInfo;
+            return ResultInfoUtil.createResultInfo(
+                    true,
+                    200,
+                    "",
+                    "",
+                    "/kon/save/saveNewInfo");
         } else {
-            ResultInfo resultInfo = ResultInfo
-                    .builder()
-                    .status(200)
-                    .flag(false)
-                    .errorMsg("存储展示数据失败")
-                    .build();
-            log.info("/kon/save/saveNewInfo" + "++++++++++" + resultInfo.toString() + "\n");
-            return resultInfo;
+            return ResultInfoUtil.createResultInfo(
+                    false,
+                    200,
+                    "",
+                    "存储展示数据失败",
+                    "/kon/save/saveNewInfo");
         }
     }
 
@@ -117,64 +108,55 @@ public class SaveController {
     @ApiOperation(value = "保存新输入的企业原始数据、分析数据和标签接口")
     @PostMapping(value = "/saveNewOriginalAnalysisLabel")
     public ResultInfo saveNewAnalysisLabel(@RequestBody @NotNull NewOriginalAnalysisLabel newOriginalAnalysisLabel) {
-        log.info("/kon/save/saveNewAnalysisLabel" + "----------" + newOriginalAnalysisLabel.toString() + "\n");
+        log.info("/kon/save/saveNewAnalysisLabel----------{}\n", newOriginalAnalysisLabel.toString());
 
         String entName = newOriginalAnalysisLabel.getBusinessBackgroundAnalysis().getEntName();
         try {
             if (!analysisValueService.saveRiskValueSpecial(newOriginalAnalysisLabel)) {
                 showInfoService.deleteShowInfo(entName);
-                ResultInfo resultInfo = ResultInfo
-                        .builder()
-                        .flag(false)
-                        .status(200)
-                        .errorMsg("存储展示数据失败")
-                        .build();
-                log.info("/kon/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
-                return resultInfo;
+                return ResultInfoUtil.createResultInfo(
+                        false,
+                        200,
+                        "",
+                        "存储展示数据失败",
+                        "/kon/save/saveNewAnalysisLabel");
             } else {
                 if (!labelService.saveLabelValueSpecial(newOriginalAnalysisLabel)) {
                     showInfoService.deleteShowInfo(entName);
-                    ResultInfo resultInfo = ResultInfo
-                            .builder()
-                            .flag(false)
-                            .status(200)
-                            .errorMsg("存储展示数据失败")
-                            .build();
-                    log.info("/kon/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
-                    return resultInfo;
+                    return ResultInfoUtil.createResultInfo(
+                            false,
+                            200,
+                            "",
+                            "存储展示数据失败",
+                            "/kon/save/saveNewAnalysisLabel");
                 } else {
                     if (!originalValueService.saveRiskValueSpecial(newOriginalAnalysisLabel)) {
                         showInfoService.deleteShowInfo(entName);
-                        ResultInfo resultInfo = ResultInfo
-                                .builder()
-                                .flag(false)
-                                .status(200)
-                                .errorMsg("存储展示数据失败")
-                                .build();
-                        log.info("/kon/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
-                        return resultInfo;
+                        return ResultInfoUtil.createResultInfo(
+                                false,
+                                200,
+                                "",
+                                "存储展示数据失败",
+                                "/kon/save/saveNewAnalysisLabel");
                     } else {
-                        ResultInfo resultInfo = ResultInfo
-                                .builder()
-                                .flag(true)
-                                .status(200)
-                                .build();
-                        log.info("/kon/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
-                        return resultInfo;
+                        return ResultInfoUtil.createResultInfo(
+                                true,
+                                200,
+                                "",
+                                "",
+                                "/kon/save/saveNewAnalysisLabel");
                     }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
             showInfoService.deleteShowInfo(entName);
-            ResultInfo resultInfo = ResultInfo
-                    .builder()
-                    .flag(false)
-                    .status(200)
-                    .errorMsg("存储展示数据失败")
-                    .build();
-            log.info("/kon/save/saveNewAnalysisLabel" + "++++++++++" + resultInfo.toString() + "\n");
-            return resultInfo;
+            return ResultInfoUtil.createResultInfo(
+                    false,
+                    200,
+                    "",
+                    "存储展示数据失败",
+                    "/kon/save/saveNewAnalysisLabel");
         }
     }
 

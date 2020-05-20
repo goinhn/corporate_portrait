@@ -48,13 +48,14 @@ public class AuthController {
     @PostMapping(value = "/userlogin")
     public ResultInfo userLogin(@RequestBody
                                 @NotNull LoginVO loginVO) {
-        log.info("/kon/verify/userlogin" + "----------" + loginVO + "\n");
+        log.info("/kon/verify/userlogin----------{}\n", loginVO);
 
         String password = loginVO.getPassword();
         loginVO.setPassword(MD5Util.string2MD5(password));
 
         TokenDTO tokenDTO;
         User user = userAuthService.findUser(loginVO);
+
         if (user == null) {
             return ResultInfoUtil.createResultInfo(
                     false,
@@ -99,7 +100,7 @@ public class AuthController {
     @PostMapping(value = "/adminlogin")
     public ResultInfo adminLogin(@RequestBody
                                  @NotNull LoginVO loginVO) {
-        log.info("/kon/verify/adminlogin" + "----------" + loginVO + "\n");
+        log.info("/kon/verify/adminlogin----------{}\n", loginVO);
 
         String password = loginVO.getPassword();
         loginVO.setPassword(MD5Util.string2MD5(password));
@@ -142,7 +143,7 @@ public class AuthController {
     @GetMapping(value = "/userloginout")
     public ResultInfo userLoginOut(HttpServletRequest request) {
         String token = TokenUtil.getRequestToken(request);
-        log.info("/kon/verify/userloginout" + "----------" + token + "\n");
+        log.info("/kon/verify/userloginout----------{}\n", token);
 
         boolean result = userAuthService.userLoginOut(token);
 
@@ -163,14 +164,9 @@ public class AuthController {
     @GetMapping(value = "/adminloginout")
     public ResultInfo adminLoginOut(HttpServletRequest request) {
         String token = TokenUtil.getRequestToken(request);
-        log.info("/kon/verify/adminloginout" + "----------" + token + "\n");
+        log.info("/kon/verify/adminloginout----------{}\n", token);
 
         boolean result = adminAuthService.adminLoginOut(token);
-
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("login");
-//
-//        return modelAndView;
 
         return ResultInfoUtil.createResultInfo(
                 result,
@@ -189,7 +185,7 @@ public class AuthController {
     @PostMapping(value = "/userregister")
     public ResultInfo userRegister(@RequestBody
                                    @NotNull RegisterVO registerVO) {
-        log.info("/kon/verify/userregister" + "----------" + registerVO.toString() + "\n");
+        log.info("/kon/verify/userregister----------{}\n", registerVO.toString());
 
         Map<String, Object> map = userAuthService.userRegister(registerVO);
 
@@ -219,7 +215,7 @@ public class AuthController {
     @GetMapping(value = "/useractive")
     public ModelAndView userActive(HttpServletRequest request) {
         String activeCode = request.getParameter("activecode");
-        log.info("/kon/verify/useractive" + "----------" + activeCode + "\n");
+        log.info("/kon/verify/useractive----------{}\n", activeCode);
         ModelAndView modelAndView = new ModelAndView();
 
         if (activeCode == null || activeCode.trim().length() == 0) {
@@ -246,11 +242,16 @@ public class AuthController {
     @GetMapping(value = "/userforgot")
     public ResultInfo userForgot(HttpServletRequest request) {
         String username = request.getParameter("username");
-        log.info("/kon/verify/userforgot" + "----------" + username + "\n");
+        log.info("/kon/verify/userforgot----------{}\n", username);
 
         boolean result = userAuthService.userForgot(username);
 
-        return ResultInfoUtil.createResultInfo(result, 200, "请查询邮件进行重置", "该用户不存在", "/kon/verify/userforgot");
+        return ResultInfoUtil.createResultInfo(
+                result,
+                200,
+                "请查询邮件进行重置",
+                "该用户不存在",
+                "/kon/verify/userforgot");
     }
 
 
@@ -262,7 +263,7 @@ public class AuthController {
     @GetMapping(value = "/userreset")
     public ModelAndView userReset(HttpServletRequest request) {
         String activecode = request.getParameter("activecode");
-        log.info("/kon/verify/userreset" + "----------" + activecode + "\n");
+        log.info("/kon/verify/userreset----------{}\n", activecode);
 
         boolean result = userAuthService.userActive(activecode);
         ModelAndView modelAndView = new ModelAndView();
@@ -288,11 +289,16 @@ public class AuthController {
         String activecode = request.getParameter("activecode");
         String password = request.getParameter("password");
         password = MD5Util.string2MD5(password);
-        log.info("/kon/verify/userresetpassword" + "----------" + "activecode:" + activecode + "password:" + password + "\n");
+        log.info("/kon/verify/userresetpassword----------activecode:{} password:{}\n", activecode, password);
 
         boolean result = userAuthService.userReset(activecode, password);
 
-        return ResultInfoUtil.createResultInfo(result, 200, "重置成功", "重置失败", "/kon/verify/userresetpassword");
+        return ResultInfoUtil.createResultInfo(
+                result,
+                200,
+                "重置成功",
+                "重置失败",
+                "/kon/verify/userresetpassword");
     }
 }
 

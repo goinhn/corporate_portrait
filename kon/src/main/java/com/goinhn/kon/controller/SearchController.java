@@ -12,6 +12,7 @@ import com.goinhn.kon.service.intf.AnalysisValueService;
 import com.goinhn.kon.service.intf.LabelService;
 import com.goinhn.kon.service.intf.OriginalValueService;
 import com.goinhn.kon.service.intf.ShowInfoService;
+import com.goinhn.kon.utils.ResultInfoUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -52,26 +53,24 @@ public class SearchController {
     @GetMapping(value = "/searchEntName/{entName}")
     public ResultInfo searchEntName(@PathVariable("entName")
                                     @NotNull(message = "搜索的企业名称不为空") String entName) {
-        log.info("/kon/search/searchEntName/{entName}" + "----------" + entName + "\n");
+        log.info("/kon/search/searchEntName/{entName}----------{}\n", entName);
 
         String[] entNames = entName.split(",");
         List<String> entNameList = new ArrayList<>();
         for (String name : entNames) {
-            if ("".equals(name.toString())) {
+            if ("".equals(name)) {
                 continue;
             }
             entNameList.add(name);
         }
 
         if (entNameList.size() == 0) {
-            ResultInfo resultInfo = ResultInfo
-                    .builder()
-                    .flag(false)
-                    .status(200)
-                    .errorMsg("查询的字段有误")
-                    .build();
-            log.info("/kon/search/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
-            return resultInfo;
+            return ResultInfoUtil.createResultInfo(
+                    false,
+                    200,
+                    "",
+                    "查询的字段有误",
+                    "/kon/search/searchEntName/{entName}");
         }
 
         List<ShowTableInfo> showTableInfos = new ArrayList<>();
@@ -84,24 +83,20 @@ public class SearchController {
         }
 
         if (showTableInfos.size() == 0) {
-            ResultInfo resultInfo = ResultInfo
-                    .builder()
-                    .flag(false)
-                    .status(200)
-                    .errorMsg("不存在该公司")
-                    .build();
-            log.info("/kon/search/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
-            return resultInfo;
+            return ResultInfoUtil.createResultInfo(
+                    false,
+                    200,
+                    "",
+                    "不存在该公司",
+                    "/kon/search/searchEntName/{entName}");
         }
 
-        ResultInfo resultInfo = ResultInfo
-                .builder()
-                .flag(true)
-                .status(200)
-                .data(showTableInfos)
-                .build();
-//        log.info("/kon/search/searchEntName/{entName}" + "++++++++++" + resultInfo.toString() + "\n");
-        return resultInfo;
+        return ResultInfoUtil.createResultInfo(
+                true,
+                200,
+                showTableInfos,
+                "",
+                "/kon/search/searchEntName/{entName}");
     }
 
 
@@ -113,16 +108,14 @@ public class SearchController {
     @GetMapping(value = "/searchEntInfo/{entName}")
     public ResultInfo searchEntInfo(@PathVariable("entName")
                                     @NotNull(message = "搜索的企业名称不为空") String entName) {
-        log.info("/kon/searchEntInfo/{entName)" + "----------" + entName + "\n");
+        log.info("/kon/searchEntInfo/{entName)----------{}\n", entName);
         if ("".equals(entName) || entName == null) {
-            ResultInfo resultInfo = ResultInfo
-                    .builder()
-                    .flag(false)
-                    .status(200)
-                    .errorMsg("查询发生错误！")
-                    .build();
-            log.info("/kon/searchEntInfo/{entName)" + "++++++++++" + resultInfo.toString() + "\n");
-            return resultInfo;
+            return ResultInfoUtil.createResultInfo(
+                    false,
+                    200,
+                    "",
+                    "查询发生错误！",
+                    "/kon/searchEntInfo/{entName)");
         }
 
         Map<String, Object> resultMap = new HashMap<>(3);
@@ -132,14 +125,12 @@ public class SearchController {
         resultMap = dealAnalysis(resultMap, entName);
         resultMap = dealLabel(resultMap, entName);
 
-        ResultInfo resultInfo = ResultInfo
-                .builder()
-                .flag(true)
-                .status(200)
-                .data(resultMap)
-                .build();
-        log.info("/kon/searchEntInfo/{entName)" + "++++++++++" + resultInfo.toString() + "\n");
-        return resultInfo;
+        return ResultInfoUtil.createResultInfo(
+                true,
+                200,
+                resultMap,
+                "",
+                "/kon/searchEntInfo/{entName)");
     }
 
     /**

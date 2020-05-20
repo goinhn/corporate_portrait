@@ -20,7 +20,7 @@ public class ResultInfoUtil {
                 .errorMsg(errorMsg)
                 .build();
 
-        log.info(path + "----------" + resultInfo.toString() + "\n");
+        log.info("{}----------{}\n", path, resultInfo.toString());
         return resultInfo;
     }
 

@@ -50,7 +50,12 @@ public class ManageController {
         countDTO.setAdminCount(adminCountService.countAdmin());
         countDTO.setBusinessCount(adminCountService.countBusiness());
 
-        return ResultInfoUtil.createResultInfo(true, 200, countDTO, "", "/kon/manage/count");
+        return ResultInfoUtil.createResultInfo(
+                true,
+                200,
+                countDTO,
+                "",
+                "/kon/manage/count");
 
     }
 
@@ -62,7 +67,7 @@ public class ManageController {
                                       @RequestParam(value = "draw") Integer draw,
                                       @RequestParam(value = "search[value]") String search) {
 
-        log.info("/kon/manage/people" + "----------" + "start:" + start.toString() + "length:" + length.toString() + "draw:" + draw.toString() + "search:" + search + "\n");
+        log.info("/kon/manage/people----------start:{} length:{} draw:{} search:{}\n", start.toString(), length.toString(), draw.toString(), search);
 
         Integer recordsTotal = adminPeopleService.countLikeUser(search, start, length);
 
@@ -87,7 +92,7 @@ public class ManageController {
                                         @RequestParam(value = "draw") Integer draw,
                                         @RequestParam(value = "search[value]") String search) {
 
-        log.info("/kon/manage/business" + "----------" + "start:" + start.toString() + "length:" + length.toString() + "draw:" + draw.toString() + "search:" + search + "\n");
+        log.info("/kon/manage/business----------start:{} length:{} draw:{} search:{}\n", start.toString(), length.toString(), draw.toString(), search);
 
         Integer recordsTotal = adminBusinessService.countLikeBusiness(search, start, length);
 
@@ -109,11 +114,16 @@ public class ManageController {
     @GetMapping(value = "/userdelete")
     public ResultInfo userDelete(@RequestParam(value = "id") Long id) {
 
-        log.info("/kon/manage/userdelete" + "----------" + id.toString() + "\n");
+        log.info("/kon/manage/userdelete----------{}\n", id.toString());
 
         boolean result = adminPeopleService.deleteUser(id);
 
-        return ResultInfoUtil.createResultInfo(result, 200, "", "", "/kon/manage/userdelete");
+        return ResultInfoUtil.createResultInfo(
+                result,
+                200,
+                "",
+                "",
+                "/kon/manage/userdelete");
     }
 
 
@@ -121,11 +131,16 @@ public class ManageController {
     @GetMapping(value = "/businessdelete")
     public ResultInfo businessDelete(@RequestParam(value = "id") Long id) {
 
-        log.info("/kon/manage/businessdelete" + "----------" + id.toString() + "\n");
+        log.info("/kon/manage/businessdelete----------{}\n", id.toString());
 
         boolean result = adminBusinessService.deleteBusiness(id);
 
-        return ResultInfoUtil.createResultInfo(result, 200, "", "", "/kon/manage/businessdelete");
+        return ResultInfoUtil.createResultInfo(
+                result,
+                200,
+                "",
+                "",
+                "/kon/manage/businessdelete");
     }
 
 

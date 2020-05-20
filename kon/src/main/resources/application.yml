@@ -1,0 +1,76 @@
+server:
+  port: 12140
+  tomcat:
+    uri-encoding: utf-8
+  servlet:
+    context-path: /kon
+
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 10MB
+  resources:
+    static-locations: classpath:/static/
+  mvc:
+    static-path-pattern: /static/**
+    favicon:
+      enabled: false
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/portrait?serverTimezone=GMT%2B8&useUnicode=true&tinyInt1isBit=false&characterEncoding=UTF-8
+    username:
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+  thymeleaf:
+    cache: false
+    check-template: true
+    check-template-location: true
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  jackson:
+    # 全局设置@JsonFormat的格式pattern
+    date-format: yyyy-MM-dd HH:mm:ss
+    # 当地时区
+    locale: zh
+    # 设置全局时区
+    time-zone: GMT+8
+    deserialization:
+      # 常用,json中含pojo不存在属性时是否失败报错,默认true
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    parser:
+      ALLOW_SINGLE_QUOTES: true # 是否允许出现单引号,默认false
+  mail:
+    host: smtp.qq.com
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+
+
+#mybatis:
+#  mapper-locations: /mapper/*.xml
+#  type-aliases-package: com.goinhn.portrait.model
+
+
+logging:
+  path: ./logs/
+  pattern:
+    console: '%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n'
+    file: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n'
+  level:
+    root: info
+    com.goinhn.portrait: info

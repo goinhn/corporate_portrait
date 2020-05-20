@@ -311,6 +311,7 @@ function sendBackOriginalAnalysisLabel(data) {
             "label": model_pred.df_sf
         }
     };
+
     let url = localUrl + '/por/save/saveNewOriginalAnalysisLabel';
 
     return ajaxTool("POST", url, getBackAnalysisLabelLook, JSON.stringify(send))
